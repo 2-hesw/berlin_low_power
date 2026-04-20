@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="你催任你催">
+<meta name="format-detection" content="telephone=no">
+<title>你催任你催</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+:root{--bg:#FBF9F6;--card:#FFFFFF;--sage:#7EB5A6;--sage-light:#E8F3EF;--orange:#F4A261;--orange-light:#FFF3E6;--text:#4A4A4A;--text-light:#999;--radius:16px}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.7;position:relative}
+
+.app-shell{display:flex;flex-direction:column;height:100%;width:100%;position:relative}
+.page-container{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 0}
+.tab-bar{flex-shrink:0;display:flex;background:#fff;border-top:1px solid #f0ede8;padding:6px 0;padding-bottom:max(env(safe-area-inset-bottom),8px)}
+.tab-item{flex:1;text-align:center;padding:4px 0;font-size:11px;color:var(--text-light);transition:color .2s;cursor:pointer;-webkit-user-select:none;user-select:none}
+.tab-item.active{color:var(--sage);font-weight:600}
+.tab-item .icon{font-size:22px;display:block;margin-bottom:1px}
+
+.page{display:none;padding-bottom:16px;min-height:100%}
+.page.active{display:block}
+.page-title{font-size:24px;font-weight:700;margin-bottom:14px;padding-top:max(env(safe-area-inset-top),12px)}
+
+.encourage-banner{background:var(--sage-light);border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;font-size:15px;color:var(--sage);line-height:1.6;text-align:center;cursor:pointer;-webkit-user-select:none;user-select:none;transition:transform .15s}
+.encourage-banner:active{transform:scale(.98)}
+
+.task-card{background:var(--card);border-radius:var(--radius);padding:14px 14px 14px 12px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.04);display:flex;align-items:flex-start;gap:10px;transition:opacity .3s;cursor:pointer}
+.task-card:active{background:#fafaf8}
+.task-card.done{opacity:.5}
+.task-body{flex:1;min-width:0}
+.task-title{font-size:16px;font-weight:600;line-height:1.5;word-break:break-word}
+.task-card.done .task-title{text-decoration:line-through;color:var(--text-light)}
+.task-meta{font-size:12px;color:var(--text-light);margin-top:5px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tag{background:var(--orange-light);color:var(--orange);padding:2px 8px;border-radius:8px;font-size:11px}
+.check-btn{flex-shrink:0;width:24px;height:24px;border-radius:50%;border:2px solid #ddd;background:transparent;cursor:pointer;margin-top:3px;transition:all .2s;-webkit-appearance:none;appearance:none}
+.task-card.done .check-btn{background:var(--sage);border-color:var(--sage)}
+.nudge-btn{flex-shrink:0;width:42px;height:42px;border-radius:50%;background:var(--orange-light);display:flex;align-items:center;justify-content:center;font-size:19px;border:none;cursor:pointer;transition:transform .15s;-webkit-appearance:none;appearance:none}
+.nudge-btn:active{transform:scale(1.15)}
+
+.empty-state{text-align:center;padding:50px 20px;color:var(--text-light);font-size:15px}
+.empty-state .emoji{font-size:44px;margin-bottom:10px;display:block}
+
+.fab{position:fixed;right:18px;bottom:calc(64px + max(env(safe-area-inset-bottom),8px) + 14px);width:54px;height:54px;border-radius:50%;background:var(--sage);color:#fff;font-size:28px;border:none;box-shadow:0 4px 16px rgba(126,181,166,.4);cursor:pointer;z-index:90;display:flex;align-items:center;justify-content:center;transition:transform .2s;-webkit-appearance:none;appearance:none}
+.fab:active{transform:scale(.9)}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;overflow:hidden}
+.overlay.show{display:block}
+
+.bottom-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--bg);border-radius:20px 20px 0 0;padding:22px 18px;padding-bottom:max(env(safe-area-inset-bottom),16px);max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1)}
+.overlay.show .bottom-sheet{transform:translateY(0)}
+
+.add-sheet h3{font-size:20px;margin-bottom:14px}
+.main-textarea{width:100%;min-height:80px;border:2px solid #eee;border-radius:var(--radius);padding:12px 14px;font-size:16px;font-family:inherit;resize:none;background:var(--card);transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.main-textarea:focus{outline:none;border-color:var(--sage)}
+.submit-btn{width:100%;padding:13px;border:none;border-radius:var(--radius);background:var(--sage);color:#fff;font-size:17px;font-weight:600;margin-top:14px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.submit-btn:active{opacity:.85}
+.expand-toggle{text-align:center;color:var(--text-light);font-size:14px;margin-top:12px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.extra-fields{display:none;margin-top:12px}
+.extra-fields.show{display:block}
+.field-label{font-size:13px;color:var(--text-light);margin-bottom:4px;margin-top:10px}
+.field-input{width:100%;padding:10px 14px;border:1.5px solid #eee;border-radius:12px;font-size:15px;font-family:inherit;background:var(--card);-webkit-appearance:none;appearance:none}
+.field-input:focus{outline:none;border-color:var(--sage)}
+.urgency-row{display:flex;gap:8px;margin-top:4px}
+.urgency-tag{flex:1;text-align:center;padding:8px;border-radius:12px;border:1.5px solid #eee;font-size:14px;cursor:pointer;transition:all .2s;-webkit-user-select:none;user-select:none}
+.urgency-tag.sel{border-color:var(--sage);background:var(--sage-light);color:var(--sage)}
+
+.reply-sheet h4{font-size:17px;margin-bottom:5px}
+.encourage-line{font-size:14px;color:var(--sage);margin-bottom:12px}
+.reply-item{background:var(--card);border-radius:14px;padding:13px 15px;margin-bottom:9px;box-shadow:0 1px 6px rgba(0,0,0,.04);cursor:pointer;transition:background .15s;-webkit-user-select:none;user-select:none}
+.reply-item:active{background:var(--sage-light)}
+.reply-style{font-size:11px;color:var(--orange);font-weight:600;margin-bottom:3px}
+.reply-text{font-size:15px;line-height:1.6}
+
+.toast{position:fixed;top:38%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.72);color:#fff;padding:10px 24px;border-radius:20px;font-size:14px;z-index:999;opacity:0;pointer-events:none;transition:opacity .3s}
+.toast.show{opacity:1}
+
+.stat-card{background:var(--card);border-radius:var(--radius);padding:18px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.04);text-align:center}
+.big-num{font-size:46px;font-weight:700;color:var(--sage);line-height:1.2}
+.stat-label{font-size:13px;color:var(--text-light);margin-top:3px}
+.stat-row{display:flex;gap:10px}
+.stat-row .stat-card{flex:1}
+.med-num{font-size:26px;font-weight:700;color:var(--orange)}
+.achievement{display:inline-block;background:var(--orange-light);color:var(--orange);padding:5px 12px;border-radius:20px;font-size:13px;margin:3px}
+.source-bar{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.source-bar .bar-label{font-size:13px;width:56px;text-align:right;color:var(--text-light);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.source-bar .bar-track{flex:1;height:11px;background:#f0ede8;border-radius:6px;overflow:hidden}
+.source-bar .bar-fill{height:100%;background:var(--sage);border-radius:6px;transition:width .5s}
+.source-bar .bar-count{font-size:12px;color:var(--text-light);width:22px}
+.progress-bar{height:10px;background:#f0ede8;border-radius:5px;overflow:hidden;margin-top:6px}
+.progress-fill{height:100%;background:var(--sage);border-radius:5px;transition:width .5s}
+
+.chat-area{background:var(--card);border-radius:var(--radius);padding:14px;margin-bottom:12px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.chat-msg{margin-bottom:12px;max-width:82%}
+.chat-msg.user{margin-left:auto}
+.bubble{padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.6;word-break:break-word}
+.chat-msg.user .bubble{background:var(--sage-light);color:var(--sage);border-bottom-right-radius:4px}
+.chat-msg.ai .bubble{background:#f5f5f4;color:var(--text);border-bottom-left-radius:4px}
+.chat-msg .time{font-size:11px;color:var(--text-light);margin-top:3px}
+.chat-msg.user .time{text-align:right}
+.chat-input-bar{display:flex;gap:10px;align-items:flex-end}
+.chat-input-bar textarea{flex:1;min-height:38px;max-height:90px;padding:9px 14px;border:2px solid #eee;border-radius:20px;font-size:15px;font-family:inherit;resize:none;background:var(--card);-webkit-appearance:none;appearance:none}
+.chat-input-bar textarea:focus{outline:none;border-color:var(--sage)}
+.chat-send-btn{flex-shrink:0;padding:9px 16px;background:var(--sage);color:#fff;border:none;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none;white-space:nowrap}
+.chat-send-btn:active{opacity:.85}
+
+.detail-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:250;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px;padding-top:max(env(safe-area-inset-top),16px)}
+.detail-overlay.show{display:block}
+.detail-back{font-size:15px;color:var(--sage);margin-bottom:14px;cursor:pointer;display:inline-block}
+.detail-title{font-size:22px;font-weight:700;margin-bottom:10px;line-height:1.4}
+.detail-info{font-size:14px;color:var(--text-light);margin-bottom:5px}
+.detail-actions{display:flex;gap:10px;margin-top:18px}
+.detail-actions button{flex:1;padding:12px;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;-webkit-appearance:none;appearance:none}
+.btn-complete{background:var(--sage);color:#fff}
+.btn-complete:active{opacity:.85}
+.btn-delete{background:#f5f5f4;color:#e57373}
+.btn-delete:active{background:#eee}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="page-container" id="pageContainer">
+    <div class="page active" id="page-inbox">
+      <div class="page-title">左耳进 👂</div>
+      <div class="encourage-banner" id="encourageBanner" onclick="N.refreshEncourage()"></div>
+      <div id="taskList"></div>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <span class="emoji">☕</span>
+        <div>暂时没有事情进来<br>享受这份清净吧</div>
+      </div>
+    </div>
+    <div class="page" id="page-stats">
+      <div class="page-title">压力表 📊</div>
+      <div id="statsContent"></div>
+    </div>
+    <div class="page" id="page-tree">
+      <div class="page-title">右耳出 💨</div>
+      <div class="chat-area" id="chatArea"></div>
+      <div class="chat-input-bar">
+        <textarea id="chatInput" placeholder="有什么想倒出去的..." rows="1" oninput="N.autoGrow(this)"></textarea>
+        <button class="chat-send-btn" onclick="N.sendChat()">倒出去</button>
+      </div>
+    </div>
+  </div>
+  <div class="tab-bar" id="tabBar">
+    <div class="tab-item active" data-tab="inbox" onclick="N.switchTab('inbox')"><span class="icon">👂</span>左耳进</div>
+    <div class="tab-item" data-tab="stats" onclick="N.switchTab('stats')"><span class="icon">📊</span>压力表</div>
+    <div class="tab-item" data-tab="tree" onclick="N.switchTab('tree')"><span class="icon">💨</span>右耳出</div>
+  </div>
+</div>
+
+<button class="fab" id="fabBtn" onclick="N.showAdd()">+</button>
+
+<div class="overlay" id="addOverlay" onclick="N.closeOverlay(event,'addOverlay')">
+  <div class="bottom-sheet add-sheet">
+    <h3>记一笔 ✍️</h3>
+    <textarea class="main-textarea" id="addTitle" placeholder="什么事进来了？"></textarea>
+    <button class="submit-btn" onclick="N.submitTask()">记下来 ✊</button>
+    <div class="expand-toggle" onclick="N.toggleExtra()"><span id="toggleText">补充细节 ▼</span></div>
+    <div class="extra-fields" id="extraFields">
+      <div class="field-label">谁叮的</div>
+      <input class="field-input" id="addSource" placeholder="比如：老板、产品经理">
+      <div class="field-label">紧急程度</div>
+      <div class="urgency-row" id="urgencyRow">
+        <div class="urgency-tag" data-v="low" onclick="N.pickUrgency('low')">不急 🍃</div>
+        <div class="urgency-tag sel" data-v="medium" onclick="N.pickUrgency('medium')">一般 ☕</div>
+        <div class="urgency-tag" data-v="high" onclick="N.pickUrgency('high')">着急 🔥</div>
+      </div>
+      <div class="field-label">截止时间</div>
+      <input class="field-input" id="addDeadline" type="date">
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="replyOverlay" onclick="N.closeOverlay(event,'replyOverlay')">
+  <div class="bottom-sheet reply-sheet">
+    <h4>帮你想好怎么回了 🎯</h4>
+    <div class="encourage-line" id="replyEncourage"></div>
+    <div id="replyList"></div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-back" onclick="N.closeDetail()">← 返回</div>
+  <div id="detailContent"></div>
+</div>
+
+<div class="toast" id="toast">已复制，直接去粘贴吧 ✌️</div>
+
+<script>
+(function(){
+"use strict";
+var SK='nicuirennicu_tasks',CK='nicuirennicu_chat';
+var encouragements=[
+  '你正在处理的事情，都会过去的 🌊','被叮不是你的错，你已经在努力了 💪',
+  '记下来就好，脑子用来想事不是记事的 ✨','深呼吸，一件一件来 🍃',
+  '你比你以为的能扛多了 🦸','事情是做不完的，但你可以选择节奏 🎵',
+  '能记下来就是掌控的开始 📝','你不是一个人在扛，我帮你记着呢 🤝',
+  '再多叮几下也不怕，都记着呢 📋','忙完这阵就去喝杯好的 ☕',
+  '每搞定一件就轻松一点 🎈','不紧不慢，都会搞定的 🐢',
+  '你在忙说明你很重要呀 ⭐','别急，饭要一口口吃 🍚',
+  '光是记录这个动作，就已经在减压了 🧘'
+];
+var comforts=[
+  '记录本身就是一种释放，你做得很好 🌸','所有的烦躁都是暂时的，你会穿过去的 🌈',
+  '累了就歇会儿，不必一直绷着 🛋️','你的感受是正当的，不需要为此自责 💚',
+  '把不开心倒出来，轻装上阵 🎒','这里没有评判，想说啥说啥 🤫',
+  '你辛苦了，认真工作的人值得被温柔对待 🌻','有情绪很正常，发出来比憋着好 💨',
+  '休息不是偷懒，是为了走更远 🏃','你已经很棒了，别对自己太严格 ✨',
+  '扛不住的时候，允许自己放一放 🎈','倒完了吗？倒完了喝口水 💧',
+  '没关系的，明天又是新的一天 🌅'
+];
+function rand(a){return a[Math.floor(Math.random()*a.length)]}
+function load(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function tasks(){return load(SK,[])} function chats(){return load(CK,[])}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function $(id){return document.getElementById(id)}
+
+var priority='medium',tab='inbox',toastTimer;
+
+function switchTab(t){
+  tab=t;
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  $('page-'+t).classList.add('active');
+  document.querySelectorAll('.tab-item').forEach(function(e){e.classList.toggle('active',e.dataset.tab===t)});
+  $('fabBtn').style.display=t==='inbox'?'flex':'none';
+  $('pageContainer').scrollTop=0;
+  if(t==='inbox')renderTasks();
+  if(t==='stats')renderStats();
+  if(t==='tree')renderChat();
+}
+function refreshEncourage(){$('encourageBanner').textContent=rand(encouragements)}
+
+function renderTasks(){
+  refreshEncourage();
+  var ts=tasks();
+  var pOrd={high:0,medium:1,low:2};
+  ts.sort(function(a,b){
+    if(a.done!==b.done)return a.done?1:-1;
+    return(pOrd[a.priority]||1)-(pOrd[b.priority]||1);
+  });
+  var el=$('taskList'),emp=$('emptyState');
+  if(!ts.length){el.innerHTML='';emp.style.display='block';return}
+  emp.style.display='none';
+  var pEmoji={high:'🔥',medium:'☕',low:'🍃'};
+  var undoneIdx=0;
+  el.innerHTML=ts.map(function(t){
+    if(!t.done)undoneIdx++;
+    var pos=undoneIdx;
+    return '<div class="task-card'+(t.done?' done':'')+'" onclick="N.openDetail(\''+t.id+'\')">'
+      +'<button class="check-btn" onclick="event.stopPropagation();N.toggleDone(\''+t.id+'\')"></button>'
+      +'<div class="task-body"><div class="task-title">'+esc(t.title)+'</div>'
+      +'<div class="task-meta"><span class="tag">'+(pEmoji[t.priority]||'☕')
+      +(t.nudgeCount>1?' 被叮 '+t.nudgeCount+' 次':'')+'</span>'
+      +(t.source?'<span>'+esc(t.source)+'</span>':'')
+      +(t.deadline?'<span>📅 '+t.deadline+'</span>':'')
+      +'</div></div>'
+      +(t.done?'':'<button class="nudge-btn" onclick="event.stopPropagation();N.onNudge(\''+t.id+'\','+pos+')">🔔</button>')
+      +'</div>';
+  }).join('');
+}
+
+function onNudge(id,pos){
+  var ts=tasks(),t;
+  for(var i=0;i<ts.length;i++){if(ts[i].id===id){ts[i].nudgeCount=(ts[i].nudgeCount||0)+1;t=ts[i];break}}
+  save(SK,ts);
+  if(navigator.vibrate)navigator.vibrate(50);
+  renderTasks();
+  if(!t)return;
+  var name=t.source?t.source+'提的':'这个';
+  var replies=[
+    {s:'正式回复',t:'收到，'+name+'事情已记录，我会尽快安排处理。'+(pos>1?'前面还有'+(pos-1)+'件事在排队，':'')+'预计会按优先级推进。'},
+    {s:'轻松回复',t:'记下啦～'+name+'事我盯着呢，'+(pos>1?'排在第'+pos+'位，':'')+'放心好啦 👌'},
+    {s:'坦诚回复',t:'我记着呢，'+(pos>1?'手上还有'+(pos-1)+'件在跟进，':'')+'会合理安排节奏的，有进展随时同步。'}
+  ];
+  $('replyEncourage').textContent=rand(encouragements);
+  $('replyList').innerHTML=replies.map(function(r){
+    return '<div class="reply-item" onclick="N.copyText(this)"><div class="reply-style">'+r.s+'</div><div class="reply-text">'+esc(r.t)+'</div></div>';
+  }).join('');
+  $('replyOverlay').classList.add('show');
+}
+
+function copyText(el){
+  var txt=el.querySelector('.reply-text').textContent;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(showToast,function(){fallbackCopy(txt)});
+  }else{fallbackCopy(txt)}
+}
+function fallbackCopy(txt){
+  var ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0;left:-9999px';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy')}catch(e){}
+  document.body.removeChild(ta);showToast();
+}
+function showToast(){
+  $('replyOverlay').classList.remove('show');
+  var t=$('toast');t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show')},1500);
+}
+
+function toggleDone(id){
+  var ts=tasks();
+  for(var i=0;i<ts.length;i++){
+    if(ts[i].id===id){ts[i].done=!ts[i].done;if(ts[i].done)ts[i].doneAt=new Date().toISOString();break}
+  }
+  save(SK,ts);renderTasks();
+}
+function deleteTask(id){save(SK,tasks().filter(function(t){return t.id!==id}));renderTasks()}
+
+function showAdd(){
+  $('addTitle').value='';$('addSource').value='';$('addDeadline').value='';
+  priority='medium';
+  document.querySelectorAll('#urgencyRow .urgency-tag').forEach(function(e){e.classList.toggle('sel',e.dataset.v==='medium')});
+  $('extraFields').classList.remove('show');$('toggleText').textContent='补充细节 ▼';
+  $('addOverlay').classList.add('show');
+  setTimeout(function(){$('addTitle').focus()},350);
+}
+function toggleExtra(){
+  var el=$('extraFields'),s=!el.classList.contains('show');
+  el.classList.toggle('show',s);
+  $('toggleText').textContent=s?'收起细节 ▲':'补充细节 ▼';
+}
+function pickUrgency(v){
+  priority=v;
+  document.querySelectorAll('#urgencyRow .urgency-tag').forEach(function(e){e.classList.toggle('sel',e.dataset.v===v)});
+}
+function submitTask(){
+  var title=$('addTitle').value.trim();
+  if(!title){$('addTitle').focus();return}
+  var ts=tasks();
+  ts.unshift({id:Date.now().toString(),title:title,source:$('addSource').value.trim(),
+    priority:priority,deadline:$('addDeadline').value,nudgeCount:1,done:false,createdAt:new Date().toISOString()});
+  save(SK,ts);
+  $('addOverlay').classList.remove('show');
+  renderTasks();
+}
+function closeOverlay(e,id){if(e.target===$(id))$(id).classList.remove('show')}
+
+function openDetail(id){
+  var ts=tasks(),t;for(var i=0;i<ts.length;i++){if(ts[i].id===id){t=ts[i];break}}
+  if(!t)return;
+  var pL={high:'🔥 着急',medium:'☕ 一般',low:'🍃 不急'};
+  $('detailContent').innerHTML='<div class="detail-title">'+esc(t.title)+'</div>'
+    +'<div class="detail-info">紧急程度：'+(pL[t.priority]||'☕ 一般')+'</div>'
+    +(t.source?'<div class="detail-info">来源：'+esc(t.source)+'</div>':'')
+    +(t.deadline?'<div class="detail-info">截止：'+t.deadline+'</div>':'')
+    +'<div class="detail-info">被叮次数：'+(t.nudgeCount||1)+' 次</div>'
+    +'<div class="detail-info">记录时间：'+new Date(t.createdAt).toLocaleString('zh-CN')+'</div>'
+    +'<div class="detail-info">状态：'+(t.done?'✅ 已搞定':'⏳ 进行中')+'</div>'
+    +'<div class="detail-actions">'
+    +'<button class="btn-complete" onclick="N.toggleDone(\''+t.id+'\');N.closeDetail();N.renderTasks();">'+(t.done?'重新打开':'搞定了 ✌️')+'</button>'
+    +'<button class="btn-delete" onclick="if(confirm(\'确定删除？\')){N.deleteTask(\''+t.id+'\');N.closeDetail();}">删掉</button></div>';
+  $('detailOverlay').classList.add('show');
+}
+function closeDetail(){$('detailOverlay').classList.remove('show')}
+
+function renderStats(){
+  var ts=tasks(),total=ts.length,doneC=0,nudges=0,stress=0;
+  var srcMap={};
+  ts.forEach(function(t){
+    if(t.done)doneC++;
+    nudges+=(t.nudgeCount||0);
+    var s=t.source||'未注明';srcMap[s]=(srcMap[s]||0)+1;
+    if(!t.done){
+      stress+=(t.priority==='high'?15:t.priority==='medium'?8:3);
+      stress+=Math.min((t.nudgeCount||0)*2,20);
+    }
+  });
+  stress=Math.min(stress,100);
+  var undone=total-doneC;
+  var sColor=stress>70?'#e57373':stress>40?'var(--orange)':'var(--sage)';
+  if(!total){$('statsContent').innerHTML='<div class="empty-state"><span class="emoji">📊</span><div>还没有数据<br>记几件事就能看到压力表了</div></div>';return}
+  var h='<div class="stat-card"><div class="big-num" style="color:'+sColor+'">'+stress+'</div><div class="stat-label">当前压力指数（满分100）</div></div>'
+    +'<div class="stat-row"><div class="stat-card"><div class="med-num">'+undone+'</div><div class="stat-label">待处理</div></div>'
+    +'<div class="stat-card"><div class="med-num">'+doneC+'</div><div class="stat-label">已搞定</div></div>'
+    +'<div class="stat-card"><div class="med-num">'+nudges+'</div><div class="stat-label">总共被叮</div></div></div>';
+  var pct=total?Math.round(doneC/total*100):0;
+  h+='<div class="stat-card" style="text-align:left"><div class="stat-label">完成率 '+pct+'%</div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div></div>';
+  var srcs=Object.keys(srcMap).map(function(k){return[k,srcMap[k]]}).sort(function(a,b){return b[1]-a[1]}).slice(0,5);
+  if(srcs.length){
+    var mx=srcs[0][1];
+    h+='<div class="stat-card" style="text-align:left"><div class="stat-label" style="margin-bottom:8px">叮你的人</div>';
+    srcs.forEach(function(s){
+      h+='<div class="source-bar"><div class="bar-label">'+esc(s[0])+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(s[1]/mx*100)+'%"></div></div><div class="bar-count">'+s[1]+'</div></div>';
+    });
+    h+='</div>';
+  }
+  var ach=[];
+  if(total>=1)ach.push('🎯 首次记录');if(doneC>=3)ach.push('✅ 搞定三件');
+  if(doneC>=10)ach.push('🏆 十项全能');if(nudges>=10)ach.push('🔔 叮叮达人');if(nudges>=50)ach.push('🛡️ 金刚不催');
+  if(ach.length){h+='<div class="stat-card"><div class="stat-label" style="margin-bottom:6px">成就</div>';ach.forEach(function(a){h+='<span class="achievement">'+a+'</span>'});h+='</div>'}
+  $('statsContent').innerHTML=h;
+}
+
+function renderChat(){
+  var msgs=chats(),area=$('chatArea');
+  var barH=52,inputH=62,titleH=50,pad=32;
+  area.style.height=(window.innerHeight-barH-inputH-titleH-pad)+'px';
+  if(!msgs.length){area.innerHTML='<div class="chat-msg ai"><div class="bubble">这里是你的右耳出 💨<br>工作上的不爽、委屈、压力，都可以倒在这里，我接着。</div></div>';return}
+  area.innerHTML=msgs.map(function(m){
+    return '<div class="chat-msg '+m.role+'"><div class="bubble">'+esc(m.text)+'</div>'
+      +'<div class="time">'+new Date(m.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})+'</div></div>';
+  }).join('');
+  setTimeout(function(){area.scrollTop=area.scrollHeight},50);
+}
+function sendChat(){
+  var inp=$('chatInput'),txt=inp.value.trim();if(!txt)return;
+  var msgs=chats();
+  msgs.push({role:'user',text:txt,ts:Date.now()});
+  save(CK,msgs.length>50?msgs.slice(-50):msgs);
+  inp.value='';inp.style.height='auto';
+  renderChat();
+  setTimeout(function(){
+    msgs=chats();
+    msgs.push({role:'ai',text:rand(comforts),ts:Date.now()});
+    save(CK,msgs.length>50?msgs.slice(-50):msgs);
+    renderChat();
+  },500);
+}
+function autoGrow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px'}
+
+window.N={switchTab:switchTab,refreshEncourage:refreshEncourage,renderTasks:renderTasks,
+  onNudge:onNudge,copyText:copyText,toggleDone:toggleDone,deleteTask:deleteTask,
+  showAdd:showAdd,toggleExtra:toggleExtra,pickUrgency:pickUrgency,submitTask:submitTask,
+  closeOverlay:closeOverlay,openDetail:openDetail,closeDetail:closeDetail,
+  sendChat:sendChat,autoGrow:autoGrow};
+
+renderTasks();
+})();
+</script>
+</body>
+</html>

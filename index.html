@@ -10,16 +10,16 @@
 <title>你催任你催</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
-:root{--bg:#FBF9F6;--card:#FFFFFF;--sage:#7EB5A6;--sage-light:#E8F3EF;--orange:#F4A261;--orange-light:#FFF3E6;--text:#4A4A4A;--text-light:#999;--radius:16px}
+:root{--bg:#FBF9F6;--card:#FFFFFF;--sage:#7EB5A6;--sage-light:#E8F3EF;--orange:#F4A261;--orange-light:#FFF3E6;--text:#4A4A4A;--text-light:#999;--radius:16px;--pink:#E8A0BF;--pink-light:#FFF0F5}
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.7;position:relative}
 
 .app-shell{display:flex;flex-direction:column;height:100%;width:100%;position:relative}
 .page-container{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 0}
 .tab-bar{flex-shrink:0;display:flex;background:#fff;border-top:1px solid #f0ede8;padding:6px 0;padding-bottom:max(env(safe-area-inset-bottom),8px)}
-.tab-item{flex:1;text-align:center;padding:4px 0;font-size:11px;color:var(--text-light);transition:color .2s;cursor:pointer;-webkit-user-select:none;user-select:none}
+.tab-item{flex:1;text-align:center;padding:4px 0;font-size:10px;color:var(--text-light);transition:color .2s;cursor:pointer;-webkit-user-select:none;user-select:none}
 .tab-item.active{color:var(--sage);font-weight:600}
-.tab-item .icon{font-size:22px;display:block;margin-bottom:1px}
+.tab-item .icon{font-size:20px;display:block;margin-bottom:1px}
 
 .page{display:none;padding-bottom:16px;min-height:100%}
 .page.active{display:block}
@@ -49,7 +49,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang 
 
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;overflow:hidden}
 .overlay.show{display:block}
-
 .bottom-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--bg);border-radius:20px 20px 0 0;padding:22px 18px;padding-bottom:max(env(safe-area-inset-bottom),16px);max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1)}
 .overlay.show .bottom-sheet{transform:translateY(0)}
 
@@ -93,6 +92,25 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang 
 .progress-bar{height:10px;background:#f0ede8;border-radius:5px;overflow:hidden;margin-top:6px}
 .progress-fill{height:100%;background:var(--sage);border-radius:5px;transition:width .5s}
 
+/* ===== Charge Page ===== */
+.charge-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.charge-card{background:var(--card);border-radius:var(--radius);padding:20px 14px;box-shadow:0 2px 10px rgba(0,0,0,.04);text-align:center;cursor:pointer;transition:transform .15s;-webkit-user-select:none;user-select:none}
+.charge-card:active{transform:scale(.95)}
+.charge-card .charge-icon{font-size:36px;display:block;margin-bottom:8px}
+.charge-card .charge-label{font-size:15px;font-weight:600;color:var(--text)}
+.charge-card .charge-count{font-size:12px;color:var(--text-light);margin-top:4px}
+.charge-log{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:12px}
+.charge-log h4{font-size:15px;margin-bottom:10px;color:var(--text)}
+.charge-log-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f5f3ef;font-size:14px}
+.charge-log-item:last-child{border-bottom:none}
+.charge-log-item .log-emoji{font-size:18px}
+.charge-log-item .log-text{flex:1;margin-left:8px;color:var(--text)}
+.charge-log-item .log-time{font-size:12px;color:var(--text-light)}
+.charge-feedback{background:var(--pink-light);border-radius:var(--radius);padding:16px;margin-bottom:14px;text-align:center;font-size:15px;color:var(--pink);line-height:1.6}
+.charge-streak{background:var(--sage-light);border-radius:var(--radius);padding:14px 18px;margin-bottom:14px;text-align:center}
+.charge-streak .streak-num{font-size:32px;font-weight:700;color:var(--sage)}
+.charge-streak .streak-label{font-size:13px;color:var(--sage);margin-top:2px}
+
 .chat-area{background:var(--card);border-radius:var(--radius);padding:14px;margin-bottom:12px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .chat-msg{margin-bottom:12px;max-width:82%}
 .chat-msg.user{margin-left:auto}
@@ -128,10 +146,19 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang 
       <div class="page-title">左耳进 👂</div>
       <div class="encourage-banner" id="encourageBanner" onclick="N.refreshEncourage()"></div>
       <div id="taskList"></div>
-      <div class="empty-state" id="emptyState" style="display:none">
-        <span class="emoji">☕</span>
-        <div>暂时没有事情进来<br>享受这份清净吧</div>
+      <div class="empty-state" id="emptyState" style="display:none"><span class="emoji">☕</span><div>暂时没有事情进来<br>享受这份清净吧</div></div>
+    </div>
+    <div class="page" id="page-charge">
+      <div class="page-title">自我充电 🔋</div>
+      <div class="charge-feedback" id="chargeFeedback"></div>
+      <div class="charge-grid">
+        <div class="charge-card" onclick="N.logCharge('fruit')"><span class="charge-icon">🍎</span><span class="charge-label">吃了水果</span><span class="charge-count" id="fruitCount">今天 0 次</span></div>
+        <div class="charge-card" onclick="N.logCharge('fitness')"><span class="charge-icon">💪</span><span class="charge-label">动了一下</span><span class="charge-count" id="fitnessCount">今天 0 次</span></div>
+        <div class="charge-card" onclick="N.logCharge('water')"><span class="charge-icon">💧</span><span class="charge-label">喝了水</span><span class="charge-count" id="waterCount">今天 0 次</span></div>
+        <div class="charge-card" onclick="N.logCharge('rest')"><span class="charge-icon">😌</span><span class="charge-label">休息了一会</span><span class="charge-count" id="restCount">今天 0 次</span></div>
       </div>
+      <div class="charge-streak" id="chargeStreak"></div>
+      <div class="charge-log" id="chargeLog"><h4>今日记录</h4><div id="chargeLogList"></div></div>
     </div>
     <div class="page" id="page-stats">
       <div class="page-title">压力表 📊</div>
@@ -148,6 +175,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang 
   </div>
   <div class="tab-bar" id="tabBar">
     <div class="tab-item active" data-tab="inbox" onclick="N.switchTab('inbox')"><span class="icon">👂</span>左耳进</div>
+    <div class="tab-item" data-tab="charge" onclick="N.switchTab('charge')"><span class="icon">🔋</span>充电</div>
     <div class="tab-item" data-tab="stats" onclick="N.switchTab('stats')"><span class="icon">📊</span>压力表</div>
     <div class="tab-item" data-tab="tree" onclick="N.switchTab('tree')"><span class="icon">💨</span>右耳出</div>
   </div>
@@ -189,12 +217,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang 
   <div id="detailContent"></div>
 </div>
 
-<div class="toast" id="toast">已复制，直接去粘贴吧 ✌️</div>
+<div class="toast" id="toast">已复制 ✌️</div>
 
 <script>
 (function(){
 "use strict";
-var SK='nicuirennicu_tasks',CK='nicuirennicu_chat';
+var SK='nicuirennicu_tasks',CK='nicuirennicu_chat',LK='nicuirennicu_charge';
 var encouragements=[
   '你正在处理的事情，都会过去的 🌊','被叮不是你的错，你已经在努力了 💪',
   '记下来就好，脑子用来想事不是记事的 ✨','深呼吸，一件一件来 🍃',
@@ -214,12 +242,22 @@ var comforts=[
   '扛不住的时候，允许自己放一放 🎈','倒完了吗？倒完了喝口水 💧',
   '没关系的，明天又是新的一天 🌅'
 ];
+var chargeLabels={fruit:'🍎 吃了水果',fitness:'💪 动了一下',water:'💧 喝了水',rest:'😌 休息了一会'};
+var chargeFeedbacks={
+  fruit:['维 C 补上了，免疫力 +1 💚','吃水果的人运气不会差 🍀','甜甜的水果，甜甜的你 🍑','果糖入账，能量蓄满 🔋','一口水果一口元气 🌟'],
+  fitness:['动起来了！多巴胺正在路上 🏃','今天的汗水是明天的铠甲 🛡️','你的身体在说谢谢 💪','运动完是不是神清气爽？✨','比昨天的自己更强了一点 📈'],
+  water:['细胞们都在欢呼 💧','喝水这件小事，你做到了 👏','水是最好的充电器 🔋','润了润，继续加油 💦','身体的 CPU 散热成功 ❄️'],
+  rest:['休息是为了走更远的路 🛤️','充电中... 预计满血还需几分钟 🔌','闭眼三分钟等于重启人生 🧘','允许自己停一停，很棒 🌸','摸鱼不是罪，是战略性休整 🐟']
+};
+
 function rand(a){return a[Math.floor(Math.random()*a.length)]}
 function load(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function tasks(){return load(SK,[])} function chats(){return load(CK,[])}
+function tasks(){return load(SK,[])} function chats(){return load(CK,[])} function charges(){return load(LK,[])}
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function $(id){return document.getElementById(id)}
+function today(){return new Date().toISOString().slice(0,10)}
+function todayCharges(){var t=today();return charges().filter(function(c){return c.date===t})}
 
 var priority='medium',tab='inbox',toastTimer;
 
@@ -231,6 +269,7 @@ function switchTab(t){
   $('fabBtn').style.display=t==='inbox'?'flex':'none';
   $('pageContainer').scrollTop=0;
   if(t==='inbox')renderTasks();
+  if(t==='charge')renderCharge();
   if(t==='stats')renderStats();
   if(t==='tree')renderChat();
 }
@@ -240,38 +279,27 @@ function renderTasks(){
   refreshEncourage();
   var ts=tasks();
   var pOrd={high:0,medium:1,low:2};
-  ts.sort(function(a,b){
-    if(a.done!==b.done)return a.done?1:-1;
-    return(pOrd[a.priority]||1)-(pOrd[b.priority]||1);
-  });
+  ts.sort(function(a,b){if(a.done!==b.done)return a.done?1:-1;return(pOrd[a.priority]||1)-(pOrd[b.priority]||1)});
   var el=$('taskList'),emp=$('emptyState');
   if(!ts.length){el.innerHTML='';emp.style.display='block';return}
   emp.style.display='none';
   var pEmoji={high:'🔥',medium:'☕',low:'🍃'};
   var undoneIdx=0;
   el.innerHTML=ts.map(function(t){
-    if(!t.done)undoneIdx++;
-    var pos=undoneIdx;
+    if(!t.done)undoneIdx++;var pos=undoneIdx;
     return '<div class="task-card'+(t.done?' done':'')+'" onclick="N.openDetail(\''+t.id+'\')">'
       +'<button class="check-btn" onclick="event.stopPropagation();N.toggleDone(\''+t.id+'\')"></button>'
       +'<div class="task-body"><div class="task-title">'+esc(t.title)+'</div>'
-      +'<div class="task-meta"><span class="tag">'+(pEmoji[t.priority]||'☕')
-      +(t.nudgeCount>1?' 被叮 '+t.nudgeCount+' 次':'')+'</span>'
-      +(t.source?'<span>'+esc(t.source)+'</span>':'')
-      +(t.deadline?'<span>📅 '+t.deadline+'</span>':'')
-      +'</div></div>'
-      +(t.done?'':'<button class="nudge-btn" onclick="event.stopPropagation();N.onNudge(\''+t.id+'\','+pos+')">🔔</button>')
-      +'</div>';
+      +'<div class="task-meta"><span class="tag">'+(pEmoji[t.priority]||'☕')+(t.nudgeCount>1?' 被叮 '+t.nudgeCount+' 次':'')+'</span>'
+      +(t.source?'<span>'+esc(t.source)+'</span>':'')+(t.deadline?'<span>📅 '+t.deadline+'</span>':'')+'</div></div>'
+      +(t.done?'':'<button class="nudge-btn" onclick="event.stopPropagation();N.onNudge(\''+t.id+'\','+pos+')">🔔</button>')+'</div>';
   }).join('');
 }
 
 function onNudge(id,pos){
   var ts=tasks(),t;
   for(var i=0;i<ts.length;i++){if(ts[i].id===id){ts[i].nudgeCount=(ts[i].nudgeCount||0)+1;t=ts[i];break}}
-  save(SK,ts);
-  if(navigator.vibrate)navigator.vibrate(50);
-  renderTasks();
-  if(!t)return;
+  save(SK,ts);if(navigator.vibrate)navigator.vibrate(50);renderTasks();if(!t)return;
   var name=t.source?t.source+'提的':'这个';
   var replies=[
     {s:'正式回复',t:'收到，'+name+'事情已记录，我会尽快安排处理。'+(pos>1?'前面还有'+(pos-1)+'件事在排队，':'')+'预计会按优先级推进。'},
@@ -287,64 +315,35 @@ function onNudge(id,pos){
 
 function copyText(el){
   var txt=el.querySelector('.reply-text').textContent;
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(showToast,function(){fallbackCopy(txt)});
-  }else{fallbackCopy(txt)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(showToast,function(){fallbackCopy(txt)})}else{fallbackCopy(txt)}
 }
-function fallbackCopy(txt){
-  var ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0;left:-9999px';
-  document.body.appendChild(ta);ta.select();
-  try{document.execCommand('copy')}catch(e){}
-  document.body.removeChild(ta);showToast();
-}
-function showToast(){
+function fallbackCopy(txt){var ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0;left:-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);showToast()}
+function showToast(msg){
   $('replyOverlay').classList.remove('show');
-  var t=$('toast');t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(function(){t.classList.remove('show')},1500);
+  var t=$('toast');t.textContent=msg||'已复制，直接去粘贴吧 ✌️';t.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show')},1500);
 }
 
-function toggleDone(id){
-  var ts=tasks();
-  for(var i=0;i<ts.length;i++){
-    if(ts[i].id===id){ts[i].done=!ts[i].done;if(ts[i].done)ts[i].doneAt=new Date().toISOString();break}
-  }
-  save(SK,ts);renderTasks();
-}
+function toggleDone(id){var ts=tasks();for(var i=0;i<ts.length;i++){if(ts[i].id===id){ts[i].done=!ts[i].done;if(ts[i].done)ts[i].doneAt=new Date().toISOString();break}}save(SK,ts);renderTasks()}
 function deleteTask(id){save(SK,tasks().filter(function(t){return t.id!==id}));renderTasks()}
 
 function showAdd(){
-  $('addTitle').value='';$('addSource').value='';$('addDeadline').value='';
-  priority='medium';
+  $('addTitle').value='';$('addSource').value='';$('addDeadline').value='';priority='medium';
   document.querySelectorAll('#urgencyRow .urgency-tag').forEach(function(e){e.classList.toggle('sel',e.dataset.v==='medium')});
   $('extraFields').classList.remove('show');$('toggleText').textContent='补充细节 ▼';
-  $('addOverlay').classList.add('show');
-  setTimeout(function(){$('addTitle').focus()},350);
+  $('addOverlay').classList.add('show');setTimeout(function(){$('addTitle').focus()},350);
 }
-function toggleExtra(){
-  var el=$('extraFields'),s=!el.classList.contains('show');
-  el.classList.toggle('show',s);
-  $('toggleText').textContent=s?'收起细节 ▲':'补充细节 ▼';
-}
-function pickUrgency(v){
-  priority=v;
-  document.querySelectorAll('#urgencyRow .urgency-tag').forEach(function(e){e.classList.toggle('sel',e.dataset.v===v)});
-}
+function toggleExtra(){var el=$('extraFields'),s=!el.classList.contains('show');el.classList.toggle('show',s);$('toggleText').textContent=s?'收起细节 ▲':'补充细节 ▼'}
+function pickUrgency(v){priority=v;document.querySelectorAll('#urgencyRow .urgency-tag').forEach(function(e){e.classList.toggle('sel',e.dataset.v===v)})}
 function submitTask(){
-  var title=$('addTitle').value.trim();
-  if(!title){$('addTitle').focus();return}
-  var ts=tasks();
-  ts.unshift({id:Date.now().toString(),title:title,source:$('addSource').value.trim(),
-    priority:priority,deadline:$('addDeadline').value,nudgeCount:1,done:false,createdAt:new Date().toISOString()});
-  save(SK,ts);
-  $('addOverlay').classList.remove('show');
-  renderTasks();
+  var title=$('addTitle').value.trim();if(!title){$('addTitle').focus();return}
+  var ts=tasks();ts.unshift({id:Date.now().toString(),title:title,source:$('addSource').value.trim(),priority:priority,deadline:$('addDeadline').value,nudgeCount:1,done:false,createdAt:new Date().toISOString()});
+  save(SK,ts);$('addOverlay').classList.remove('show');renderTasks();
 }
 function closeOverlay(e,id){if(e.target===$(id))$(id).classList.remove('show')}
 
 function openDetail(id){
-  var ts=tasks(),t;for(var i=0;i<ts.length;i++){if(ts[i].id===id){t=ts[i];break}}
-  if(!t)return;
+  var ts=tasks(),t;for(var i=0;i<ts.length;i++){if(ts[i].id===id){t=ts[i];break}}if(!t)return;
   var pL={high:'🔥 着急',medium:'☕ 一般',low:'🍃 不急'};
   $('detailContent').innerHTML='<div class="detail-title">'+esc(t.title)+'</div>'
     +'<div class="detail-info">紧急程度：'+(pL[t.priority]||'☕ 一般')+'</div>'
@@ -353,75 +352,108 @@ function openDetail(id){
     +'<div class="detail-info">被叮次数：'+(t.nudgeCount||1)+' 次</div>'
     +'<div class="detail-info">记录时间：'+new Date(t.createdAt).toLocaleString('zh-CN')+'</div>'
     +'<div class="detail-info">状态：'+(t.done?'✅ 已搞定':'⏳ 进行中')+'</div>'
-    +'<div class="detail-actions">'
-    +'<button class="btn-complete" onclick="N.toggleDone(\''+t.id+'\');N.closeDetail();N.renderTasks();">'+(t.done?'重新打开':'搞定了 ✌️')+'</button>'
+    +'<div class="detail-actions"><button class="btn-complete" onclick="N.toggleDone(\''+t.id+'\');N.closeDetail();N.renderTasks();">'+(t.done?'重新打开':'搞定了 ✌️')+'</button>'
     +'<button class="btn-delete" onclick="if(confirm(\'确定删除？\')){N.deleteTask(\''+t.id+'\');N.closeDetail();}">删掉</button></div>';
   $('detailOverlay').classList.add('show');
 }
 function closeDetail(){$('detailOverlay').classList.remove('show')}
 
-function renderStats(){
-  var ts=tasks(),total=ts.length,doneC=0,nudges=0,stress=0;
-  var srcMap={};
-  ts.forEach(function(t){
-    if(t.done)doneC++;
-    nudges+=(t.nudgeCount||0);
-    var s=t.source||'未注明';srcMap[s]=(srcMap[s]||0)+1;
-    if(!t.done){
-      stress+=(t.priority==='high'?15:t.priority==='medium'?8:3);
-      stress+=Math.min((t.nudgeCount||0)*2,20);
-    }
+/* ===== Charge ===== */
+function logCharge(type){
+  var cs=charges();
+  cs.push({type:type,date:today(),ts:Date.now()});
+  save(LK,cs);
+  if(navigator.vibrate)navigator.vibrate([30,50,30]);
+  var fb=rand(chargeFeedbacks[type]||['记录成功 ✅']);
+  showToast(fb);
+  renderCharge();
+}
+
+function renderCharge(){
+  var tc=todayCharges();
+  var counts={fruit:0,fitness:0,water:0,rest:0};
+  tc.forEach(function(c){counts[c.type]=(counts[c.type]||0)+1});
+  $('fruitCount').textContent='今天 '+counts.fruit+' 次';
+  $('fitnessCount').textContent='今天 '+counts.fitness+' 次';
+  $('waterCount').textContent='今天 '+counts.water+' 次';
+  $('restCount').textContent='今天 '+counts.rest+' 次';
+
+  // feedback
+  var total=tc.length;
+  var fb='';
+  if(total===0)fb='还没开始充电，点一个按钮开始吧 ⚡';
+  else if(total<3)fb='已充电 '+total+' 次，继续保持 💚';
+  else if(total<6)fb='今天已经充了 '+total+' 次电，你对自己真好 🌟';
+  else fb='充电达人！今天 '+total+' 次，满血复活 🔋✨';
+  $('chargeFeedback').textContent=fb;
+
+  // streak
+  var allC=charges(),daySet={};
+  allC.forEach(function(c){daySet[c.date]=true});
+  var streak=0,d=new Date();
+  for(var i=0;i<365;i++){
+    var ds=d.toISOString().slice(0,10);
+    if(daySet[ds])streak++;else if(i>0)break;
+    d.setDate(d.getDate()-1);
+  }
+  $('chargeStreak').innerHTML='<div class="streak-num">'+streak+'</div><div class="streak-label">天连续充电 🔥</div>';
+
+  // log
+  var logHtml='';
+  var todayLogs=tc.slice().reverse().slice(0,10);
+  if(!todayLogs.length)logHtml='<div style="text-align:center;color:var(--text-light);padding:12px;font-size:14px">还没有记录</div>';
+  else todayLogs.forEach(function(c){
+    logHtml+='<div class="charge-log-item"><span class="log-emoji">'+(chargeLabels[c.type]||c.type).slice(0,2)+'</span>'
+      +'<span class="log-text">'+(chargeLabels[c.type]||c.type).slice(2)+'</span>'
+      +'<span class="log-time">'+new Date(c.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})+'</span></div>';
   });
-  stress=Math.min(stress,100);
+  $('chargeLogList').innerHTML=logHtml;
+}
+
+/* ===== Stats ===== */
+function renderStats(){
+  var ts=tasks(),total=ts.length,doneC=0,nudges=0,stress=0;var srcMap={};
+  ts.forEach(function(t){if(t.done)doneC++;nudges+=(t.nudgeCount||0);var s=t.source||'未注明';srcMap[s]=(srcMap[s]||0)+1;
+    if(!t.done){stress+=(t.priority==='high'?15:t.priority==='medium'?8:3);stress+=Math.min((t.nudgeCount||0)*2,20)}});
+  // charge bonus: reduce stress
+  var tc=todayCharges();
+  var chargeBonus=Math.min(tc.length*3,20);
+  stress=Math.max(0,Math.min(stress-chargeBonus,100));
   var undone=total-doneC;
   var sColor=stress>70?'#e57373':stress>40?'var(--orange)':'var(--sage)';
-  if(!total){$('statsContent').innerHTML='<div class="empty-state"><span class="emoji">📊</span><div>还没有数据<br>记几件事就能看到压力表了</div></div>';return}
-  var h='<div class="stat-card"><div class="big-num" style="color:'+sColor+'">'+stress+'</div><div class="stat-label">当前压力指数（满分100）</div></div>'
+  if(!total&&!tc.length){$('statsContent').innerHTML='<div class="empty-state"><span class="emoji">📊</span><div>还没有数据<br>记几件事或充充电就能看到压力表了</div></div>';return}
+  var h='<div class="stat-card"><div class="big-num" style="color:'+sColor+'">'+stress+'</div><div class="stat-label">当前压力指数'+(chargeBonus>0?' (充电减压 -'+chargeBonus+')':'')+'</div></div>'
     +'<div class="stat-row"><div class="stat-card"><div class="med-num">'+undone+'</div><div class="stat-label">待处理</div></div>'
     +'<div class="stat-card"><div class="med-num">'+doneC+'</div><div class="stat-label">已搞定</div></div>'
-    +'<div class="stat-card"><div class="med-num">'+nudges+'</div><div class="stat-label">总共被叮</div></div></div>';
-  var pct=total?Math.round(doneC/total*100):0;
-  h+='<div class="stat-card" style="text-align:left"><div class="stat-label">完成率 '+pct+'%</div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div></div>';
+    +'<div class="stat-card"><div class="med-num">'+tc.length+'</div><div class="stat-label">今日充电</div></div></div>';
+  if(total){var pct=Math.round(doneC/total*100);h+='<div class="stat-card" style="text-align:left"><div class="stat-label">完成率 '+pct+'%</div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div></div>'}
   var srcs=Object.keys(srcMap).map(function(k){return[k,srcMap[k]]}).sort(function(a,b){return b[1]-a[1]}).slice(0,5);
-  if(srcs.length){
-    var mx=srcs[0][1];
-    h+='<div class="stat-card" style="text-align:left"><div class="stat-label" style="margin-bottom:8px">叮你的人</div>';
-    srcs.forEach(function(s){
-      h+='<div class="source-bar"><div class="bar-label">'+esc(s[0])+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(s[1]/mx*100)+'%"></div></div><div class="bar-count">'+s[1]+'</div></div>';
-    });
-    h+='</div>';
-  }
+  if(srcs.length){var mx=srcs[0][1];h+='<div class="stat-card" style="text-align:left"><div class="stat-label" style="margin-bottom:8px">叮你的人</div>';
+    srcs.forEach(function(s){h+='<div class="source-bar"><div class="bar-label">'+esc(s[0])+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(s[1]/mx*100)+'%"></div></div><div class="bar-count">'+s[1]+'</div></div>'});h+='</div>'}
   var ach=[];
-  if(total>=1)ach.push('🎯 首次记录');if(doneC>=3)ach.push('✅ 搞定三件');
-  if(doneC>=10)ach.push('🏆 十项全能');if(nudges>=10)ach.push('🔔 叮叮达人');if(nudges>=50)ach.push('🛡️ 金刚不催');
+  if(total>=1)ach.push('🎯 首次记录');if(doneC>=3)ach.push('✅ 搞定三件');if(doneC>=10)ach.push('🏆 十项全能');
+  if(nudges>=10)ach.push('🔔 叮叮达人');if(nudges>=50)ach.push('🛡️ 金刚不催');
+  var allC=charges(),daySet={};allC.forEach(function(c){daySet[c.date]=true});var streak=0,d=new Date();
+  for(var i=0;i<365;i++){var ds=d.toISOString().slice(0,10);if(daySet[ds])streak++;else if(i>0)break;d.setDate(d.getDate()-1)}
+  if(streak>=3)ach.push('🔋 连续充电 '+streak+' 天');
+  if(tc.length>=5)ach.push('⚡ 今日满电');
   if(ach.length){h+='<div class="stat-card"><div class="stat-label" style="margin-bottom:6px">成就</div>';ach.forEach(function(a){h+='<span class="achievement">'+a+'</span>'});h+='</div>'}
   $('statsContent').innerHTML=h;
 }
 
+/* ===== Chat ===== */
 function renderChat(){
   var msgs=chats(),area=$('chatArea');
-  var barH=52,inputH=62,titleH=50,pad=32;
-  area.style.height=(window.innerHeight-barH-inputH-titleH-pad)+'px';
+  var barH=52,inputH=62,titleH=50,pad=32;area.style.height=(window.innerHeight-barH-inputH-titleH-pad)+'px';
   if(!msgs.length){area.innerHTML='<div class="chat-msg ai"><div class="bubble">这里是你的右耳出 💨<br>工作上的不爽、委屈、压力，都可以倒在这里，我接着。</div></div>';return}
-  area.innerHTML=msgs.map(function(m){
-    return '<div class="chat-msg '+m.role+'"><div class="bubble">'+esc(m.text)+'</div>'
-      +'<div class="time">'+new Date(m.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})+'</div></div>';
-  }).join('');
+  area.innerHTML=msgs.map(function(m){return '<div class="chat-msg '+m.role+'"><div class="bubble">'+esc(m.text)+'</div><div class="time">'+new Date(m.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})+'</div></div>'}).join('');
   setTimeout(function(){area.scrollTop=area.scrollHeight},50);
 }
 function sendChat(){
   var inp=$('chatInput'),txt=inp.value.trim();if(!txt)return;
-  var msgs=chats();
-  msgs.push({role:'user',text:txt,ts:Date.now()});
-  save(CK,msgs.length>50?msgs.slice(-50):msgs);
-  inp.value='';inp.style.height='auto';
-  renderChat();
-  setTimeout(function(){
-    msgs=chats();
-    msgs.push({role:'ai',text:rand(comforts),ts:Date.now()});
-    save(CK,msgs.length>50?msgs.slice(-50):msgs);
-    renderChat();
-  },500);
+  var msgs=chats();msgs.push({role:'user',text:txt,ts:Date.now()});
+  save(CK,msgs.length>50?msgs.slice(-50):msgs);inp.value='';inp.style.height='auto';renderChat();
+  setTimeout(function(){msgs=chats();msgs.push({role:'ai',text:rand(comforts),ts:Date.now()});save(CK,msgs.length>50?msgs.slice(-50):msgs);renderChat()},500);
 }
 function autoGrow(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,90)+'px'}
 
@@ -429,7 +461,7 @@ window.N={switchTab:switchTab,refreshEncourage:refreshEncourage,renderTasks:rend
   onNudge:onNudge,copyText:copyText,toggleDone:toggleDone,deleteTask:deleteTask,
   showAdd:showAdd,toggleExtra:toggleExtra,pickUrgency:pickUrgency,submitTask:submitTask,
   closeOverlay:closeOverlay,openDetail:openDetail,closeDetail:closeDetail,
-  sendChat:sendChat,autoGrow:autoGrow};
+  sendChat:sendChat,autoGrow:autoGrow,logCharge:logCharge};
 
 renderTasks();
 })();

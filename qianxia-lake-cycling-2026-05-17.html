@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>千峡湖骑行赛行程 · 2026-05-17</title>
+  <style>
+    :root {
+      --bg: #edf7f4;
+      --ink: #10201d;
+      --muted: #60716d;
+      --panel: #ffffff;
+      --line: #c9dcd6;
+      --lake: #0f766e;
+      --lake-dark: #115e59;
+      --leaf: #4d7c0f;
+      --sun: #eab308;
+      --alert: #b91c1c;
+      --soft: #e6f3ef;
+      --shadow: 0 12px 34px rgba(14, 78, 70, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.12), transparent 34%),
+        linear-gradient(225deg, rgba(234, 179, 8, 0.14), transparent 28%),
+        var(--bg);
+    }
+
+    a {
+      color: var(--lake-dark);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(15, 118, 110, 0.35);
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 20px 44px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr 0.85fr;
+      gap: 20px;
+      align-items: stretch;
+      padding: 28px;
+      background: linear-gradient(135deg, #ffffff 0%, #eef8f5 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      color: var(--lake-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p, ul {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 12px;
+      font-size: 42px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .sub {
+      max-width: 760px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .status strong {
+      color: var(--lake-dark);
+      font-size: 14px;
+    }
+
+    .status span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      min-height: 104px;
+      padding: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .metric .value {
+      font-size: 25px;
+      font-weight: 850;
+      line-height: 1.1;
+    }
+
+    .metric .note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(14, 78, 70, 0.07);
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+
+    .title-row h2 {
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .title-row span {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .date {
+      color: var(--lake-dark);
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .events {
+      display: grid;
+      gap: 8px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 10px;
+      padding: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(201, 220, 214, 0.9);
+      border-radius: 8px;
+    }
+
+    .time {
+      color: var(--lake-dark);
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.5;
+    }
+
+    .event h3 {
+      font-size: 15px;
+      line-height: 1.35;
+      margin-bottom: 5px;
+    }
+
+    .event p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 13px 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .list strong {
+      display: block;
+      color: var(--ink);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .prep-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .journey-map {
+      display: grid;
+      gap: 10px;
+    }
+
+    .nav-map {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .nav-stop {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .marker {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      color: #ffffff;
+      background: var(--lake);
+      font-weight: 900;
+      font-size: 14px;
+      box-shadow: 0 6px 16px rgba(14, 78, 70, 0.18);
+    }
+
+    .marker.warn-marker {
+      color: #4a3500;
+      background: var(--sun);
+    }
+
+    .stop-text strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .stop-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .stop-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 7px;
+    }
+
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border: 1px solid rgba(15, 118, 110, 0.28);
+      border-radius: 8px;
+      color: var(--lake-dark);
+      background: rgba(230, 243, 239, 0.85);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .nav-leg {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 0 14px;
+    }
+
+    .leg-line {
+      justify-self: center;
+      width: 3px;
+      min-height: 48px;
+      border-radius: 999px;
+      background: var(--lake);
+    }
+
+    .leg-line.warn-line {
+      background: var(--sun);
+    }
+
+    .leg-card {
+      padding: 10px 12px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .leg-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .strava-tools {
+      display: grid;
+      gap: 10px;
+    }
+
+    .strava-input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .strava-input-row input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: #ffffff;
+      font-size: 14px;
+    }
+
+    .strava-input-row button {
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid rgba(15, 118, 110, 0.35);
+      border-radius: 8px;
+      color: #ffffff;
+      background: var(--lake);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .strava-preview {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      border: 1px dashed rgba(15, 118, 110, 0.35);
+      border-radius: 8px;
+      background: rgba(230, 243, 239, 0.55);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .strava-preview.has-route {
+      display: block;
+      padding: 0;
+      border-style: solid;
+      background: #ffffff;
+      text-align: left;
+    }
+
+    .strava-hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .journey-step {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .journey-place {
+      padding: 13px 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      align-content: center;
+      min-height: 76px;
+    }
+
+    .journey-place strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .journey-place span {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .journey-leg {
+      position: relative;
+      padding: 13px 14px 13px 22px;
+      background: linear-gradient(90deg, rgba(15, 118, 110, 0.1), rgba(255, 255, 255, 0.92));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      align-content: center;
+      min-height: 76px;
+    }
+
+    .journey-leg::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 16px;
+      bottom: 16px;
+      width: 3px;
+      border-radius: 999px;
+      background: var(--lake);
+    }
+
+    .journey-leg strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.35;
+      margin-bottom: 5px;
+    }
+
+    .journey-leg span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .journey-leg.warn-leg {
+      background: linear-gradient(90deg, rgba(234, 179, 8, 0.16), rgba(255, 255, 255, 0.92));
+      border-color: rgba(234, 179, 8, 0.55);
+    }
+
+    .journey-leg.warn-leg::before {
+      background: var(--sun);
+    }
+
+    .prep {
+      padding: 14px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .prep h3 {
+      color: var(--lake-dark);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .prep p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .callout {
+      padding: 14px 16px;
+      background: #fff8dc;
+      border: 1px solid rgba(234, 179, 8, 0.55);
+      border-radius: 8px;
+      color: #5f4a05;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .alert {
+      color: var(--alert);
+      font-weight: 800;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 920px) {
+      .hero, .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics, .prep-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 32px;
+      }
+
+      .hero, .panel {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .metrics, .prep-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .day, .event {
+        grid-template-columns: 1fr;
+      }
+
+      .journey-step {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-stop {
+        grid-template-columns: 40px 1fr;
+      }
+
+      .stop-links {
+        grid-column: 2;
+        justify-content: flex-start;
+      }
+
+      .strava-input-row {
+        grid-template-columns: 1fr;
+      }
+
+      .title-row {
+        display: grid;
+        gap: 4px;
+      }
+
+      .title-row span {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Qianxia Lake Cycling Weekend</div>
+        <h1>浙江千峡湖骑行赛行程汇总</h1>
+        <p class="sub">
+          比赛日为 2026 年 5 月 17 日，地点在浙江省千峡湖，主会场为北山镇张坪村主会场。
+          页面已把高铁、租车、丽水爬山、青田住宿、比赛流程和赛后返程收拢到一页，出发前照着核对就行。
+        </p>
+        <div class="metrics">
+          <div class="metric">
+            <div class="label">比赛日期</div>
+            <div class="value">5 月 17 日</div>
+            <div class="note">周日，7:00 开始检录</div>
+          </div>
+          <div class="metric">
+            <div class="label">比赛项目</div>
+            <div class="value">环千峡湖</div>
+            <div class="note">9:30-16:00，赛道全程</div>
+          </div>
+          <div class="metric">
+            <div class="label">交通主线</div>
+            <div class="value">G7343 / G7338</div>
+            <div class="note">已购：周五 G7343 杭州东 20:08 -> 丽水 21:53；已定：周日 G7338 丽水 18:32 -> 杭州东 20:20</div>
+          </div>
+          <div class="metric">
+            <div class="label">官方链接</div>
+            <div class="value">微信文章</div>
+            <div class="note"><a href="https://mp.weixin.qq.com/s/hWgqpZUXghJbbDm_UdrD-g">打开比赛链接</a></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div class="status">
+          <strong>5 月 16 日先到场</strong>
+          <span>周五晚到丽水住宿，周六早上取车，白天开去青田欧尚酒店。</span>
+        </div>
+        <div class="status">
+          <strong>5 月 17 日关键窗口</strong>
+          <span>7:00-9:00 分组分区检录，9:10 开幕式，9:30 正式进入环千峡湖赛段。</span>
+        </div>
+        <div class="status">
+          <strong>赛后收口</strong>
+          <span>返程已定 G7338 18:32。租车订单到 18:30，实际目标 17:45-18:00 完成还车。</span>
+        </div>
+        <div class="status">
+          <strong>当前状态</strong>
+          <span>周五丽水酒店已定为季纷-都城酒店；周六青田酒店已定为青田欧尚酒店；去程已购 G7343。</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <div class="stack">
+        <div class="panel">
+          <div class="title-row">
+            <h2>行迹图</h2>
+            <span>标点导航式规划</span>
+          </div>
+          <div class="nav-map">
+            <div class="nav-stop">
+              <div class="marker">A</div>
+              <div class="stop-text">
+                <strong>杭州东站</strong>
+                <span>周五 20:08，G7343 出发</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?q=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99&city=%E6%9D%AD%E5%B7%9E&src=codex&callnative=0">高德</a>
+                <a class="map-link" href="https://map.baidu.com/search/%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">百度</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">Google</a>
+              </div>
+            </div>
+            <div class="nav-leg">
+              <div class="leg-line"></div>
+              <div class="leg-card"><strong>高铁 · 1 小时 45 分</strong>G7343，20:08 杭州东 -> 21:53 丽水。到站后直接去季纷-都城酒店，别再安排额外事项。</div>
+            </div>
+            <div class="nav-stop">
+              <div class="marker">B</div>
+              <div class="stop-text">
+                <strong>丽水站 / 季纷-都城酒店</strong>
+                <span>周五晚入住，周六上午再取车</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?q=%E4%B8%BD%E6%B0%B4%E7%AB%99">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E4%B8%BD%E6%B0%B4%E7%AB%99&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">丽水站</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E4%B8%80%E5%97%A8%E7%A7%9F%E8%BD%A6%20%E4%B8%BD%E6%B0%B4%E7%AB%99&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">一嗨</a>
+                <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E4%B8%BD%E6%B0%B4%E7%AB%99&destination=%E4%B8%80%E5%97%A8%E7%A7%9F%E8%BD%A6%20%E4%B8%BD%E6%B0%B4%E7%AB%99&travelmode=walking">Google</a>
+              </div>
+            </div>
+            <div class="nav-leg">
+              <div class="leg-line"></div>
+              <div class="leg-card"><strong>周六上午 · 取车 30-45 分</strong>睡醒后去一嗨取车、验车、拆前轮装车。</div>
+            </div>
+            <div class="nav-stop">
+              <div class="marker">C</div>
+              <div class="stop-text">
+                <strong>周六准备路线</strong>
+                <span>Strava 路线约 140km / 2400m，完整执行风险高</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?q=%E4%B8%BD%E6%B0%B4%20%E7%88%AC%E5%B1%B1">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E4%B8%BD%E6%B0%B4%20%E7%88%AC%E5%B1%B1&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德</a>
+                <a class="map-link" href="https://map.baidu.com/search/%E4%B8%BD%E6%B0%B4%20%E7%88%AC%E5%B1%B1">百度</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%BD%E6%B0%B4%20%E7%88%AC%E5%B1%B1">Google</a>
+              </div>
+            </div>
+            <div class="nav-leg">
+              <div class="leg-line"></div>
+              <div class="leg-card"><strong>风险判断 · 周六不再追求完整骑</strong>周六上午取车、装车、采购后再出发，140km / 2400m 仍会明显影响周日比赛；主线改为短骑或休整。</div>
+            </div>
+            <div class="nav-stop">
+              <div class="marker">D</div>
+              <div class="stop-text">
+                <strong>青田欧尚酒店</strong>
+                <span>周六晚已定，第二天早起开车去张坪</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?q=%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德</a>
+                <a class="map-link" href="https://map.baidu.com/search/%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97">百度</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97">Google</a>
+              </div>
+            </div>
+            <div class="nav-leg">
+              <div class="leg-line warn-line"></div>
+              <div class="leg-card"><strong>自驾 · 45-75 分</strong>青田县城 -> 北山镇张坪村主会场。比赛日清晨建议按上限预算。</div>
+            </div>
+            <div class="nav-stop">
+              <div class="marker warn-marker">E</div>
+              <div class="stop-text">
+                <strong>北山镇张坪村主会场</strong>
+                <span>7:00 检录，9:30 环千峡湖</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?saddr=%E9%9D%92%E7%94%B0%E5%8E%BF%E5%9F%8E&daddr=%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91&dirflg=d">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德</a>
+                <a class="map-link" href="https://map.baidu.com/search/%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91">百度</a>
+                <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E9%9D%92%E7%94%B0%E5%8E%BF%E5%9F%8E&destination=%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91&travelmode=driving">Google</a>
+              </div>
+            </div>
+            <div class="nav-leg">
+              <div class="leg-line warn-line"></div>
+              <div class="leg-card"><strong>自驾 · 1 小时 50 分-2 小时 20 分</strong>张坪 -> 丽水站附近还车。要赶 G7338，建议 15:30-15:45 离场，最晚 16:00 必须出发。</div>
+            </div>
+            <div class="nav-stop">
+              <div class="marker">F</div>
+              <div class="stop-text">
+                <strong>丽水站 / 还车</strong>
+                <span>订单 18:30 截止，实际 17:45-18:00 完成还车</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?saddr=%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91&daddr=%E4%B8%BD%E6%B0%B4%E7%AB%99&dirflg=d">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E4%B8%BD%E6%B0%B4%E7%AB%99&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德</a>
+                <a class="map-link" href="https://map.baidu.com/search/%E4%B8%BD%E6%B0%B4%E7%AB%99">百度</a>
+                <a class="map-link" href="https://www.google.com/maps/dir/?api=1&origin=%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91&destination=%E4%B8%BD%E6%B0%B4%E7%AB%99&travelmode=driving">Google</a>
+              </div>
+            </div>
+            <div class="nav-leg">
+              <div class="leg-line"></div>
+              <div class="leg-card"><strong>高铁 · 1 小时 48 分</strong>G7338，18:32 丽水 -> 20:20 杭州东；前提是提前还车，不按 18:30 到店执行。</div>
+            </div>
+            <div class="nav-stop">
+              <div class="marker">G</div>
+              <div class="stop-text">
+                <strong>杭州东站</strong>
+                <span>周日晚到达，软包接驳看状态处理</span>
+              </div>
+              <div class="stop-links">
+                <a class="map-link" href="http://maps.apple.com/?q=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">苹果</a>
+                <a class="map-link" href="https://uri.amap.com/search?keyword=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99&city=%E6%9D%AD%E5%B7%9E&src=codex&callnative=0">高德</a>
+                <a class="map-link" href="https://map.baidu.com/search/%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">百度</a>
+                <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">Google</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>Strava 路书</h2>
+            <span>周六准备 + 周日比赛</span>
+          </div>
+          <div class="strava-tools">
+            <div>
+              <strong>周六准备路线</strong>
+              <div id="strava-saturday-preview" class="strava-preview">
+                正在加载周六准备 Strava 路书。
+              </div>
+            </div>
+            <div>
+              <strong>周日比赛路线</strong>
+              <div id="strava-sunday-preview" class="strava-preview">
+                正在加载周日比赛 Strava 路书。
+              </div>
+            </div>
+            <p class="strava-hint">
+              官方嵌入格式使用 <code>strava-embeds.com/embed.js</code>，在 Safari/Chrome 中打开预览最稳定。
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>出发前检查</h2>
+            <span>按当前方案执行</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>已确认：周五高铁与丽水住宿</strong>
+              去程已购 G7343，周五晚住季纷-都城酒店。到丽水后直接去酒店休息。
+            </li>
+            <li>
+              <strong>已确认：一嗨丽水站店，自助取钥匙</strong>
+              取车点为一嗨丽水站店，可自助取钥匙；车型为大众速腾。自行车装车需要拆前轮，所以周六取车前把桶轴/快拆、前轮固定、旧毛巾车架保护和后排放倒空间都准备好。
+            </li>
+            <li>
+              <strong>已确认：高铁用软包带车</strong>
+              你有软包可以装车；前叉保护用旧毛巾处理，避免拆前轮后前叉受压。建议同时带扎带/魔术贴，把把组、后拨、碟片和车架接触点保护好。
+            </li>
+            <li>
+              <strong>周六路线：看天气决定，小环线优先</strong>
+              天气好就短骑 40-70km；天气不好直接切小环线或取消骑行，保周日比赛状态。
+            </li>
+            <li>
+              <strong>物料领取：按周日可处理</strong>
+              目前判断比赛物料第二天可以处理。仍建议周六晚上把身份证、报名信息和参赛短信/二维码单独放好，周日 7:00-9:00 检录窗口不要压线。
+            </li>
+            <li>
+              <strong>青田欧尚酒店到张坪早晨用时</strong>
+              酒店地址按携程信息为青田鹤城西路 49 号，距青田站步行约 1.8km。酒店到张坪按 45-75 分估算；周日按 6:00 前出发执行。
+            </li>
+            <li>
+              <strong>周日返程已定 G7338，执行要前移</strong>
+              G7338 18:32 -> 20:20 已购买。赛后节奏按“实际 17:45-18:00 完成还车”倒推；18:30 是租车订单截止时间，不作为到店时间。
+            </li>
+            <li>
+              <strong>天气、补给和装备还要赛前一晚复核</strong>
+              赛前一晚复核降雨、风向、温度；确认水壶、电解质、能量胶、备用内胎、气瓶/打气筒、灯、充电宝、身份证、号码布/芯片和赛后干衣。
+            </li>
+            <li>
+              <strong>周日早餐需要自备</strong>
+              青田欧尚酒店按不含早餐处理：面包/饭团、香蕉、咖啡或电解质提前买好，出发前水壶灌满。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>完整赛程</h2>
+            <span>按官方安排转录</span>
+          </div>
+          <div class="timeline">
+            <div class="day">
+              <div class="date">5 月 16 日<br />周六</div>
+              <div class="events">
+                <article class="event">
+                  <div class="time">11:30-17:00</div>
+                  <div>
+                    <h3>选手签到</h3>
+                    <p>地点：北山镇张坪村主会场。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">15:00-21:00</div>
+                  <div>
+                    <h3>赛前嘉年华与晚间活动</h3>
+                    <p>千峡风物、共富市集、“渔乐无穷”互动嘉年华、“我在千峡湖摸鱼”互动游戏、千峡湖全鱼宴、音乐会与烧烤趴。地点：北山镇张坪村主会场。</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="day">
+              <div class="date">5 月 17 日<br />周日</div>
+              <div class="events">
+                <article class="event">
+                  <div class="time">7:00-9:00</div>
+                  <div>
+                    <h3>选手签到、检录</h3>
+                    <p>地点：北山镇张坪村主会场。备注：分组分区检录。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">9:10-9:30</div>
+                  <div>
+                    <h3>开幕式</h3>
+                    <p>地点：北山镇张坪村主会场。备注：领导致辞、裁判员代表致辞。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">9:30-16:00</div>
+                  <div>
+                    <h3>环千峡湖</h3>
+                    <p>地点：赛道全程。这是全天核心赛段，建议按长距离骑行准备补给和备胎工具。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">15:00-15:20</div>
+                  <div>
+                    <h3>颁奖</h3>
+                    <p>地点：北山镇张坪村主会场。备注：现场领导、嘉宾、到达的选手参与。</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>交通安排</h2>
+            <span>已定执行线</span>
+          </div>
+          <div class="timeline">
+            <div class="day">
+              <div class="date">5 月 15 日<br />周五</div>
+              <div class="events">
+                <article class="event">
+                  <div class="time">20:08-21:53</div>
+                  <div>
+                    <h3>G7343 杭州东到丽水</h3>
+                    <p>杭州东 20:08 出发，丽水 21:53 到达。到站后直接去季纷-都城酒店入住。</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="day">
+              <div class="date">5 月 16 日<br />周六</div>
+              <div class="events">
+                <article class="event">
+                  <div class="time">06:30</div>
+                  <div>
+                    <h3>一嗨丽水站店取车</h3>
+                    <p>自助取钥匙，车型大众速腾。拆前轮装车，用旧毛巾保护前叉和车架接触点。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">白天</div>
+                  <div>
+                    <h3>短骑或小环线</h3>
+                    <p>看天气执行：天气好短骑 40-70km，天气不好切小环线或取消骑行。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">傍晚</div>
+                  <div>
+                    <h3>青田欧尚酒店入住</h3>
+                    <p>晚上把第二天比赛装备、水壶、补给、证件和软包收纳全部提前摆好。</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="day">
+              <div class="date">5 月 17 日<br />周日</div>
+              <div class="events">
+                <article class="event">
+                  <div class="time">清晨</div>
+                  <div>
+                    <h3>青田出发去千峡湖主会场</h3>
+                    <p>目标是 6:30 前到北山镇张坪村主会场附近，给停车、换装、检录和临时问题留足余量。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">赛后</div>
+                  <div>
+                    <h3>开车回丽水站附近还车</h3>
+                    <p>完赛后先换干衣、补水吃东西，再从千峡湖返回丽水站附近还车。张坪主会场到丽水站建议按 2 小时上下预算，比赛散场和山路会让时间波动。</p>
+                  </div>
+                </article>
+                <article class="event">
+                  <div class="time">18:32-20:20</div>
+                  <div>
+                    <h3>G7338 丽水返回杭州东</h3>
+                    <p>丽水 18:32 出发，杭州东 20:20 到达。到杭州东后按当天状态处理软包接驳。</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>地图与住宿</h2>
+            <span>点开后用地图确认实时路况</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>高铁节点</strong>
+              杭州东站：
+              <a href="https://uri.amap.com/search?keyword=%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99&city=%E6%9D%AD%E5%B7%9E&src=codex&callnative=0">高德</a>
+              /
+              <a href="https://map.baidu.com/search/%E6%9D%AD%E5%B7%9E%E4%B8%9C%E7%AB%99">百度</a>
+              ；丽水站：
+              <a href="https://uri.amap.com/search?keyword=%E4%B8%BD%E6%B0%B4%E7%AB%99&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德</a>
+              /
+              <a href="https://map.baidu.com/search/%E4%B8%BD%E6%B0%B4%E7%AB%99">百度</a>
+              。去程已购 G7343，返程已购 G7338。
+            </li>
+            <li>
+              <strong>丽水取还车</strong>
+              一嗨租车丽水站附近门店：
+              <a href="https://uri.amap.com/search?keyword=%E4%B8%80%E5%97%A8%E7%A7%9F%E8%BD%A6%20%E4%B8%BD%E6%B0%B4%E7%AB%99&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德搜索</a>
+              /
+              <a href="https://map.baidu.com/search/%E4%B8%80%E5%97%A8%E7%A7%9F%E8%BD%A6%20%E4%B8%BD%E6%B0%B4%E7%AB%99">百度搜索</a>
+              。一嗨丽水站店自助取钥匙，车型大众速腾，取车后拆前轮装车。
+            </li>
+            <li>
+              <strong>比赛主会场</strong>
+              北山镇张坪村主会场：
+              <a href="https://uri.amap.com/search?keyword=%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德</a>
+              /
+              <a href="https://map.baidu.com/search/%E5%8C%97%E5%B1%B1%E9%95%87%E5%BC%A0%E5%9D%AA%E6%9D%91">百度</a>
+              。赛后从这里回丽水站附近还车，正常按 2 小时上下预算。
+            </li>
+            <li>
+              <strong>青田住宿：已定青田欧尚酒店</strong>
+              5 月 16 日晚上住青田欧尚酒店。公开页面显示店名为欧尚酒店（青田火车站店），地址在青田鹤城西路 49 号，距青田站步行约 1.8km；早餐按自备处理。
+              <a href="http://maps.apple.com/?q=%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97">苹果地图</a>
+              /
+              <a href="https://m.ctrip.com/html5/hotel/hoteldetail/72895098.html">携程详情</a>
+              /
+              <a href="https://uri.amap.com/search?keyword=%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97&city=%E4%B8%BD%E6%B0%B4&src=codex&callnative=0">高德搜索</a>
+              /
+              <a href="https://map.baidu.com/search/%E9%9D%92%E7%94%B0%E6%AC%A7%E5%B0%9A%E9%85%92%E5%BA%97">百度搜索</a>
+              。
+            </li>
+            <li>
+              <strong>行程地图顺序</strong>
+              杭州东站 -> 丽水站 / 一嗨取车 -> 丽水附近爬山或短骑 -> 青田欧尚酒店 -> 北山镇张坪村主会场 -> 丽水站附近还车 -> 杭州东站。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>已定安排</h2>
+            <span>交通与租车</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>去程高铁：G7343 杭州东 20:08 -> 丽水 21:53</strong>
+              已购买。到站后直接去季纷-都城酒店入住，周五晚上不再安排取车或开车去青田。
+            </li>
+            <li>
+              <strong>返程高铁：G7338 丽水 18:32 -> 杭州东 20:20</strong>
+              已购买。赛后按 17:45-18:00 完成还车倒推，15:30-15:45 离开主会场，最晚 16:00 出发。
+            </li>
+            <li>
+              <strong>一嗨租车：丽水取还</strong>
+              车型大众速腾。5 月 16 日 06:30 自助取钥匙，5 月 17 日 18:30 订单截止；自行车拆前轮装车，旧毛巾保护前叉。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>执行节奏</h2>
+            <span>比赛日建议</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>6:30 前到主会场附近</strong>
+              给停车、换装、找检录区和处理临时问题留缓冲。7:00-9:00 是检录窗口，别把时间压到最后。
+            </li>
+            <li>
+              <strong>8:30 前完成车况和补给确认</strong>
+              重点看胎压、刹车、变速、码表路线、电变电量、水壶和随身补给。
+            </li>
+            <li>
+              <strong>9:10 前进入开幕式节奏</strong>
+              开幕式后 9:30 进入环湖赛段，出发前少喝太多水，避免刚开赛就想找厕所。
+            </li>
+            <li>
+              <strong>15:00 后留意颁奖与返程</strong>
+              完赛后先回主会场补水、换衣，再按 15:30-15:45 离场节奏安排返程。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>补给策略</h2>
+            <span>按 5-6 小时窗口准备</span>
+          </div>
+          <div class="prep-grid">
+            <div class="prep">
+              <h3>骑前</h3>
+              <p>酒店早餐按没有处理。5:20-5:40 吃完：饭团/面包 2 份 + 香蕉 1 根 + 咖啡或电解质；6:30 前灌满 2 个水壶。</p>
+            </div>
+            <div class="prep">
+              <h3>骑中</h3>
+              <p>目标每小时 50-60g 碳水，5-6 小时合计 250-360g。带 6 支胶、2 根能量棒、1-2 包软糖/米饼、2 包电解质粉、2 粒盐丸备用。</p>
+            </div>
+            <div class="prep">
+              <h3>骑后</h3>
+              <p>完赛后 10 分钟内先喝水和碳水，车上放一瓶运动饮料 + 面包/饭团 + 蛋白棒。换干衣服后再开车回丽水，别湿衣服赶车。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>天气与穿着</h2>
+            <span>按小雨湿热预案</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>天气判断</strong>
+              按<a href="https://www.nmc.cn/publish/forecast/AZJ/qingtian.html">中央气象台青田预报</a>，5 月 16 日小雨、约 19-26℃；5 月 17 日清晨湿度高，8 点前后有小雨信号，比赛时段约 20-24℃。最终出发前一晚和周日 5:00 再复核一次。
+            </li>
+            <li>
+              <strong>比赛穿着</strong>
+              短袖骑行服 + 背带裤 + 薄全指或半指手套 + 骑行眼镜；带轻薄防雨风衣或马甲，清晨和下坡用，热了塞后袋。
+            </li>
+            <li>
+              <strong>雨天保护</strong>
+              手机、证件、车钥匙、房卡、纸巾放防水袋；软包/换洗衣物用塑料袋二次防水。眼镜优先透明或浅色镜片，雨天比深色镜片安全。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="panel">
+          <div class="title-row">
+            <h2>携带清单</h2>
+            <span>出门前核对</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>证件与参赛物品</strong>
+              身份证、报名信息、参赛包、号码布或号码牌、计时芯片、现金或备用支付方式。
+            </li>
+            <li>
+              <strong>车辆与工具</strong>
+              头盔、码表、前后灯、备用内胎 2 条、撬胎棒、气瓶 2 个或便携打气筒、多功能工具、快扣、链条油、小抹布。
+            </li>
+            <li>
+              <strong>补给</strong>
+              两个水壶、能量胶 6 支、能量棒 2 根、软糖/米饼 1-2 包、电解质粉 2 包、盐丸 2 粒备用、赛后运动饮料 1 瓶。
+            </li>
+            <li>
+              <strong>衣物</strong>
+              骑行服 1 套、备用骑行袜 1 双、薄防雨风衣或马甲、手套、眼镜、赛后 T 恤/内裤/袜子/短裤、轻薄外套、毛巾、拖鞋。
+            </li>
+            <li>
+              <strong>高铁与装车</strong>
+              软包、旧毛巾前叉保护、扎带/魔术贴、拆轮工具、碟刹垫片或纸板、后拨保护、一次性手套。
+            </li>
+            <li>
+              <strong>电子设备</strong>
+              手机、充电宝、码表充电线、尾灯充电线。出发前把路线和主会场定位离线保存。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>地点信息</h2>
+            <span>主会场优先</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>比赛区域</strong>
+              浙江省千峡湖。
+            </li>
+            <li>
+              <strong>签到与检录</strong>
+              北山镇张坪村主会场。
+            </li>
+            <li>
+              <strong>比赛赛段</strong>
+              环千峡湖，地点标注为赛道全程。
+            </li>
+            <li>
+              <strong>资料入口</strong>
+              <a href="https://mp.weixin.qq.com/s/hWgqpZUXghJbbDm_UdrD-g">官方微信文章</a>。当前页面根据你提供的赛程截图整理。
+            </li>
+            <li>
+              <strong>地图入口</strong>
+              页面“地图与住宿”区块已经收好杭州东、丽水站、一嗨租车、张坪主会场和青田住宿链接。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>杭州东接驳</h2>
+            <span>软包进出站</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>高铁携车</strong>
+              已决定用软包带车上高铁。关键是前轮拆下后保护前叉，并把后拨、碟片和车架接触点包好；杭州东进站尽量提前到站，给安检和搬运留时间。
+            </li>
+            <li>
+              <strong>返程接驳</strong>
+              G7338 到杭州东 20:20。到站后按当天体力、天气和软包重量处理，从站台到出站口先慢慢搬，不抢时间。
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="title-row">
+            <h2>风险提醒</h2>
+            <span>比赛当天看一眼</span>
+          </div>
+          <ul class="list">
+            <li>
+              <strong>湖区天气</strong>
+              当前按小雨湿热预案执行。雨势变大时，周六短骑直接取消或缩到 30-40km；周日下坡保守，弯前减速，避免湿路压线。
+            </li>
+            <li>
+              <strong>检录时间</strong>
+              <span class="alert">7:00-9:00</span> 是硬窗口，交通和停车都要给提前量。
+            </li>
+            <li>
+              <strong>长时间赛段</strong>
+              周日 9:30-16:00 的窗口很长，按耐力赛处理，前半程稳一点，别在开头把腿打空。周六不安排 140km / 2400m 大路线。
+            </li>
+            <li>
+              <strong>返程恢复</strong>
+              完赛后先换干衣、补水和吃东西，再开车回丽水还车、坐高铁返程，避免疲劳叠加。
+            </li>
+            <li>
+              <strong>租车时间</strong>
+              5 月 16 日 06:30 取车、赛后提前还车都要留排队和验车时间。自行车装车前最好拍一下车内和后备箱状态。
+            </li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          最后复核：大众速腾实际装车空间、杭州东软包进出站动线、青田欧尚酒店停车、酒店到张坪主会场实时车程、主会场停车点、周日 5:00 天气。
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">
+      更新时间：2026-05-13。赛程来自用户提供的比赛安排截图，交通安排来自用户口述，天气按中央气象台青田预报做保守预案，车次以 12306 实时信息为准。
+    </p>
+  </main>
+  <script>
+    const stravaRoutes = {
+      saturday: "3489498813579848930",
+      sunday: "3489508019275099566"
+    };
+
+    function loadStravaEmbed(routeId, targetId) {
+      const preview = document.getElementById(targetId);
+      if (!preview || !routeId) return;
+      preview.classList.add("has-route");
+      preview.innerHTML = `<div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="${routeId}" data-style="standard" data-slippy="true"></div>`;
+
+      if (document.querySelector('script[src="https://strava-embeds.com/embed.js"]')) {
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://strava-embeds.com/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    loadStravaEmbed(stravaRoutes.saturday, "strava-saturday-preview");
+    loadStravaEmbed(stravaRoutes.sunday, "strava-sunday-preview");
+  </script>
+</body>
+</html>

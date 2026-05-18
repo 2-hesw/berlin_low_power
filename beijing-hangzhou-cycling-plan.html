@@ -143,55 +143,20 @@
       border-radius: 6px;
       color: #594321;
     }
-    .climb-list {
+    .route-notes {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
     }
-    .climb {
+    .route-note {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 12px;
     }
-    .climb p {
+    .route-note p {
       color: var(--muted);
       margin-bottom: 10px;
-    }
-    .map-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .map-links a {
-      min-height: 34px;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 10px;
-      border-radius: 7px;
-      background: #edf4ef;
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 800;
-      text-decoration: none;
-    }
-    .roadbook-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 12px 0;
-    }
-    .download {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 14px;
-      border-radius: 8px;
-      background: var(--green);
-      color: #fff;
-      font-weight: 800;
-      text-decoration: none;
     }
     .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
     .footer {
@@ -201,7 +166,7 @@
       padding: 16px 18px 28px;
     }
     @media (max-width: 780px) {
-      .metrics, .grid, .days, .climb-list { grid-template-columns: 1fr; }
+      .metrics, .grid, .days, .route-notes { grid-template-columns: 1fr; }
       header { padding-top: 22px; }
       main { padding: 12px; }
       section { padding: 14px; }
@@ -248,7 +213,7 @@
       <h2>分日计划</h2>
       <div class="days">
         <article class="day"><div class="day-top"><h3>D0 · 06-13 北京检查</h3><span class="km">0 km</span></div><span class="tag">休息</span><p>车况、外胎、刹车、传动、车灯、充电、路线离线化；晚上早睡。</p></article>
-        <article class="day"><div class="day-top"><h3>D1 · 06-14 北京 -> 天津/静海</h3><span class="km">130-150 km</span></div><span class="tag">Z2</span><p>第一天保守，熟悉驮包、坐垫和手套状态，午后避开天津城市高峰。</p></article>
+        <article class="day"><div class="day-top"><h3>D1 · 06-14 北京 -> 天津/静海</h3><span class="km">130-150 km</span></div><span class="tag">Z2</span><p>默认收在天津/静海。若 13:00 前过静海、心率正常、无逆风高温、补给充足，可继续冲沧州，把 D2 压力降下来。</p></article>
         <article class="day"><div class="day-top"><h3>D2 · 06-15 天津/静海 -> 德州</h3><span class="km">175-195 km</span></div><span class="tag">长日</span><p>第一根硬骨头，早出发。逆风强就住沧州南或吴桥，不硬顶德州。</p></article>
         <article class="day"><div class="day-top"><h3>D3 · 06-16 德州 -> 泰安</h3><span class="km">155-175 km</span></div><span class="tag">Z2</span><p>进济南、出济南都留时间，泰安前不追均速，晚上重点补碳水。</p></article>
         <article class="day"><div class="day-top"><h3>D4 · 06-17 泰安 -> 徐州</h3><span class="km">175-195 km</span></div><span class="tag">长日</span><p>中段丘陵和城市穿行混合，爬坡心率封顶，抵达徐州后清洁传动。</p></article>
@@ -260,64 +225,38 @@
     </section>
 
     <section>
-      <h2>路书制作</h2>
-      <p class="note">先用 GPX 控制点骨架导入行者或 iGPSPORT，再在工具里吸附道路、检查桥梁/禁行/施工和补给点。这个 GPX 只负责把 8 天的关键控制点串起来，不作为最终导航轨迹。</p>
-      <div class="roadbook-actions">
-        <a class="download" href="gpx/beijing-hangzhou-2026-dragonboat-waypoints.gpx" download>下载 GPX 骨架</a>
-      </div>
-      <ul>
-        <li>行者：导入 GPX 后进入路书编辑，逐日吸附道路，上传后记录路书编号。</li>
-        <li>iGPSPORT：在 App 的 My Roadbook 中导入 GPX，校正后发送到设备；常见路径是 My -> My Roadbook -> Import Roadbook。</li>
-        <li>精修顺序：先确认跨河桥梁和进出城道路，再看爬升段，最后补便利店/住宿点。</li>
-      </ul>
-      <div class="climb-list">
-        <article class="climb">
-          <h3>D3 · 济南南部 -> 泰安北</h3>
-          <p>进泰山北麓前会开始有缓坡和丘陵起伏。当天已经从德州骑来，重点是不要在进泰安前追均速。</p>
-          <div class="map-links">
-            <a href="https://www.amap.com/search?query=%E6%B3%B0%E5%AE%89%20%E6%B3%B0%E5%B1%B1%E5%8C%97%E9%BA%93" target="_blank" rel="noopener">高德预览</a>
-            <a href="https://map.baidu.com/search/%E6%B3%B0%E5%AE%89%20%E6%B3%B0%E5%B1%B1%E5%8C%97%E9%BA%93" target="_blank" rel="noopener">百度预览</a>
-          </div>
+      <h2>沿途特色与道路状态</h2>
+      <p class="note">这版先按大方向判断路况和体感，不把路书工具塞进页面。真正导航前仍要逐日确认禁行、施工、桥梁和当天风向。</p>
+      <div class="route-notes">
+        <article class="route-note">
+          <h3>D1 · 北京南下到天津/静海</h3>
+          <p>通州、廊坊、武清一线城市边缘多，红绿灯、货车、村镇路口会明显拖慢均速。特色是华北平原开阔、补给密集，但体感容易被横风放大。</p>
+          <p><strong>状态好直达沧州：</strong>可以，但条件要苛刻：13:00 前过静海，均心率没有漂高，气温不爆，腿和坐垫都正常。否则第一天冲 200 km 会把 D2-D4 的恢复预算提前烧掉。</p>
         </article>
-        <article class="climb">
-          <h3>D4 · 泰安 -> 曲阜/兖州</h3>
-          <p>离开泰安后仍有泰山南缘和丘陵余脉，坡不一定长，但会打断巡航节奏。这里是 D4 长日的早段控强度重点。</p>
-          <div class="map-links">
-            <a href="https://www.amap.com/search?query=%E6%B3%B0%E5%AE%89%20%E6%9B%B2%E9%98%9C%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
-            <a href="https://map.baidu.com/search/%E6%B3%B0%E5%AE%89%20%E6%9B%B2%E9%98%9C%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
-          </div>
+        <article class="route-note">
+          <h3>D2 · 沧州/德州平原段</h3>
+          <p>这一段很适合稳定巡航，地形不难，难点是单调、风和大车。沧州、吴桥、德州补给都方便；吴桥是杂技之乡，适合作为精神路标和中途休整点。</p>
+          <p>道路状态上优先避开车流太重的国道直线段，能走并行省道/县道时更舒服。逆风日不要硬守速度。</p>
         </article>
-        <article class="climb">
-          <h3>D6 · 南京南部 -> 溧水</h3>
-          <p>南京南部到溧水一带有连续缓起伏和城市外缘道路，端午第一天车流可能更复杂。若当天热，宁可收在溧水。</p>
-          <div class="map-links">
-            <a href="https://www.amap.com/search?query=%E5%8D%97%E4%BA%AC%20%E6%BA%A7%E6%B0%B4%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
-            <a href="https://map.baidu.com/search/%E5%8D%97%E4%BA%AC%20%E6%BA%A7%E6%B0%B4%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
-          </div>
+        <article class="route-note">
+          <h3>D3-D4 · 济南、泰安、曲阜</h3>
+          <p>从济南南下到泰安会开始出现泰山北麓缓坡和丘陵起伏，D4 离开泰安后仍有短坡和滚动路。这里是全线最有“地形存在感”的早段。</p>
+          <p>特色上，泰安看泰山气质，曲阜是孔子故里。道路状态上进出济南、泰安要预留城市穿行时间，不要把爬坡段安排到傍晚疲劳时。</p>
         </article>
-        <article class="climb">
-          <h3>D7 · 溧阳/宜兴丘陵</h3>
-          <p>溧阳、宜兴靠近天目湖和太湖西岸，路书如果走风景更好的线，容易遇到短坡密集和滚动丘陵。</p>
-          <div class="map-links">
-            <a href="https://www.amap.com/search?query=%E6%BA%A7%E9%98%B3%20%E5%AE%9C%E5%85%B4%20%E5%A4%A9%E7%9B%AE%E6%B9%96%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
-            <a href="https://map.baidu.com/search/%E6%BA%A7%E9%98%B3%20%E5%AE%9C%E5%85%B4%20%E5%A4%A9%E7%9B%AE%E6%B9%96%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
-          </div>
+        <article class="route-note">
+          <h3>D5-D6 · 徐州、蚌埠、滁州、南京</h3>
+          <p>徐州到蚌埠以平原和城镇道路为主，进出城、跨河桥梁和货车是重点。淮河一带风景开阔，但夏季闷热感会变强。</p>
+          <p>南京周边交通复杂，端午第一天车流可能更乱。跨江、绕城和进出城路段宁可慢，不建议夜骑冲南京市区。</p>
         </article>
-        <article class="climb">
-          <h3>D7-D8 · 湖州南部 / 莫干山外缘</h3>
-          <p>从湖州进杭州如果贴近德清、莫干山外缘，会比纯平路更漂亮也更累。8 天版建议只走外缘，不主动加莫干山爬坡。</p>
-          <div class="map-links">
-            <a href="https://www.amap.com/search?query=%E6%B9%96%E5%B7%9E%20%E5%BE%B7%E6%B8%85%20%E8%8E%AB%E5%B9%B2%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
-            <a href="https://map.baidu.com/search/%E6%B9%96%E5%B7%9E%20%E5%BE%B7%E6%B8%85%20%E8%8E%AB%E5%B9%B2%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
-          </div>
+        <article class="route-note">
+          <h3>D7 · 溧阳、宜兴、湖州</h3>
+          <p>溧阳、宜兴靠近天目湖和太湖西岸，如果为了风景走更靠山的线，会遇到短坡密集和滚动丘陵。宜兴有竹海、陶都气质，湖州前后水网和乡镇路更多。</p>
+          <p>D7 是最后一个长日，漂亮路线和省力路线要二选一。8 天版默认省力，状态很好才贴近天目湖/宜兴丘陵。</p>
         </article>
-        <article class="climb">
-          <h3>可选加码 · 径山/良渚北线</h3>
-          <p>最后一天如果状态很好，可以看杭州北部丘陵；但默认不建议加码。D8 的任务是安全进杭州，不是再证明爬坡能力。</p>
-          <div class="map-links">
-            <a href="https://www.amap.com/search?query=%E6%9D%AD%E5%B7%9E%20%E5%BE%84%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
-            <a href="https://map.baidu.com/search/%E6%9D%AD%E5%B7%9E%20%E5%BE%84%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
-          </div>
+        <article class="route-note">
+          <h3>D8 · 湖州、德清、杭州</h3>
+          <p>湖州到杭州可以走更平顺的德清/良渚方向，也可以贴近莫干山外缘看山。8 天版默认不加莫干山和径山，最后一天任务是安全进杭州。</p>
+          <p>进杭州城市道路密度高，周末假期人车多。最后 30 km 不冲刺，留判断力处理路口、非机动车道和导航变线。</p>
         </article>
       </div>
     </section>

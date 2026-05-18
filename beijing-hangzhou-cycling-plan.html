@@ -143,6 +143,38 @@
       border-radius: 6px;
       color: #594321;
     }
+    .climb-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .climb {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .climb p {
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .map-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .map-links a {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 7px;
+      background: #edf4ef;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
     .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
     .footer {
       color: var(--muted);
@@ -151,7 +183,7 @@
       padding: 16px 18px 28px;
     }
     @media (max-width: 780px) {
-      .metrics, .grid, .days { grid-template-columns: 1fr; }
+      .metrics, .grid, .days, .climb-list { grid-template-columns: 1fr; }
       header { padding-top: 22px; }
       main { padding: 12px; }
       section { padding: 14px; }
@@ -206,6 +238,61 @@
         <article class="day"><div class="day-top"><h3>D6 · 06-19 蚌埠 -> 南京/溧水</h3><span class="km">150-175 km</span></div><span class="tag">端午 D1</span><p>跨江和南京周边交通复杂，宁可提前收在溧水。</p></article>
         <article class="day"><div class="day-top"><h3>D7 · 06-20 南京/溧水 -> 湖州</h3><span class="km">155-180 km</span></div><span class="tag">长日</span><p>最后一个长日，热和累计疲劳会放大风险，下午必须主动补水降温。</p></article>
         <article class="day"><div class="day-top"><h3>D8 · 06-21 湖州 -> 杭州</h3><span class="km">85-105 km</span></div><span class="tag">轻松完赛</span><p>端午假期最后一天，控制兴奋感，进杭州注意城市道路和疲劳后的判断力。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>爬升与地图预览</h2>
+      <p class="note">北京到杭州主线大部分是平原，真正需要提前看地形的位置集中在泰安、南京南部、溧阳宜兴和湖州进杭州。下面是路书精修时优先检查的爬升/丘陵段，地图链接用于预览位置，不代表最终骑行轨迹。</p>
+      <div class="climb-list">
+        <article class="climb">
+          <h3>D3 · 济南南部 -> 泰安北</h3>
+          <p>进泰山北麓前会开始有缓坡和丘陵起伏。当天已经从德州骑来，重点是不要在进泰安前追均速。</p>
+          <div class="map-links">
+            <a href="https://www.amap.com/search?query=%E6%B3%B0%E5%AE%89%20%E6%B3%B0%E5%B1%B1%E5%8C%97%E9%BA%93" target="_blank" rel="noopener">高德预览</a>
+            <a href="https://map.baidu.com/search/%E6%B3%B0%E5%AE%89%20%E6%B3%B0%E5%B1%B1%E5%8C%97%E9%BA%93" target="_blank" rel="noopener">百度预览</a>
+          </div>
+        </article>
+        <article class="climb">
+          <h3>D4 · 泰安 -> 曲阜/兖州</h3>
+          <p>离开泰安后仍有泰山南缘和丘陵余脉，坡不一定长，但会打断巡航节奏。这里是 D4 长日的早段控强度重点。</p>
+          <div class="map-links">
+            <a href="https://www.amap.com/search?query=%E6%B3%B0%E5%AE%89%20%E6%9B%B2%E9%98%9C%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
+            <a href="https://map.baidu.com/search/%E6%B3%B0%E5%AE%89%20%E6%9B%B2%E9%98%9C%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
+          </div>
+        </article>
+        <article class="climb">
+          <h3>D6 · 南京南部 -> 溧水</h3>
+          <p>南京南部到溧水一带有连续缓起伏和城市外缘道路，端午第一天车流可能更复杂。若当天热，宁可收在溧水。</p>
+          <div class="map-links">
+            <a href="https://www.amap.com/search?query=%E5%8D%97%E4%BA%AC%20%E6%BA%A7%E6%B0%B4%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
+            <a href="https://map.baidu.com/search/%E5%8D%97%E4%BA%AC%20%E6%BA%A7%E6%B0%B4%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
+          </div>
+        </article>
+        <article class="climb">
+          <h3>D7 · 溧阳/宜兴丘陵</h3>
+          <p>溧阳、宜兴靠近天目湖和太湖西岸，路书如果走风景更好的线，容易遇到短坡密集和滚动丘陵。</p>
+          <div class="map-links">
+            <a href="https://www.amap.com/search?query=%E6%BA%A7%E9%98%B3%20%E5%AE%9C%E5%85%B4%20%E5%A4%A9%E7%9B%AE%E6%B9%96%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
+            <a href="https://map.baidu.com/search/%E6%BA%A7%E9%98%B3%20%E5%AE%9C%E5%85%B4%20%E5%A4%A9%E7%9B%AE%E6%B9%96%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
+          </div>
+        </article>
+        <article class="climb">
+          <h3>D7-D8 · 湖州南部 / 莫干山外缘</h3>
+          <p>从湖州进杭州如果贴近德清、莫干山外缘，会比纯平路更漂亮也更累。8 天版建议只走外缘，不主动加莫干山爬坡。</p>
+          <div class="map-links">
+            <a href="https://www.amap.com/search?query=%E6%B9%96%E5%B7%9E%20%E5%BE%B7%E6%B8%85%20%E8%8E%AB%E5%B9%B2%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
+            <a href="https://map.baidu.com/search/%E6%B9%96%E5%B7%9E%20%E5%BE%B7%E6%B8%85%20%E8%8E%AB%E5%B9%B2%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
+          </div>
+        </article>
+        <article class="climb">
+          <h3>可选加码 · 径山/良渚北线</h3>
+          <p>最后一天如果状态很好，可以看杭州北部丘陵；但默认不建议加码。D8 的任务是安全进杭州，不是再证明爬坡能力。</p>
+          <div class="map-links">
+            <a href="https://www.amap.com/search?query=%E6%9D%AD%E5%B7%9E%20%E5%BE%84%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">高德预览</a>
+            <a href="https://map.baidu.com/search/%E6%9D%AD%E5%B7%9E%20%E5%BE%84%E5%B1%B1%20%E9%AA%91%E8%A1%8C" target="_blank" rel="noopener">百度预览</a>
+          </div>
+        </article>
       </div>
     </section>
 

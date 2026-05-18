@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/beijing-hangzhou",
+      "destination": "/beijing-hangzhou-cycling-plan.html"
+    },
+    {
       "source": "/qianxia",
       "destination": "/qianxia-lake-cycling-2026-05-17.html"
     }

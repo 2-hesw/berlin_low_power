@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>北京到杭州骑行计划</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18201d;
+      --muted: #5f6964;
+      --line: #dbe2dc;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --green: #176a4b;
+      --blue: #275a7a;
+      --gold: #b88423;
+      --red: #b14b3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+    }
+    header {
+      padding: 28px 18px 18px;
+      background: linear-gradient(135deg, #f7f5ef 0%, #e5efe8 48%, #e6edf2 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 10px 0 8px;
+      font-size: clamp(30px, 7vw, 58px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      margin: 0 0 18px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .metric, section, .day {
+      background: rgba(255,255,255,.82);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .metric { padding: 12px; }
+    .metric strong { display: block; font-size: 22px; color: var(--ink); }
+    .metric span { color: var(--muted); font-size: 12px; }
+    main { padding: 18px; }
+    section {
+      padding: 16px;
+      margin: 14px auto;
+      max-width: 1100px;
+    }
+    h2 { margin: 0 0 12px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eaf1ec;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .days {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .day {
+      padding: 12px;
+      background: var(--panel);
+      min-height: 154px;
+    }
+    .day-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+    .km { color: var(--blue); font-weight: 800; white-space: nowrap; }
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #f4eddf;
+      color: #7b5618;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    ul { padding-left: 18px; margin: 8px 0 0; }
+    li { margin: 5px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--green); background: #edf4ef; }
+    tr:last-child td { border-bottom: 0; }
+    .note {
+      border-left: 4px solid var(--gold);
+      padding: 10px 12px;
+      background: #fffaf0;
+      border-radius: 6px;
+      color: #594321;
+    }
+    .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
+    .footer {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 16px 18px 28px;
+    }
+    @media (max-width: 780px) {
+      .metrics, .grid, .days { grid-template-columns: 1fr; }
+      header { padding-top: 22px; }
+      main { padding: 12px; }
+      section { padding: 14px; }
+      table { font-size: 13px; }
+      th, td { padding: 8px 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">北京 -> 杭州 · 稳妥完赛版</div>
+      <h1>12 天骑到杭州</h1>
+      <p class="lead">基于最近 30 天约 800 km 骑行、关键单日 194 km / 3228 m 的能力画像制定。核心原则是日均 110-140 km、少数平路长日到 150 km、每 3-4 天插入缓冲日。</p>
+      <div class="metrics">
+        <div class="metric"><strong>1300-1450 km</strong><span>路书前总里程估算</span></div>
+        <div class="metric"><strong>12 天</strong><span>含 2 个短缓冲日</span></div>
+        <div class="metric"><strong>125-145 W</strong><span>主巡航功率参考</span></div>
+        <div class="metric"><strong>60-75 g/h</strong><span>骑行中碳水目标</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>执行原则</h2>
+      <div class="grid">
+        <div>
+          <span class="pill">强度</span>
+          <p>全程按 Z2 耐力骑处理，爬坡和逆风不硬顶。均速不是指标，第二天还能正常出发才是指标。</p>
+        </div>
+        <div>
+          <span class="pill">恢复</span>
+          <p>D9 和 D11 是主动恢复日，不建议删除。长途的胜负手是睡眠、吃饭、洗衣和疼痛管理。</p>
+        </div>
+        <div>
+          <span class="pill">路线</span>
+          <p>城市和里程是计划级估算。出发前必须用高德、行者或 Strava 精修到实际可骑道路。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>分日计划</h2>
+      <div class="days">
+        <article class="day"><div class="day-top"><h3>D0 · 北京检查</h3><span class="km">0 km</span></div><span class="tag">休息</span><p>车况、外胎、刹车、传动、车灯、充电、路线离线化；晚上早睡。</p></article>
+        <article class="day"><div class="day-top"><h3>D1 · 北京 -> 天津</h3><span class="km">120-140 km</span></div><span class="tag">Z2</span><p>第一天不争速度，熟悉驮包、坐垫和手套状态，午后避开城市高峰。</p></article>
+        <article class="day"><div class="day-top"><h3>D2 · 天津 -> 沧州</h3><span class="km">115-130 km</span></div><span class="tag">Z2</span><p>平路巡航日，重点练吃喝节奏：每 20 分钟进食或喝水。</p></article>
+        <article class="day"><div class="day-top"><h3>D3 · 沧州 -> 德州</h3><span class="km">115-130 km</span></div><span class="tag">Z2</span><p>观察膝盖、跟腱和手掌麻木。逆风强就主动降速，不追回均速。</p></article>
+        <article class="day"><div class="day-top"><h3>D4 · 德州 -> 济南</h3><span class="km">115-135 km</span></div><span class="tag">Z2</span><p>进济南前留足城市穿行时间，不把到店时间压到天黑。</p></article>
+        <article class="day"><div class="day-top"><h3>D5 · 济南 -> 曲阜/兖州</h3><span class="km">120-140 km</span></div><span class="tag">Z2-Z3 短坡</span><p>可能有丘陵和城市道路，控制爬坡心率，不在泰安附近逞强。</p></article>
+        <article class="day"><div class="day-top"><h3>D6 · 曲阜/兖州 -> 徐州</h3><span class="km">125-145 km</span></div><span class="tag">Z2</span><p>稳定巡航，抵达后做一次完整洗车和传动清理。</p></article>
+        <article class="day"><div class="day-top"><h3>D7 · 徐州 -> 蚌埠</h3><span class="km">135-155 km</span></div><span class="tag">长日</span><p>相对长的一天，早出发。若高温或逆风，拆成徐州 -> 宿州。</p></article>
+        <article class="day"><div class="day-top"><h3>D8 · 蚌埠 -> 滁州</h3><span class="km">120-140 km</span></div><span class="tag">Z2</span><p>给南京前留缓冲，不硬顶到南京；晚上重点睡眠和补碳水。</p></article>
+        <article class="day"><div class="day-top"><h3>D9 · 滁州 -> 南京</h3><span class="km">55-75 km</span></div><span class="tag">恢复骑</span><p>上午短骑到南京，下午洗衣、补胎、补给、按摩放松。</p></article>
+        <article class="day"><div class="day-top"><h3>D10 · 南京 -> 溧阳/宜兴</h3><span class="km">115-140 km</span></div><span class="tag">Z2</span><p>出南京交通复杂，宁愿早走慢骑；下午热就缩短到溧阳。</p></article>
+        <article class="day"><div class="day-top"><h3>D11 · 溧阳/宜兴 -> 湖州</h3><span class="km">85-110 km</span></div><span class="tag">恢复-Z2</span><p>第二个缓冲日，给身体回一点血，不要为了凑里程加码。</p></article>
+        <article class="day"><div class="day-top"><h3>D12 · 湖州 -> 杭州</h3><span class="km">80-100 km</span></div><span class="tag">轻松完赛</span><p>最后一天控制兴奋感，进杭州注意城市道路和疲劳后的判断力。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>每日节奏</h2>
+      <table>
+        <tr><th>时间</th><th>动作</th></tr>
+        <tr><td>06:00-06:40</td><td>起床、早餐、补水、检查胎压和刹车。</td></tr>
+        <tr><td>07:00</td><td>出发，先 30 分钟轻松热身。</td></tr>
+        <tr><td>09:00-11:30</td><td>主巡航段，保持可聊天强度，不追均速。</td></tr>
+        <tr><td>11:30-13:00</td><td>午饭或便利店补给，热天至少避开 30-45 分钟暴晒。</td></tr>
+        <tr><td>13:00-16:30</td><td>下午段，按体感降功率；最后 20 km 不冲。</td></tr>
+        <tr><td>17:00 前</td><td>尽量到达住宿点，洗澡、洗衣、拉伸、补碳水。</td></tr>
+        <tr><td>21:30-22:30</td><td>睡觉，第二天路线和补给点只做简短复核。</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>补给与装备</h2>
+      <div class="grid">
+        <div>
+          <h3>骑行中</h3>
+          <ul>
+            <li>碳水 60-75 g/h。</li>
+            <li>水 500-750 ml/h，高温 750-1000 ml/h。</li>
+            <li>热天每小时补 500-800 mg 钠。</li>
+          </ul>
+        </div>
+        <div>
+          <h3>骑后</h3>
+          <ul>
+            <li>30 分钟内补碳水和蛋白。</li>
+            <li>洗衣、拉伸、检查皮肤磨损。</li>
+            <li>第二天补给和水点离线保存。</li>
+          </ul>
+        </div>
+        <div>
+          <h3>必带</h3>
+          <ul>
+            <li>内胎 2 条、补胎片、气筒/气瓶。</li>
+            <li>前后灯、充电宝、身份证、少量现金。</li>
+            <li>防晒、防磨膏、薄防雨风衣。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>调整规则</h2>
+      <p class="note risk">出现膝盖刺痛、跟腱痛、手麻持续加重，当天缩短，第二天改 50-80 km 恢复骑。静息心率明显偏高、腿沉、热身 30 分钟仍转不起来，也直接改短。</p>
+      <p class="note">高温、逆风、暴雨、能见度差时，里程下调 20%-40%，优先住到安全县城。每 3-4 天至少保留一个 60-100 km 的轻松日。</p>
+    </section>
+
+    <section>
+      <h2>出发前训练</h2>
+      <table>
+        <tr><th>时间</th><th>训练重点</th></tr>
+        <tr><td>出发前 4-6 周</td><td>每周 1 次 120-160 km 长距离 Z2，1 次甜点/阈值短课，1-2 次恢复骑，力量维护 1-2 次。</td></tr>
+        <tr><td>出发前 2-3 周</td><td>做一次两日连续骑，例如 140 km + 100 km，测试坐垫、手套、补给和恢复。</td></tr>
+        <tr><td>出发前 7-10 天</td><td>减量到高峰周的 50%-60%，保留短促唤醒，不再堆大爬升。</td></tr>
+        <tr><td>出发前 2 天</td><td>只轻松转腿或休息，检查车况和装备。</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>最后复核</h2>
+      <ul>
+        <li>用高德、行者或 Strava 把每日路书精修到实际可骑道路。</li>
+        <li>确认每日住宿城市，避免把到店时间压到天黑。</li>
+        <li>出发前按季节确认天气、风向、降雨和高温预警。</li>
+        <li>复核跨河桥梁、施工路段、禁行路段。</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="footer">生成日期：2026-05-18 · 计划级估算，路书精修前不作为精确导航使用</div>
+</body>
+</html>

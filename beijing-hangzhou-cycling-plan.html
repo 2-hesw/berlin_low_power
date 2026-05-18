@@ -175,6 +175,24 @@
       font-weight: 800;
       text-decoration: none;
     }
+    .roadbook-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .download {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 14px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+    }
     .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
     .footer {
       color: var(--muted);
@@ -242,8 +260,16 @@
     </section>
 
     <section>
-      <h2>爬升与地图预览</h2>
-      <p class="note">北京到杭州主线大部分是平原，真正需要提前看地形的位置集中在泰安、南京南部、溧阳宜兴和湖州进杭州。下面是路书精修时优先检查的爬升/丘陵段，地图链接用于预览位置，不代表最终骑行轨迹。</p>
+      <h2>路书制作</h2>
+      <p class="note">先用 GPX 控制点骨架导入行者或 iGPSPORT，再在工具里吸附道路、检查桥梁/禁行/施工和补给点。这个 GPX 只负责把 8 天的关键控制点串起来，不作为最终导航轨迹。</p>
+      <div class="roadbook-actions">
+        <a class="download" href="gpx/beijing-hangzhou-2026-dragonboat-waypoints.gpx" download>下载 GPX 骨架</a>
+      </div>
+      <ul>
+        <li>行者：导入 GPX 后进入路书编辑，逐日吸附道路，上传后记录路书编号。</li>
+        <li>iGPSPORT：在 App 的 My Roadbook 中导入 GPX，校正后发送到设备；常见路径是 My -> My Roadbook -> Import Roadbook。</li>
+        <li>精修顺序：先确认跨河桥梁和进出城道路，再看爬升段，最后补便利店/住宿点。</li>
+      </ul>
       <div class="climb-list">
         <article class="climb">
           <h3>D3 · 济南南部 -> 泰安北</h3>

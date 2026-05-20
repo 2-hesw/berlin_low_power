@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>给今晚留一点安静 · 睡眠小卡片</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #211f24;
+      --muted: #6d686e;
+      --line: #e4ddd9;
+      --paper: #f8f4ef;
+      --panel: #ffffff;
+      --green: #537a68;
+      --blue: #5f7688;
+      --gold: #9b7446;
+      --red: #9a5b58;
+      --rose: #a96f76;
+      --soft: #f1f7f2;
+      --cool: #eef4f7;
+      --warm: #fff6e9;
+      --warn: #fff1ee;
+      --shadow: 0 14px 34px rgba(91, 72, 55, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(83, 122, 104, .10), transparent 32%),
+        linear-gradient(225deg, rgba(169, 111, 118, .10), transparent 34%),
+        var(--paper);
+      line-height: 1.55;
+    }
+    h1, h2, h3, p, ul { margin: 0; letter-spacing: 0; }
+    a { color: var(--green); font-weight: 800; text-decoration: none; border-bottom: 1px solid rgba(23, 106, 75, .28); }
+    .page { max-width: 1100px; margin: 0 auto; padding: 24px 16px 38px; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      gap: 16px;
+      padding: 24px;
+      background: linear-gradient(135deg, #fff 0%, #f6f1ea 54%, #eef5f1 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .eyebrow { color: var(--rose); font-size: 13px; font-weight: 850; }
+    h1 { margin-top: 8px; max-width: 720px; font-size: clamp(34px, 8vw, 58px); line-height: 1.04; }
+    .lead { margin-top: 12px; max-width: 760px; color: var(--muted); font-size: 16px; }
+    .hero-side { display: grid; gap: 10px; }
+    .mini {
+      padding: 14px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .mini strong { display: block; color: var(--green); margin-bottom: 4px; }
+    .mini span { color: var(--muted); font-size: 14px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .metric {
+      min-height: 92px;
+      padding: 13px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(23, 106, 75, .05);
+    }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .metric strong { display: block; margin-top: 8px; font-size: 20px; line-height: 1.15; }
+    .layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; margin-top: 14px; align-items: start; }
+    .stack { display: grid; gap: 14px; }
+    .panel {
+      padding: 17px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(23, 106, 75, .05);
+    }
+    .title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 12px; }
+    h2 { font-size: 21px; line-height: 1.25; }
+    .hint { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .cards { display: grid; gap: 9px; }
+    .card {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 10px;
+      min-height: 96px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .mark {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--green);
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .card h3 { font-size: 16px; line-height: 1.25; }
+    .card p { margin-top: 5px; color: var(--muted); font-size: 14px; }
+    .card.cool .mark { background: var(--blue); }
+    .card.warm .mark { background: var(--gold); }
+    .card.warn .mark { background: var(--red); }
+    .card.rose .mark { background: var(--rose); }
+    .card.soft { background: var(--soft); }
+    .card.cool { background: var(--cool); }
+    .card.warm { background: var(--warm); }
+    .card.warn { background: var(--warn); }
+    .card.rose { background: #fff2f3; }
+    .timeline { display: grid; gap: 8px; }
+    .time-row {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 10px;
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .time { color: var(--green); font-size: 14px; font-weight: 900; }
+    .time-row strong { display: block; font-size: 15px; }
+    .time-row span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
+    .checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .check {
+      min-height: 74px;
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .check strong { display: block; color: var(--ink); margin-bottom: 4px; }
+    .rule {
+      padding: 12px 13px;
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      background: var(--warm);
+      color: #594321;
+      font-size: 14px;
+    }
+    .risk { border-left-color: var(--red); background: var(--warn); color: #66352f; }
+    .template {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      list-style: none;
+    }
+    .template li {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .template strong { color: var(--ink); }
+    .source { color: var(--muted); font-size: 12px; line-height: 1.7; }
+    footer { padding: 18px 8px 0; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 860px) {
+      .hero, .layout, .metrics, .checklist { grid-template-columns: 1fr; }
+      .hero { padding: 18px; }
+      .page { padding: 16px 10px 32px; }
+      .hint { white-space: normal; }
+      .time-row, .template li { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">午觉没睡好后的睡眠补救</div>
+        <h1>给今晚留一点安静</h1>
+        <p class="lead">午觉没睡好，不代表今晚也会失败。你不需要立刻把状态调整到完美，只要一点点把身体带回柔软、安稳、可休息的地方。</p>
+      </div>
+      <div class="hero-side">
+        <div class="mini"><strong>给她的一句话</strong><span>今天没睡好，不是你的错。我们慢慢把夜晚变轻一点。</span></div>
+        <div class="mini"><strong>今日原则</strong><span>少补偿，少催促，少评判。</span></div>
+        <div class="mini"><strong>失眠处理</strong><span>如果清醒很久，就温柔地离开床，等困意回来。</span></div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="metric"><span>午觉建议</span><strong>短一点就好</strong></div>
+      <div class="metric"><span>傍晚状态</span><strong>轻轻活动</strong></div>
+      <div class="metric"><span>睡前节奏</span><strong>慢慢收光</strong></div>
+      <div class="metric"><span>清醒很久</span><strong>先离开床</strong></div>
+    </section>
+
+    <main class="layout">
+      <div class="stack">
+        <section class="panel">
+          <div class="title">
+            <h2>今晚温柔版</h2>
+            <span class="hint">不用把自己修好</span>
+          </div>
+          <div class="cards">
+            <article class="card rose"><span class="mark">1</span><div><h3>先别急着补偿</h3><p>午觉没睡好已经很烦了，傍晚不必再用一场长觉补回来。实在困，可以闭眼 10-20 分钟，像给自己按一下暂停键。</p></div></article>
+            <article class="card cool"><span class="mark">2</span><div><h3>让身体轻轻动一动</h3><p>饭后散步、拉伸、慢慢收拾房间都可以。不是为了消耗自己，只是让白天的紧绷从身体里松开一点。</p></div></article>
+            <article class="card warm"><span class="mark">3</span><div><h3>睡前把世界调暗</h3><p>把灯光、消息、短视频、复杂讨论都慢慢放远。洗个热水澡、泡脚、读几页纸书，让夜晚有一个柔和的过渡。</p></div></article>
+            <article class="card warn"><span class="mark">4</span><div><h3>不把睡眠变成考试</h3><p>如果醒着，也尽量不看时间。你不需要计算还剩几个小时，不需要证明自己今晚一定能睡好。</p></div></article>
+            <article class="card soft"><span class="mark">5</span><div><h3>给自己一句低压力的话</h3><p>可以试着对自己说：“我现在只是在休息，睡不着也没关系。”安全感回来一点，困意才更容易靠近。</p></div></article>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title">
+            <h2>今晚的小节奏</h2>
+            <span class="hint">不用精确，顺着来就好</span>
+          </div>
+          <div class="timeline">
+            <div class="time-row"><div class="time">晚饭后</div><div><strong>把身体带回当下</strong><span>散步、拉伸、整理桌面，选一种不费脑的活动。</span></div></div>
+            <div class="time-row"><div class="time">睡前一会儿</div><div><strong>把世界调小声</strong><span>灯光变暗，消息收口，把今天先放在门外。</span></div></div>
+            <div class="time-row"><div class="time">上床后</div><div><strong>只休息，不评估</strong><span>不看时间，不给今晚打分，也不追问自己为什么还没睡。</span></div></div>
+            <div class="time-row"><div class="time">清醒很久</div><div><strong>温柔地离开床</strong><span>去暗一点的地方做安静、无聊的事，困意回来再回去。</span></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="panel">
+          <div class="title">
+            <h2>午觉小约定</h2>
+            <span class="hint">让白天休息不打扰夜晚</span>
+          </div>
+          <div class="checklist">
+            <div class="check"><strong>短一点</strong>10-30 分钟就够，像充一点电，不追求睡满。</div>
+            <div class="check"><strong>早一点</strong>尽量放在 12:30-14:30，15:00 后就把睡意留给晚上。</div>
+            <div class="check"><strong>没睡也算</strong>闭眼安静 15 分钟，也是在照顾自己。</div>
+            <div class="check"><strong>不耗着</strong>如果越躺越烦，就起身喝水、见光、轻轻活动。</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title">
+            <h2>让夜晚轻一点</h2>
+            <span class="hint">少一点刺激和自责</span>
+          </div>
+          <div class="stack">
+            <div class="rule risk">手机先放远一点。不是因为你自控力不好，而是信息流太会把大脑重新叫醒。</div>
+            <div class="rule risk">酒精不适合当助眠。它可能让人更快困，但容易让后半夜变浅、变碎。</div>
+            <div class="rule">记录可以很简单：几点起床、有没有午觉、咖啡因最晚几点。别记录到让自己更紧张。</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title">
+            <h2>明天也不用怕</h2>
+            <span class="hint">睡差一天不会毁掉全部</span>
+          </div>
+          <div class="cards">
+            <article class="card soft"><span class="mark">A</span><div><h3>起床时间尽量照旧</h3><p>睡差了也可以慢慢起床、见光、洗漱、吃点东西。生物钟会因为这些小动作重新找到方向。</p></div></article>
+            <article class="card cool"><span class="mark">B</span><div><h3>白天困，不等于失败</h3><p>困只是身体在回收睡眠压力。把咖啡因早点收住，午觉短一点，今晚还有机会变好。</p></div></article>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title">
+            <h2>给自己的小约定</h2>
+            <span class="hint">不需要完美执行</span>
+          </div>
+          <ul class="template">
+            <li><strong>起床时间</strong><span>尽量固定，不必苛刻。</span></li>
+            <li><strong>午觉最晚</strong><span>给晚上留一点困意。</span></li>
+            <li><strong>咖啡因截止</strong><span>提前一点，身体会感谢你。</span></li>
+            <li><strong>低刺激活动</strong><span>洗澡、泡脚、纸书、轻音乐。</span></li>
+            <li><strong>离床备用活动</strong><span>暗处坐一会儿，等困意回来。</span></li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <section class="panel" style="margin-top: 14px;">
+      <div class="title">
+        <h2>温柔提醒</h2>
+        <span class="hint">2026-05-20</span>
+      </div>
+      <p class="source">这不是一份要求你“必须做到”的清单，而是一组可以任选几条的小帮助。若失眠每周 3 次以上并持续 3 个月，或明显影响白天工作、训练、情绪，建议考虑睡眠门诊或 CBT-I。页面参考 CDC、AASM、NHS 对睡眠卫生和 CBT-I 的公开建议整理。</p>
+    </section>
+
+    <footer>给今晚留一点安静 · 睡眠小卡片 · 温柔低压版</footer>
+  </div>
+</body>
+</html>

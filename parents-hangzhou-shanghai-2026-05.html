@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>杭州-绍兴-上海父母同行计划 · 2026-05-23</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17201d;
+      --muted: #5f6d68;
+      --line: #d8e0dc;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --green: #176a4b;
+      --blue: #275f86;
+      --gold: #a8761e;
+      --red: #a9473c;
+      --soft: #edf5f1;
+      --warm: #fff7e8;
+      --shadow: 0 12px 30px rgba(23, 106, 75, .09);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(23, 106, 75, .10), transparent 32%),
+        linear-gradient(225deg, rgba(39, 95, 134, .10), transparent 30%),
+        var(--paper);
+      line-height: 1.5;
+    }
+    a { color: var(--green); font-weight: 800; text-decoration: none; border-bottom: 1px solid rgba(23, 106, 75, .28); }
+    h1, h2, h3, p, ul { margin: 0; letter-spacing: 0; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 24px 16px 38px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
+      padding: 24px;
+      background: linear-gradient(135deg, #fff 0%, #eef6f2 56%, #eef4f8 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .eyebrow { color: var(--green); font-size: 13px; font-weight: 850; }
+    h1 { margin-top: 8px; font-size: clamp(32px, 8vw, 56px); line-height: 1.05; }
+    .lead { margin-top: 12px; max-width: 760px; color: var(--muted); font-size: 16px; }
+    .hero-side { display: grid; gap: 10px; }
+    .mini {
+      padding: 14px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .mini strong { display: block; color: var(--green); margin-bottom: 4px; }
+    .mini span { color: var(--muted); font-size: 14px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .metric {
+      min-height: 90px;
+      padding: 13px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .metric span { color: var(--muted); font-size: 12px; }
+    .metric strong { display: block; margin-top: 8px; font-size: 22px; line-height: 1.1; }
+    .weather {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .weather-card {
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(23, 106, 75, .05);
+    }
+    .weather-card h2 { font-size: 18px; }
+    .weather-card p { margin-top: 7px; color: var(--muted); font-size: 13px; }
+    .weather-card .temp { margin-top: 10px; color: var(--blue); font-size: 20px; font-weight: 900; }
+    .weather-card .warn { color: #7a5313; }
+    .layout { display: grid; grid-template-columns: 1.25fr .85fr; gap: 14px; margin-top: 14px; align-items: start; }
+    .stack { display: grid; gap: 14px; }
+    .panel {
+      padding: 17px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(23, 106, 75, .05);
+    }
+    .title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 12px; }
+    h2 { font-size: 21px; line-height: 1.25; }
+    .hint { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .route { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .city {
+      padding: 14px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .badge {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #fff;
+      background: var(--green);
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .city h3 { margin-top: 10px; font-size: 18px; }
+    .city p { margin-top: 6px; color: var(--muted); font-size: 14px; }
+    .days { display: grid; gap: 8px; }
+    .day {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      align-items: start;
+    }
+    .date { color: var(--green); font-size: 14px; font-weight: 900; line-height: 1.25; }
+    .day strong { display: block; font-size: 15px; }
+    .day span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
+    .plan-lines { display: grid; gap: 7px; }
+    .plan-lines p { color: var(--muted); font-size: 13px; }
+    .plan-lines b { color: var(--ink); }
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 24px;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 6px;
+      color: #6f4d14;
+      background: #f7ecda;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .list { display: grid; gap: 8px; padding: 0; list-style: none; }
+    .list li {
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .list strong { display: block; color: var(--ink); margin-bottom: 3px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .tile {
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .tile strong { display: block; color: var(--ink); margin-bottom: 4px; }
+    .rule {
+      padding: 12px 13px;
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      background: var(--warm);
+      color: #594321;
+      font-size: 14px;
+    }
+    .risk { border-left-color: var(--red); background: #fff3f1; color: #63322b; }
+    .source { color: var(--muted); font-size: 12px; line-height: 1.65; }
+    footer { padding: 18px 8px 0; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 860px) {
+      .hero, .layout, .metrics, .weather, .route, .grid { grid-template-columns: 1fr; }
+      .day { grid-template-columns: 1fr; }
+      .hero { padding: 18px; }
+      .page { padding: 16px 10px 32px; }
+      .hint { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">2026-05-23 周六 -> 2026-05-31 周日</div>
+        <h1>杭州-绍兴-上海父母同行计划</h1>
+        <p class="lead">目标：醒目、周到、灵活。上午玩核心点，下午留休息；雨天换室内，累了删景点，不把行程变成赶路。</p>
+      </div>
+      <div class="hero-side">
+        <div class="mini"><strong>路线</strong><span>杭州 5 晚 -> 绍兴 1 晚 -> 嘉兴半日 -> 上海虹桥 2 晚</span></div>
+        <div class="mini"><strong>体能</strong><span>每天 1 个主景点，步行控制为低到中。</span></div>
+        <div class="mini"><strong>天气</strong><span>江南 5 月下旬按闷湿有雨准备。</span></div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="metric"><span>总时长</span><strong>9 天 8 晚</strong></div>
+      <div class="metric"><span>住宿</span><strong>5 + 1 + 2</strong></div>
+      <div class="metric"><span>换城</span><strong>3 次</strong></div>
+      <div class="metric"><span>执行口径</span><strong>少走多坐</strong></div>
+    </section>
+
+    <section class="weather">
+      <article class="weather-card">
+        <h2>杭州 · 5/23-5/27</h2>
+        <div class="temp">约 21-29℃</div>
+        <p>小雨/阴雨开场，5/26 中雨转阴。</p>
+        <p class="warn">周日放西湖，周一放灵隐；后两天用运河/博物馆兜底。</p>
+      </article>
+      <article class="weather-card">
+        <h2>绍兴 · 5/28</h2>
+        <div class="temp">约 17-29℃</div>
+        <p>晴转多云，约 18-26℃。</p>
+        <p class="warn">周四去绍兴正好，鲁迅故里和仓桥直街适合慢逛。</p>
+      </article>
+      <article class="weather-card">
+        <h2>嘉兴/上海 · 5/29-5/31</h2>
+        <div class="temp">约 20-28℃</div>
+        <p>5/29 嘉兴阴转多云，上海多云转阴；5/30 上海晴转多云。</p>
+        <p class="warn">周五嘉兴只做南湖/月河半日，晚上住虹桥；周六再进上海市区。</p>
+      </article>
+    </section>
+
+    <main class="layout">
+      <div class="stack">
+        <section class="panel">
+          <div class="title"><h2>城市节奏</h2><span class="hint">周四绍兴，周五嘉兴，上海住虹桥</span></div>
+          <div class="route">
+            <article class="city">
+              <span class="badge">5/23-5/27</span>
+              <h3>杭州</h3>
+              <p>周日西湖，周一灵隐龙井，周二运河，周三留白/博物馆。</p>
+            </article>
+            <article class="city">
+              <span class="badge">5/28</span>
+              <h3>绍兴</h3>
+              <p>鲁迅故里、仓桥直街、沈园。住一晚，少折返。</p>
+            </article>
+            <article class="city">
+              <span class="badge">5/29-5/31</span>
+              <h3>嘉兴 -> 上海虹桥</h3>
+              <p>嘉兴南湖/月河半日，晚上住虹桥，周六进市区。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>每日执行卡</h2><span class="hint">路线 / 订票 / 吃饭 / 注意事项</span></div>
+          <div class="days">
+            <div class="day"><div class="date">5/23<br>周六</div><div class="plan-lines"><strong>到杭州，低强度适应</strong><p><b>路线</b>：到店放行李 -> 湖滨/武林近距离吃饭 -> 雨小再湖滨短走。</p><p><b>订票</b>：无；当天只确认后续灵隐、雷峰塔、西湖游船。</p><p><b>吃饭</b>：杭州酒家/知味观/新白鹿，点东坡肉、片儿川、龙井虾仁。</p><p><b>注意</b>：5/23 杭州小雨，别安排西湖大步行。</p></div></div>
+            <div class="day"><div class="date">5/24<br>周日</div><div class="plan-lines"><strong>西湖游船日</strong><p><b>路线</b>：湖滨码头 -> 三潭印月 -> 花港观鱼 -> 雷峰塔/净慈寺二选一。</p><p><b>订票</b>：西湖游船现场或线上；雷峰塔可提前购票。</p><p><b>吃饭</b>：中午南山路/湖滨，晚上湖滨银泰解决。</p><p><b>注意</b>：坐船替代环湖，下午父母累就取消登塔。</p></div></div>
+            <div class="day"><div class="date">5/25<br>周一</div><div class="plan-lines"><strong>灵隐 + 龙井慢坐</strong><p><b>路线</b>：打车到灵隐飞来峰 -> 灵隐寺 -> 午饭 -> 龙井村/茶博。</p><p><b>订票</b>：灵隐飞来峰提前预约/购票；灵隐寺香花券现场或平台确认。</p><p><b>吃饭</b>：灵隐素面/梅家坞农家菜，晚餐回酒店附近。</p><p><b>注意</b>：景区台阶多，飞来峰不要全走，下午以喝茶休息为主。</p></div></div>
+            <div class="day"><div class="date">5/26<br>周二</div><div class="plan-lines"><strong>运河雨天友好线</strong><p><b>路线</b>：小河直街 -> 桥西历史街区 -> 中国伞/扇/刀剪剑博物馆择一。</p><p><b>订票</b>：博物馆类出发前查公众号预约；雨大就只保留室内馆。</p><p><b>吃饭</b>：运河边简餐/茶馆；晚上回杭州核心区吃杭帮菜。</p><p><b>注意</b>：这是恢复日，不加远点，为绍兴两晚留体力。</p></div></div>
+            <div class="day"><div class="date">5/27<br>周三</div><div class="plan-lines"><strong>杭州留白 / 博物馆</strong><p><b>路线</b>：中国丝绸博物馆/西湖文化广场 -> 午休 -> 湖滨轻逛。</p><p><b>订票</b>：个人参观中国丝绸博物馆通常无需线上预约；出发前看闭馆信息。</p><p><b>吃饭</b>：酒店附近解决，别跑远。</p><p><b>注意</b>：这是绍兴前的缓冲日，行李整理好，别加大景点。</p></div></div>
+            <div class="day"><div class="date">5/28<br>周四</div><div class="plan-lines"><strong>杭州 -> 绍兴，古城慢逛</strong><p><b>路线</b>：杭州东 -> 绍兴北 -> 酒店寄存 -> 鲁迅故里 -> 仓桥直街。</p><p><b>订票</b>：买高铁；鲁迅故里免费但建议预约/刷证；沈园看时间再买。</p><p><b>吃饭</b>：咸亨酒店/寻宝记，点茴香豆、醉鸡、梅干菜扣肉。</p><p><b>注意</b>：绍兴晴转多云，适合慢逛；石板路穿防滑鞋。</p></div></div>
+            <div class="day"><div class="date">5/29<br>周五</div><div class="plan-lines"><strong>绍兴 -> 嘉兴 -> 上海虹桥</strong><p><b>路线</b>：绍兴北 -> 嘉兴南 -> 南湖或月河半日 -> 上海虹桥 -> 酒店。</p><p><b>订票</b>：绍兴北到嘉兴南、嘉兴南到上海虹桥；南湖游船按现场/公众号。</p><p><b>吃饭</b>：嘉兴吃粽子、南湖银鱼或月河简餐；上海晚餐放虹桥天地。</p><p><b>注意</b>：嘉兴只选南湖或月河，不要两边都深逛；行李优先寄存。</p></div></div>
+            <div class="day"><div class="date">5/30<br>周六</div><div class="plan-lines"><strong>上海市区经典线</strong><p><b>路线</b>：虹桥 -> 豫园/城隍庙 -> 午休 -> 外滩短线 -> 虹桥。</p><p><b>订票</b>：豫园提前购票；上海博物馆/自然博物馆作为雨天备选。</p><p><b>吃饭</b>：南翔小笼/德兴馆；晚餐可在虹桥天地或市区本帮菜。</p><p><b>注意</b>：住虹桥进市区有距离，晚上别拖太晚回。</p></div></div>
+            <div class="day"><div class="date">5/31<br>周日</div><div class="plan-lines"><strong>虹桥轻松返程</strong><p><b>路线</b>：返程早：虹桥天地/酒店附近；返程晚：上海动物园或七宝古镇择一。</p><p><b>订票</b>：返程票、行李寄存确认；若去动物园再购票。</p><p><b>吃饭</b>：虹桥天地/龙湖天街，少跑远。</p><p><b>注意</b>：阴有小雨，虹桥附近收尾最省心。</p></div></div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="stack">
+        <section class="panel">
+          <div class="title"><h2>住宿候选</h2><span class="hint">杭州你来定</span></div>
+          <div class="grid">
+            <div class="tile"><strong>绍兴首选：全季鲁迅故里</strong>延安路261号，距鲁迅故居约300米；连锁稳定，适合父母。</div>
+            <div class="tile"><strong>绍兴体验：鲁迅故里开元颐居</strong>近鲁迅故里、沈园、青藤书屋等，位置更有古城感。</div>
+            <div class="tile"><strong>绍兴地标：咸亨酒店</strong>鲁迅中路179号，吃饭和文化体验方便；订前看房型新旧。</div>
+            <div class="tile"><strong>上海首选：虹桥康得思</strong>申虹路333号，室内步行约5分钟到虹桥火车站和2/10号线。</div>
+            <div class="tile"><strong>上海稳妥：虹桥凯悦嘉轩</strong>申虹路9号，近虹桥天地和龙湖天街，吃饭方便。</div>
+            <div class="tile"><strong>上海备选：虹桥商务区酒店</strong>优先选“虹桥火车站/虹桥天地”步行可达，不选太偏会展区。</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>订票清单</h2><span class="hint">提前一天过一遍</span></div>
+          <ul class="list">
+            <li><strong>交通</strong>杭州东 -> 绍兴北 5/28；绍兴北 -> 嘉兴南、嘉兴南 -> 上海虹桥 5/29；上海返程 5/31。</li>
+            <li><strong>杭州</strong>灵隐飞来峰、雷峰塔、西湖游船；中国丝绸博物馆个人参观无需线上预约。</li>
+            <li><strong>绍兴</strong>鲁迅故里免费但建议预约；沈园/夜游/乌篷船按当天决定购票。</li>
+            <li><strong>嘉兴/上海</strong>嘉兴南湖游船按当天决定；豫园提前购票；上海博物馆/自然博物馆作为雨天备选。</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>杭州人文备选</h2><span class="hint">放周二/周三，不加到核心线</span></div>
+          <ul class="list">
+            <li><strong>运河城市</strong>桥西历史街区 + 拱宸桥 + 运河博物馆/伞扇刀剪剑博物馆。适合周二，雨天也稳。</li>
+            <li><strong>丝绸杭州</strong>中国丝绸博物馆。展陈轻松漂亮，适合周三上午，父母不累。</li>
+            <li><strong>南宋老城</strong>河坊街 / 南宋御街 / 胡雪岩故居择一。只短逛，商业街不久留。</li>
+            <li><strong>宋韵陶瓷</strong>南宋官窑博物馆或德寿宫遗址博物馆。想增加历史感再加，预约方便时优先。</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>灵活规则</h2><span class="hint">照顾父母体感</span></div>
+          <ul class="list">
+            <li><strong>下雨</strong>西湖/外滩缩短，改博物馆、茶馆、商场、酒店休息。</li>
+            <li><strong>累了</strong>删下午项目，不补到晚上；晚餐选酒店 3 km 内。</li>
+            <li><strong>排队</strong>超过 30 分钟就换点，父母舒适度优先。</li>
+            <li><strong>换城</strong>车次选午前或午后，避开早高峰和深夜到店。</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>吃什么</h2><span class="hint">按城市点菜</span></div>
+          <div class="grid">
+            <div class="tile"><strong>杭州</strong>东坡肉、龙井虾仁、宋嫂鱼羹、片儿川。</div>
+            <div class="tile"><strong>绍兴</strong>梅干菜扣肉、醉鸡、茴香豆、黄酒。</div>
+            <div class="tile"><strong>上海</strong>红烧肉、油爆虾、响油鳝糊、生煎。</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>带什么</h2><span class="hint">少而必要</span></div>
+          <ul class="list">
+            <li><strong>轻装数量</strong>每人 3 件上衣、2 条裤子、4 套内衣袜子、1 件薄外套；中途洗一次衣服。</li>
+            <li><strong>穿衣策略</strong>短袖/薄长袖为主，尽量选速干；薄外套必带，外滩晚风和室内空调用得上。</li>
+            <li><strong>鞋伞</strong>防滑好走的鞋最重要；不要穿新鞋。每人 1 把小伞，另备一次性雨衣 2-3 件。</li>
+            <li><strong>药品</strong>常用药、肠胃药、晕车药、创可贴、止痛药、藿香正气/口服补液盐，按父母习惯带。</li>
+            <li><strong>证件</strong>身份证、医保卡、少量现金；所有预约码、高铁票、酒店订单截图到相册。</li>
+            <li><strong>电子</strong>充电宝、充电线、老人手机充电器；出门前手机电量至少 80%。</li>
+            <li><strong>随身包</strong>纸巾、湿巾、小水杯、薄外套、伞、药、身份证；行李箱寄存后也不影响游玩。</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>最后复核</h2><span class="hint">出发前 24 小时</span></div>
+          <div class="rule">确认 5/23-5/27 杭州降雨时段；订绍兴 5/28、上海虹桥 5/29-5/31；确认酒店可寄存行李和有电梯。</div>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>参考攻略</h2><span class="hint">想细看时点开</span></div>
+          <ul class="list">
+            <li><strong>杭州西湖官方</strong><a href="https://westlake.hangzhou.gov.cn/">西湖风景名胜区</a>：看西湖景点背景、管委会信息和景区动态。</li>
+            <li><strong>杭州灵隐官方</strong><a href="https://www.lingyinsi.com/detail_57_19455.html">灵隐飞来峰预约说明</a>：出发前确认实名预约和分时游览规则。</li>
+            <li><strong>杭州人文参考</strong><a href="https://www.canal-museum.cn/news/1351">桥西历史街区</a>、<a href="https://ct.zj.gov.cn/art/2019/8/5/art_1671969_36385240.html">中国丝绸博物馆</a>、<a href="https://ct.zj.gov.cn/art/2019/8/5/art_1664685_36385254.html">南宋官窑博物馆</a>。</li>
+            <li><strong>绍兴官方两天一夜</strong><a href="https://sxwg.sx.gov.cn/art/2023/1/6/art_1229535165_58944093.html">畅游绍兴</a>：鲁迅故里、沈园、仓桥直街这条线可参考。</li>
+            <li><strong>绍兴景区介绍</strong><a href="https://www.shaoxingtour.cn/rwjq/lxgl_syjq.htm">鲁迅故里·沈园</a>：看鲁迅故里和沈园的官方介绍。</li>
+            <li><strong>嘉兴半日参考</strong><a href="https://www.loongwander.com/zh-CN/article/nanhu-lake-tourist-area">南湖 + 月河</a>：南湖、红船、月河街区怎么取舍。</li>
+            <li><strong>上海外滩背景</strong><a href="https://english.shanghai.gov.cn/en-HeritageZones/20231208/f2ac293f546a4d32aba936f2e733a47c.html">外滩历史文化街区</a>：适合出发前了解外滩建筑和历史。</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="title"><h2>底线</h2><span class="hint">别硬撑</span></div>
+          <div class="rule risk">父母脚疼、犯困、胃口差、天气闷热时，直接回酒店休息。行程删掉不可惜，状态坏了才亏。</div>
+        </section>
+
+        <section class="panel source">
+          <strong>参考</strong><br>
+          <a href="https://www.tianqi24.com/hangzhou/">杭州天气</a> ·
+          <a href="https://www.tianqi24.com/shaoxing/">绍兴天气</a> ·
+          <a href="https://www.tianqi24.com/shanghai/">上海天气</a> ·
+          <a href="https://www.iinhotel.com/1829738">全季绍兴鲁迅故里</a> ·
+          <a href="https://www.cordishotels.com/sc/shanghai-hongqiao/">上海虹桥康得思</a> ·
+          <a href="https://m.hyattplacehongqiao.cn/">上海虹桥凯悦嘉轩</a> ·
+          <a href="https://www.chinasilkmuseum.com/cgjyy/index_6.aspx">中国丝绸博物馆预约说明</a>
+        </section>
+      </aside>
+    </main>
+
+    <footer>更新日期：2026-05-20 · 短路径：/parents-trip</footer>
+  </div>
+</body>
+</html>

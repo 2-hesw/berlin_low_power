@@ -158,6 +158,42 @@
       color: var(--muted);
       margin-bottom: 10px;
     }
+    .route-map {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+    .map-panel {
+      background: #f8fbf8;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      overflow: hidden;
+    }
+    .map-panel svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .checkpoint-list {
+      display: grid;
+      gap: 8px;
+    }
+    .checkpoint {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .checkpoint strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+    .checkpoint span {
+      color: var(--muted);
+      font-size: 13px;
+    }
     .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
     .footer {
       color: var(--muted);
@@ -166,7 +202,7 @@
       padding: 16px 18px 28px;
     }
     @media (max-width: 780px) {
-      .metrics, .grid, .days, .route-notes { grid-template-columns: 1fr; }
+      .metrics, .grid, .days, .route-notes, .route-map { grid-template-columns: 1fr; }
       header { padding-top: 22px; }
       main { padding: 12px; }
       section { padding: 14px; }
@@ -180,7 +216,7 @@
     <div class="wrap">
       <div class="eyebrow">北京 -> 杭州 · 5W/kg 强队版</div>
       <h1>7 骑 + 1 机动</h1>
-      <p class="lead">暂定 2026-06-14 到 2026-06-21，衔接 6 月 19 日至 21 日端午假期。队友人均约 5W/kg，D1 默认直达沧州，D7 进杭州，D8 留给天气、机械、状态或杭州轻松收尾。</p>
+      <p class="lead">暂定 2026-06-14 到 2026-06-21，衔接 6 月 19 日至 21 日端午假期。队友人均约 5W/kg，路线改为京杭运河贴线版：北京/通州、天津、沧州、德州、临清/聊城、济宁、徐州、淮安、扬州、苏州、嘉兴到杭州。</p>
       <div class="metrics">
         <div class="metric"><strong>1280-1450 km</strong><span>路书前总里程估算</span></div>
         <div class="metric"><strong>7 骑 + 1</strong><span>D8 作为机动缓冲</span></div>
@@ -204,7 +240,35 @@
         </div>
         <div>
           <span class="pill">路线</span>
-          <p>D1 默认到沧州，D3 和 D6 是关键长日。出发前必须精修实际可骑道路和降级住宿点。</p>
+          <p>原济南/泰安线不算严格沿运河。运河贴线版更平，但城镇、水网、桥梁和货车检查更多。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>路线图</h2>
+      <p class="note">判断：原路线经济南/泰安/曲阜，更像山东丘陵挑战线；如果主题是沿京杭运河骑到杭州，应改走德州、临清/聊城、济宁、台儿庄/徐州、淮安、扬州、江南运河到杭州。</p>
+      <div class="route-map">
+        <div class="map-panel">
+          <svg viewBox="0 0 820 520" role="img" aria-label="北京到杭州京杭运河贴线骑行示意图">
+            <rect x="0" y="0" width="820" height="520" fill="#f8fbf8"/>
+            <path d="M120 42 C180 78, 160 120, 210 150 C255 180, 245 222, 300 250 C360 282, 340 334, 410 358 C492 386, 500 430, 610 462 C668 478, 706 488, 742 492" fill="none" stroke="#b7c8bd" stroke-width="18" stroke-linecap="round"/>
+            <path d="M120 42 C180 78, 160 120, 210 150 C255 180, 245 222, 300 250 C360 282, 340 334, 410 358 C492 386, 500 430, 610 462 C668 478, 706 488, 742 492" fill="none" stroke="#176a4b" stroke-width="5" stroke-linecap="round"/>
+            <path d="M300 250 C346 230, 386 210, 430 186" fill="none" stroke="#b14b3d" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+            <text x="438" y="184" fill="#b14b3d" font-size="18" font-weight="700">原济南/泰安偏离线</text>
+            <g fill="#176a4b" stroke="#fff" stroke-width="3">
+              <circle cx="120" cy="42" r="9"/><circle cx="164" cy="92" r="8"/><circle cx="210" cy="150" r="8"/><circle cx="254" cy="202" r="8"/><circle cx="300" cy="250" r="8"/><circle cx="356" cy="305" r="8"/><circle cx="410" cy="358" r="8"/><circle cx="482" cy="394" r="8"/><circle cx="548" cy="432" r="8"/><circle cx="610" cy="462" r="8"/><circle cx="676" cy="480" r="8"/><circle cx="742" cy="492" r="9"/>
+            </g>
+            <g fill="#18201d" font-size="18" font-weight="700">
+              <text x="92" y="28">北京/通州</text><text x="176" y="90">天津</text><text x="220" y="146">沧州</text><text x="266" y="202">德州</text><text x="312" y="250">临清/聊城</text><text x="368" y="304">济宁/台儿庄</text><text x="422" y="358">徐州</text><text x="494" y="394">淮安</text><text x="558" y="430">扬州/镇江</text><text x="620" y="460">苏州</text><text x="686" y="478">嘉兴</text><text x="700" y="514">杭州</text>
+            </g>
+          </svg>
+        </div>
+        <div class="checkpoint-list">
+          <div class="checkpoint"><strong>北段</strong><span>北京/通州 -> 天津 -> 沧州 -> 德州，平原长距离，横风和大车是主要变量。</span></div>
+          <div class="checkpoint"><strong>山东运河段</strong><span>德州 -> 临清/聊城 -> 济宁/台儿庄 -> 徐州，比济南/泰安线更贴运河，爬升更少。</span></div>
+          <div class="checkpoint"><strong>淮扬段</strong><span>徐州 -> 宿迁 -> 淮安 -> 扬州/镇江，运河文化最集中，桥梁和城镇密度上升。</span></div>
+          <div class="checkpoint"><strong>江南运河段</strong><span>常州/无锡 -> 苏州 -> 嘉兴 -> 杭州，水网、红绿灯和假期人车流会压低均速。</span></div>
         </div>
       </div>
     </section>
@@ -213,13 +277,13 @@
       <h2>分日计划</h2>
       <div class="days">
         <article class="day"><div class="day-top"><h3>D0 · 06-13 北京检查</h3><span class="km">0 km</span></div><span class="tag">休息</span><p>车况、外胎、刹车、传动、车灯、充电、路线离线化；晚上早睡。</p></article>
-        <article class="day"><div class="day-top"><h3>D1 · 06-14 北京 -> 沧州</h3><span class="km">210-230 km</span></div><span class="tag">集团长日</span><p>强队版默认直达沧州。06:00 前出发，午前过天津/静海；逆风高温或队伍磨合差就收天津/静海。</p></article>
-        <article class="day"><div class="day-top"><h3>D2 · 06-15 沧州 -> 济南</h3><span class="km">200-220 km</span></div><span class="tag">短轮换</span><p>平原巡航日，靠轮换省力。不要为了均速在大车路段硬顶，进济南前预留城市穿行时间。</p></article>
-        <article class="day"><div class="day-top"><h3>D3 · 06-16 济南 -> 徐州</h3><span class="km">230-255 km</span></div><span class="tag">关键长日</span><p>含泰山北麓起伏和多城市穿行。状态不稳就收曲阜或滕州，不硬顶徐州。</p></article>
-        <article class="day"><div class="day-top"><h3>D4 · 06-17 徐州 -> 蚌埠</h3><span class="km">160-180 km</span></div><span class="tag">恢复巡航</span><p>强队版里的相对短日，用来洗车、清传动、恢复接触点。别把短日骑成强度课。</p></article>
-        <article class="day"><div class="day-top"><h3>D5 · 06-18 蚌埠 -> 南京/溧水</h3><span class="km">170-200 km</span></div><span class="tag">Z2</span><p>端午前最后一个工作日，跨河、进出城和货车是重点。南京周边不夜骑冒险。</p></article>
-        <article class="day"><div class="day-top"><h3>D6 · 06-19 南京/溧水 -> 湖州</h3><span class="km">180-220 km</span></div><span class="tag">丘陵长日</span><p>进入江南丘陵和水网。漂亮路线和省力路线二选一，热天优先省力。</p></article>
-        <article class="day"><div class="day-top"><h3>D7 · 06-20 湖州 -> 杭州</h3><span class="km">90-130 km</span></div><span class="tag">轻松完赛</span><p>控制兴奋感进杭州。状态好可加良渚/西湖短绕，但不加莫干山、径山这种额外大爬升。</p></article>
+        <article class="day"><div class="day-top"><h3>D1 · 06-14 北京/通州 -> 沧州</h3><span class="km">210-230 km</span></div><span class="tag">集团长日</span><p>贴北运河/南运河方向南下。06:00 前出发，午前过天津/静海；逆风高温或队伍磨合差就收天津/静海。</p></article>
+        <article class="day"><div class="day-top"><h3>D2 · 06-15 沧州 -> 临清/聊城</h3><span class="km">185-215 km</span></div><span class="tag">短轮换</span><p>经德州进入运河山东段。德州、临清是运河节点，平原横风和大车比爬升更关键。</p></article>
+        <article class="day"><div class="day-top"><h3>D3 · 06-16 临清/聊城 -> 徐州</h3><span class="km">220-250 km</span></div><span class="tag">关键长日</span><p>贴济宁、台儿庄方向，比泰安线更平也更贴运河。状态不稳就收济宁或台儿庄。</p></article>
+        <article class="day"><div class="day-top"><h3>D4 · 06-17 徐州 -> 淮安</h3><span class="km">180-210 km</span></div><span class="tag">运河长日</span><p>沿中运河方向，经宿迁到淮安。桥梁、水网和进出城检查变多，淮安尽量早到。</p></article>
+        <article class="day"><div class="day-top"><h3>D5 · 06-18 淮安 -> 镇江/常州</h3><span class="km">190-220 km</span></div><span class="tag">里运河</span><p>经高邮、扬州，进入里运河精华段。扬州适合大补给，过江和进城路段谨慎。</p></article>
+        <article class="day"><div class="day-top"><h3>D6 · 06-19 镇江/常州 -> 嘉兴</h3><span class="km">180-220 km</span></div><span class="tag">江南水网</span><p>经无锡、苏州进入江南运河段，红绿灯和镇区密度很高。苏州/嘉兴按状态二选一收车。</p></article>
+        <article class="day"><div class="day-top"><h3>D7 · 06-20 嘉兴 -> 杭州</h3><span class="km">90-120 km</span></div><span class="tag">运河收尾</span><p>贴江南运河经临平/拱墅方向进杭州。控制兴奋感，不再额外加莫干山、径山大爬升。</p></article>
         <article class="day"><div class="day-top"><h3>D8 · 06-21 杭州机动</h3><span class="km">0-80 km</span></div><span class="tag">机动</span><p>留给暴雨、爆胎、队友状态、杭州短骑或返程。若 D7 已完成，D8 不再硬凑里程。</p></article>
       </div>
     </section>
@@ -229,34 +293,34 @@
       <p class="note">这版先按大方向判断路况和体感，不把路书工具塞进页面。真正导航前仍要逐日确认禁行、施工、桥梁和当天风向。</p>
       <div class="route-notes">
         <article class="route-note">
-          <h3>D1 · 北京南下到天津/静海</h3>
-          <p>通州、廊坊、武清一线城市边缘多，红绿灯、货车、村镇路口会明显拖慢均速。特色是华北平原开阔、补给密集，但体感容易被横风放大。</p>
-          <p><strong>状态好直达沧州：</strong>可以，但条件要苛刻：13:00 前过静海，均心率没有漂高，气温不爆，腿和坐垫都正常。否则第一天冲 200 km 会把 D2-D4 的恢复预算提前烧掉。</p>
+          <h3>D1 · 北京/通州、天津、沧州</h3>
+          <p>北运河/南运河方向，华北平原开阔，补给密集，但横风明显。通州、武清、静海、沧州外缘红绿灯和大车会拖慢均速。</p>
+          <p><strong>执行：</strong>强队版可以直达沧州，但午前必须通过天津/静海；否则及时收天津/静海，不要第一天就把队伍磨合成本拉满。</p>
         </article>
         <article class="route-note">
-          <h3>D2 · 沧州/德州平原段</h3>
-          <p>这一段很适合稳定巡航，地形不难，难点是单调、风和大车。沧州、吴桥、德州补给都方便；吴桥是杂技之乡，适合作为精神路标和中途休整点。</p>
-          <p>道路状态上优先避开车流太重的国道直线段，能走并行省道/县道时更舒服。逆风日不要硬守速度。</p>
+          <h3>D2 · 沧州、德州、临清/聊城</h3>
+          <p>运河北段重要节点，整体平，但大车、横风、村镇路口会拖慢节奏。德州、临清适合作为大补给点。</p>
+          <p>道路状态上优先避开车流太重的国道直线段，能走并行省道/县道时更舒服。逆风日用短轮换。</p>
         </article>
         <article class="route-note">
-          <h3>D3 · 济南、泰安、曲阜</h3>
-          <p>从济南南下到泰安会开始出现泰山北麓缓坡和丘陵起伏，之后曲阜/兖州/滕州一路城市和村镇密集。</p>
-          <p>这是强队版最容易骑爆的一天。进出济南、泰安、曲阜都要预留时间，状态不好就收曲阜或滕州。</p>
+          <h3>D3 · 临清/聊城、济宁、台儿庄、徐州</h3>
+          <p>贴鲁运河和南四湖方向，比济南/泰安线更平也更贴运河，但桥梁、水网和城镇密度更高。</p>
+          <p>这是运河贴线版最容易因路况耗时的一天。状态不好就收济宁或台儿庄，不硬顶徐州。</p>
         </article>
         <article class="route-note">
-          <h3>D4-D5 · 徐州、蚌埠、滁州、南京</h3>
-          <p>徐州到蚌埠以平原和城镇道路为主，进出城、跨河桥梁和货车是重点。淮河一带风景开阔，但夏季闷热感会变强。</p>
-          <p>D4 是恢复日，D5 再进南京圈。南京周边交通复杂，跨江、绕城和进出城路段宁可慢，不建议夜骑冲南京市区。</p>
+          <h3>D4-D5 · 徐州、淮安、扬州、镇江</h3>
+          <p>中运河/里运河重点段，运河文化最强。徐州、宿迁、淮安、扬州一路桥多、镇多、城市密度高。</p>
+          <p>淮安、扬州适合作为大补给和文化节点；过江和进出城路段宁可慢，不建议夜骑。</p>
         </article>
         <article class="route-note">
-          <h3>D7 · 溧阳、宜兴、湖州</h3>
-          <p>溧阳、宜兴靠近天目湖和太湖西岸，如果为了风景走更靠山的线，会遇到短坡密集和滚动丘陵。宜兴有竹海、陶都气质，湖州前后水网和乡镇路更多。</p>
-          <p>D6 是最后一个真正长日，漂亮路线和省力路线要二选一。强队也优先省力，状态很好才贴近天目湖/宜兴丘陵。</p>
+          <h3>D6 · 常州、无锡、苏州、嘉兴</h3>
+          <p>江南运河段，水网密、红绿灯多、镇区连续。文化体验更强，但实际骑行均速会被路口和人车流压低。</p>
+          <p>D6 是最后一个真正长日，苏州/嘉兴可按状态二选一收车，不要为了路书完整性硬顶。</p>
         </article>
         <article class="route-note">
-          <h3>D7-D8 · 湖州、德清、杭州</h3>
-          <p>湖州到杭州可以走更平顺的德清/良渚方向，也可以贴近莫干山外缘看山。D7 默认进杭州，D8 留机动。</p>
-          <p>进杭州城市道路密度高，周末假期人车多。最后 30 km 不冲刺，留判断力处理路口、非机动车道和导航变线。</p>
+          <h3>D7-D8 · 嘉兴、临平/拱墅、杭州</h3>
+          <p>嘉兴到杭州贴江南运河收尾，临平/拱墅方向更契合“运河进杭州”的主题。</p>
+          <p>D7 默认进杭州，D8 留机动。进杭州城市道路密度高，周末假期人车多，最后 30 km 不冲刺。</p>
         </article>
       </div>
     </section>

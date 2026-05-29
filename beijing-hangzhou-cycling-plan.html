@@ -194,6 +194,25 @@
       color: var(--muted);
       font-size: 13px;
     }
+    .route-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 14px;
+    }
+    .route-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+    }
     .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
     .footer {
       color: var(--muted);
@@ -248,6 +267,9 @@
     <section>
       <h2>路线图</h2>
       <p class="note">判断：原路线经济南/泰安/曲阜，更像山东丘陵挑战线；如果主题是沿京杭运河骑到杭州，应改走德州、临清/聊城、济宁、台儿庄/徐州、淮安、扬州、江南运河到杭州。</p>
+      <div class="route-actions">
+        <a href="https://www.strava.com/routes/3495235328649224896">打开 Strava 正式路书</a>
+      </div>
       <div class="route-map">
         <div class="map-panel">
           <svg viewBox="0 0 820 520" role="img" aria-label="北京到杭州京杭运河贴线骑行示意图">
@@ -423,6 +445,7 @@
     <section>
       <h2>最后复核</h2>
       <ul>
+        <li>正式路书：<a href="https://www.strava.com/routes/3495235328649224896">Strava 北京到杭州路线</a>。</li>
         <li>用高德、行者或 Strava 把每日路书精修到实际可骑道路。</li>
         <li>确认每日住宿城市，避免把到店时间压到天黑。</li>
         <li>出发前按季节确认天气、风向、降雨和高温预警。</li>

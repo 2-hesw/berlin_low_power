@@ -213,6 +213,32 @@
       font-weight: 800;
       font-size: 14px;
     }
+    .strava-preview {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      border: 1px dashed rgba(23, 106, 75, 0.35);
+      border-radius: 8px;
+      background: rgba(234, 241, 236, 0.75);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: center;
+    }
+    .strava-preview.has-route {
+      display: block;
+      padding: 0;
+      border-style: solid;
+      background: #fff;
+      text-align: left;
+    }
+    .strava-hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
     .risk { border-left-color: var(--red); background: #fff3f1; color: #61312b; }
     .footer {
       color: var(--muted);
@@ -270,6 +296,10 @@
       <div class="route-actions">
         <a href="https://www.strava.com/routes/3495235328649224896">打开 Strava 正式路书</a>
       </div>
+      <div id="strava-route-preview" class="strava-preview">
+        正在加载 Strava 路线预览。
+      </div>
+      <p class="strava-hint">若预览没有显示，通常是浏览器隐私设置或 Strava 登录态限制，直接点击上方按钮打开正式路书。</p>
       <div class="route-map">
         <div class="map-panel">
           <svg viewBox="0 0 820 520" role="img" aria-label="北京到杭州京杭运河贴线骑行示意图">
@@ -456,5 +486,25 @@
   </main>
 
   <div class="footer">生成日期：2026-05-22 · 2026 端午 5W/kg 强队版 · 计划级估算，路书精修前不作为精确导航使用</div>
+  <script>
+    const stravaRouteId = "3495235328649224896";
+
+    function loadStravaRoutePreview(routeId, targetId) {
+      const preview = document.getElementById(targetId);
+      if (!preview || !routeId) return;
+      preview.classList.add("has-route");
+      preview.innerHTML = `<div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="${routeId}" data-style="standard" data-slippy="true"></div>`;
+
+      if (document.querySelector('script[src="https://strava-embeds.com/embed.js"]')) {
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://strava-embeds.com/embed.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+
+    loadStravaRoutePreview(stravaRouteId, "strava-route-preview");
+  </script>
 </body>
 </html>

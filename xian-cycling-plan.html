@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>西安骑行计划 · 骊山 + 城墙跑 + 朱雀环线</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --ink: #20211f;
+      --muted: #66706b;
+      --panel: #ffffff;
+      --line: #d9d2c4;
+      --qin: #8f2f23;
+      --qin-dark: #652217;
+      --pine: #1f6b55;
+      --sky: #256d8f;
+      --gold: #c98923;
+      --soft: #f7eadc;
+      --green-soft: #e8f3ee;
+      --shadow: 0 14px 34px rgba(72, 54, 33, 0.13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(143, 47, 35, 0.10), transparent 30%),
+        linear-gradient(225deg, rgba(31, 107, 85, 0.10), transparent 32%),
+        var(--bg);
+    }
+
+    a {
+      color: var(--qin-dark);
+      font-weight: 750;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(101, 34, 23, 0.35);
+    }
+
+    .page {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 42px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 20px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.96), rgba(247,234,220,0.92)),
+        radial-gradient(circle at 80% 10%, rgba(201, 137, 35, 0.20), transparent 32%);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      color: var(--qin-dark);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p, ul { margin: 0; }
+
+    h1 {
+      margin-top: 12px;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin-top: 14px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border: 1px solid rgba(101, 34, 23, 0.22);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 6px 18px rgba(72, 54, 33, 0.08);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .status strong {
+      display: block;
+      color: var(--qin-dark);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .status span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      min-height: 100px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+      color: var(--qin-dark);
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .stack { display: grid; gap: 18px; }
+
+    section {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 8px 24px rgba(72, 54, 33, 0.07);
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .title-row h2 {
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .title-row span {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .route-card {
+      min-height: 164px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .route-card h3 {
+      font-size: 17px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .route-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--pine);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .day-label {
+      color: var(--qin-dark);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .day-main {
+      display: grid;
+      gap: 8px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 10px;
+      padding: 11px;
+      border: 1px solid rgba(217, 210, 196, 0.9);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .time {
+      color: var(--qin-dark);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .event p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .map-line {
+      display: grid;
+      gap: 10px;
+    }
+
+    .leg {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .pin {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--pine);
+      font-weight: 850;
+    }
+
+    .leg strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .leg span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .hint {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .strava-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .strava-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .strava-card h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .strava-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .strava-preview {
+      min-height: 320px;
+      margin-top: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(217, 210, 196, 0.9);
+      border-radius: 8px;
+      background: #fbfaf7;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      padding: 11px 12px;
+      border: 1px solid rgba(217, 210, 196, 0.95);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .checklist strong { color: var(--ink); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .mini-card h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .mini-card p, .mini-card li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .mini-card ul {
+      display: grid;
+      gap: 6px;
+      padding-left: 18px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 860px) {
+      .hero, .layout, .route-grid, .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page { width: min(100% - 22px, 1160px); padding-top: 14px; }
+      .hero, section { padding: 16px; }
+      .metrics { grid-template-columns: 1fr; }
+      .day, .event { grid-template-columns: 1fr; }
+      .title-row { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .title-row span { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Xi'an ride block · 日期待定</div>
+        <h1>骊山正反爬、朱雀环线，再留一天跑城墙</h1>
+        <p class="lead">三天两骑一跑：第一天用骊山正反爬打开爬坡节奏，第二天换成西安城墙轻松跑和城区恢复，第三天骑朱雀环线做山地长日。路线细节以你提供的 Strava 路书为准，住宿、交通和天气在出发前最后复核。</p>
+        <div class="hero-links">
+          <a class="button" href="https://www.strava.com/routes/3506981027780454660">骊山正反爬</a>
+          <a class="button" href="https://www.strava.com/routes/3506985699200590472">朱雀环线</a>
+          <a class="button" href="https://ditu.amap.com/search?query=%E8%A5%BF%E5%AE%89%E5%9F%8E%E5%A2%99">城墙地图</a>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>3 天</strong><span>两天骑行，一天跑步恢复</span></div>
+          <div class="metric"><strong>2 条</strong><span>Strava 路线：骊山、朱雀</span></div>
+          <div class="metric"><strong>50-70 g/h</strong><span>山地骑行碳水目标</span></div>
+          <div class="metric"><strong>早出发</strong><span>避开城区车流和午后高温</span></div>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="status">
+          <strong>主线安排</strong>
+          <span>D1 骊山正反爬；D2 西安城墙跑 + 城区恢复；D3 朱雀环线。D2 不堆强度，给 D3 留腿。</span>
+        </div>
+        <div class="status">
+          <strong>住宿建议</strong>
+          <span>住钟楼、永宁门、小寨或曲江附近都方便；若 D3 清晨去朱雀方向，提前确认出城路线和交通时间。</span>
+        </div>
+        <div class="status">
+          <strong>已知限制</strong>
+          <span>Strava 公共页面目前只确认路线名称，详细里程和爬升需要登录后查看，出发前在 App 内离线保存。</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <div class="stack">
+        <section>
+          <div class="title-row">
+            <h2>行迹图</h2>
+            <span>城区 -> 临潼/骊山 -> 城墙 -> 朱雀</span>
+          </div>
+          <div class="map-line">
+            <div class="leg">
+              <div class="pin">A</div>
+              <div><strong>西安市区集结</strong><span>早上从酒店直接出发或打车到更顺的起点；骑行日尽量避开早高峰核心路段。</span></div>
+            </div>
+            <div class="leg">
+              <div class="pin">B</div>
+              <div><strong>临潼 - 骊山 - 弓长张 - 骊山</strong><span>第一天骑“临潼-骊山-弓长张-骊山（落日在十八湾）”，爬坡日控制前半程，不在第一趟上坡拉爆。</span></div>
+            </div>
+            <div class="leg">
+              <div class="pin">C</div>
+              <div><strong>西安城墙跑</strong><span>第二天换跑步，按轻松跑处理；可以绕城墙一圈，也可以只跑 6-10 km，目标是唤醒身体。</span></div>
+            </div>
+            <div class="leg">
+              <div class="pin">D</div>
+              <div><strong>朱雀环线</strong><span>第三天作为长日山路，早出发、稳补给，下降路段保守处理，回城后留足吃饭和收车时间。</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="title-row">
+            <h2>完整日程</h2>
+            <span>日期待定版</span>
+          </div>
+          <div class="timeline">
+            <div class="day">
+              <div class="day-label">D0<br>抵达</div>
+              <div class="day-main">
+                <div class="event"><div class="time">晚间</div><p>抵达西安，入住后检查车况：胎压、刹车、变速、外胎伤口、码表路线、车灯和充电宝。</p></div>
+                <div class="event"><div class="time">睡前</div><p>把两条 Strava 路线离线保存；确认第二天早餐和出发点，骑行服、雨衣、补给按包分好。</p></div>
+              </div>
+            </div>
+            <div class="day">
+              <div class="day-label">D1<br>骊山</div>
+              <div class="day-main">
+                <div class="event"><div class="time">06:30</div><p>早餐，500 ml 水 + 主食；检查天气、胎压、刹车，带够上山补给。</p></div>
+                <div class="event"><div class="time">07:15</div><p>出发前往临潼/骊山方向。城区段不抢速度，进入山路后按 Z2-Z3 稳爬。</p></div>
+                <div class="event"><div class="time">中午</div><p>在可补给点补水、盐和碳水；第二次爬骊山前先吃，不空腹上坡。</p></div>
+                <div class="event"><div class="time">傍晚前</div><p>回到市区或住宿点，30 分钟内补碳水和蛋白，晚餐不吃过辣，给 D2 跑步留恢复空间。</p></div>
+              </div>
+            </div>
+            <div class="day">
+              <div class="day-label">D2<br>城墙跑</div>
+              <div class="day-main">
+                <div class="event"><div class="time">上午</div><p>西安城墙轻松跑，优先 6-10 km；状态好再延长，不做间歇和冲刺。</p></div>
+                <div class="event"><div class="time">下午</div><p>城区恢复：吃饭、补水、简单拉伸、洗骑行服；把 D3 朱雀环线补给装好。</p></div>
+                <div class="event"><div class="time">晚间</div><p>确认 D3 风向、降雨、温度、出城路线和返程时间。睡前少走路，别把恢复日逛成暴走日。</p></div>
+              </div>
+            </div>
+            <div class="day">
+              <div class="day-label">D3<br>朱雀</div>
+              <div class="day-main">
+                <div class="event"><div class="time">06:00</div><p>更早起床和早餐，长日按 50-70 g 碳水/小时准备，至少带两瓶水和电解质。</p></div>
+                <div class="event"><div class="time">07:00</div><p>执行“朱雀环线”。前半程保守骑，补给按时间吃，不等饿了再吃。</p></div>
+                <div class="event"><div class="time">午后</div><p>山路下降控制速度，弯道不压极限；遇雨、落石、施工或能见度差就主动降级。</p></div>
+                <div class="event"><div class="time">收车</div><p>回城后先恢复、再拆车或打包。若当天返程，至少预留 2 小时交通和装车缓冲。</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="title-row">
+            <h2>Strava 路线</h2>
+            <span>可预览，App 内离线保存</span>
+          </div>
+          <div class="strava-list">
+            <div class="strava-card">
+              <h3>骊山正反爬</h3>
+              <p>Strava 名称：临潼-骊山-弓长张-骊山（落日在十八湾）。如果嵌入预览受浏览器隐私设置影响，直接打开外链。</p>
+              <div class="strava-preview">
+                <div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3506981027780454660" data-style="standard" data-slippy="true"></div>
+              </div>
+              <p class="hint"><a href="https://www.strava.com/routes/3506981027780454660">打开 Strava 路线</a></p>
+            </div>
+            <div class="strava-card">
+              <h3>朱雀环线</h3>
+              <p>第三天长日山路，出发前在 Strava App 复核里程、爬升、路况和补给点。</p>
+              <div class="strava-preview">
+                <div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3506985699200590472" data-style="standard" data-slippy="true"></div>
+              </div>
+              <p class="hint"><a href="https://www.strava.com/routes/3506985699200590472">打开 Strava 路线</a></p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="stack">
+        <section>
+          <div class="title-row">
+            <h2>执行原则</h2>
+            <span>别把三天骑崩</span>
+          </div>
+          <div class="route-grid">
+            <div class="route-card">
+              <span class="tag">D1</span>
+              <h3>骊山正反爬</h3>
+              <p>爬坡节奏日。第一趟上坡留余量，第二趟看腿决定是否提强度；下降以安全为先。</p>
+            </div>
+            <div class="route-card">
+              <span class="tag">D2</span>
+              <h3>城墙跑</h3>
+              <p>跑步恢复日。用轻松跑换肌肉刺激，不追配速；跑完补碳水、晒衣服、早睡。</p>
+            </div>
+            <div class="route-card">
+              <span class="tag">D3</span>
+              <h3>朱雀环线</h3>
+              <p>全程重点日。早出发、稳补给、谨慎下坡；若天气差，优先保留安全余量。</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="title-row">
+            <h2>补给策略</h2>
+            <span>山路版</span>
+          </div>
+          <ul class="checklist">
+            <li><strong>骑行中：</strong>每小时 50-70 g 碳水，来源可用能量胶、软糖、运动饮料、面包、香蕉。</li>
+            <li><strong>喝水：</strong>常温 500-750 ml/h；炎热或爬坡多时提高到 750-1000 ml/h，并补电解质。</li>
+            <li><strong>跑步日：</strong>城墙跑前吃少量主食，跑后补 20-30 g 蛋白 + 主食，不用额外堆能量胶。</li>
+            <li><strong>骑后：</strong>30 分钟内补碳水和蛋白；晚餐少酒少辣，别让肠胃拖累 D3。</li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="title-row">
+            <h2>携带清单</h2>
+            <span>按包检查</span>
+          </div>
+          <div class="two-col">
+            <div class="mini-card">
+              <h3>车和工具</h3>
+              <ul>
+                <li>内胎 2 条、撬胎棒、气筒或气瓶</li>
+                <li>快扣、迷你工具、扎带、链条油</li>
+                <li>前后灯、码表、充电线、充电宝</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <h3>衣物和安全</h3>
+              <ul>
+                <li>头盔、眼镜、手套、薄风衣或雨衣</li>
+                <li>两套骑行服、跑步衣物、替换袜子</li>
+                <li>身份证、少量现金、防晒、创可贴</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="title-row">
+            <h2>风险提醒</h2>
+            <span>出发前读一遍</span>
+          </div>
+          <ul class="checklist">
+            <li><strong>城区出入：</strong>西安市区车流和路口复杂，骑行日不抢灯，不在主干道硬拉速度。</li>
+            <li><strong>山路下降：</strong>骊山和朱雀都有连续弯道，遇沙土、水渍、逆光和游客车辆时主动降速。</li>
+            <li><strong>天气：</strong>无具体日期，不写死天气。出发前一天查西安、临潼、鄠邑/朱雀方向降雨和风力。</li>
+            <li><strong>恢复：</strong>D2 城墙跑不是训练赛；腿沉就缩短，别用恢复日制造 D3 的疲劳。</li>
+          </ul>
+        </section>
+
+        <section>
+          <div class="title-row">
+            <h2>最后复核</h2>
+            <span>出发前 24 小时</span>
+          </div>
+          <ul class="checklist">
+            <li>在 Strava App 内确认两条路线的里程、爬升、路面和离线导航。</li>
+            <li>确认酒店位置、早餐时间、是否能安全放车，以及 D3 早晨出城动线。</li>
+            <li>查询西安、临潼、朱雀方向天气，尤其是降雨、阵风和高温。</li>
+            <li>确认返程时间；D3 收车到车站或机场至少预留 2 小时缓冲。</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <div class="footer">生成日期：2026-06-30 · 西安三天两骑一跑计划 · 路线以 Strava App 内最新路书为准</div>
+  </div>
+  <script src="https://strava-embeds.com/embed.js" async></script>
+</body>
+</html>

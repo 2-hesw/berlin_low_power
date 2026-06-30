@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/xian",
+      "destination": "/xian-cycling-plan.html"
+    },
+    {
       "source": "/beijing-hangzhou",
       "destination": "/beijing-hangzhou-cycling-plan.html"
     },

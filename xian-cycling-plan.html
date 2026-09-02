@@ -371,6 +371,12 @@
     gap:5px 16px; font-size:12.5px; line-height:1.7; }
   .rstat span { color:var(--muted); }
   .rstat b { color:var(--ink); }
+  .route-preview { position:relative; min-height:520px; margin-top:14px; overflow:hidden;
+    border:1px solid rgba(216,205,185,.75); border-radius:3px; background:#f6f2e9; }
+  .route-preview iframe { width:100% !important; max-width:none !important; }
+  .strava-embed-placeholder { min-height:520px; display:grid; place-items:center;
+    padding:20px; color:var(--muted); font-size:12px; text-align:center; }
+  .strava-embed-placeholder::before { content:'正在加载 Strava 路线预览…'; }
   .route-links { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 4px; }
   .route-links a { display:inline-flex; align-items:center; min-height:44px; padding:0 12px;
     border:1px solid var(--line); background:var(--card); color:var(--teal);
@@ -400,7 +406,10 @@
   @media (max-width:760px) {
     .route-links a { flex:1 1 100%; justify-content:center; }
     .weather-grid { grid-template-columns:1fr; }
+    .route-card { padding:12px 10px 10px; }
+    .route-preview { min-height:500px; margin-left:-2px; margin-right:-2px; }
   }
+  @media print { .route-preview { display:none; } }
 </style>
 </head>
 <body>
@@ -438,23 +447,31 @@
       <div class="route-list">
         <div class="route-card">
           <h3>骊山双爬 · D1</h3>
-          <p class="route-link-line"><a href="https://www.strava.com/routes/3327275777194039836" target="_blank" rel="noopener">Strava 路书：骊山双爬</a></p>
+          <p class="route-link-line"><a href="https://www.strava.com/routes/3506981027780454660" target="_blank" rel="noopener">在 Strava 打开：骊山双爬</a></p>
           <div class="rstat">
             <span><b>里程</b> 76.44 km</span>
             <span><b>爬升</b> 1758 m</span>
             <span><b>Strava 预计</b> 骑行 2:47</span>
             <span><b>完成中位</b> 约 4:04</span>
           </div>
+          <div class="route-preview no-export" data-html2canvas-ignore="true" aria-label="骊山双爬 Strava 路线预览">
+            <div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3506981027780454660" data-full-width="true"></div>
+            <noscript><p>浏览器未启用脚本，请使用上方链接在 Strava 查看路线。</p></noscript>
+          </div>
         </div>
         <div class="route-card">
           <h3>朱雀环线 · D3</h3>
-          <p class="route-link-line"><a href="https://www.strava.com/routes/3326911564669495680" target="_blank" rel="noopener">Strava 路书：朱雀环线</a></p>
+          <p class="route-link-line"><a href="https://www.strava.com/routes/3506985699200590472" target="_blank" rel="noopener">在 Strava 打开：朱雀环线</a></p>
           <div class="rstat">
             <span><b>里程</b> 141.95 km</span>
             <span><b>爬升</b> 2637 m</span>
             <span><b>Strava 预计</b> 骑行 5:10</span>
             <span><b>完成中位</b> 约 6:52</span>
             <span><b>执行</b> 8–11 小时 · 05:45 出发</span>
+          </div>
+          <div class="route-preview no-export" data-html2canvas-ignore="true" aria-label="朱雀环线 Strava 路线预览">
+            <div class="strava-embed-placeholder" data-embed-type="route" data-embed-id="3506985699200590472" data-full-width="true"></div>
+            <noscript><p>浏览器未启用脚本，请使用上方链接在 Strava 查看路线。</p></noscript>
           </div>
         </div>
       </div>
@@ -597,7 +614,7 @@
     </div>
   </header>
   <div class="day-body">
-    <div class="tl"><div class="tl-row k-meal"><div class="tl-t">05:45</div><div class="tl-what">起床；早餐以易消化碳水为主，完成胎压和天气复核 </div></div><div class="tl-row k-hop"><div class="tl-t">06:30-07:20</div><div class="tl-what">携车接驳至临潼路书起点；方式与耗时待确认 <span class="chip">硬门禁</span></div></div><div class="tl-row k-anchor"><div class="tl-t">07:30-13:30</div><div class="tl-what">骊山双爬 76.44 km / +1,758 m；Strava 预估骑行 2:47，中位完成 4:04，按 4-6 小时总耗时准备 <span class="chip">路书</span> <a class="rownav" href="https://www.strava.com/routes/3327275777194039836" target="_blank" rel="noopener" aria-label="导航到 骊山双爬 76.44 km / +1"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+    <div class="tl"><div class="tl-row k-meal"><div class="tl-t">05:45</div><div class="tl-what">起床；早餐以易消化碳水为主，完成胎压和天气复核 </div></div><div class="tl-row k-hop"><div class="tl-t">06:30-07:20</div><div class="tl-what">携车接驳至临潼路书起点；方式与耗时待确认 <span class="chip">硬门禁</span></div></div><div class="tl-row k-anchor"><div class="tl-t">07:30-13:30</div><div class="tl-what">骊山双爬 76.44 km / +1,758 m；Strava 预估骑行 2:47，中位完成 4:04，按 4-6 小时总耗时准备 <span class="chip">路书</span> <a class="rownav" href="https://www.strava.com/routes/3506981027780454660" target="_blank" rel="noopener" aria-label="导航到 骊山双爬 76.44 km / +1"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
   <circle cx="12" cy="10" r="3" /></svg></a></div></div><div class="tl-row k-meal"><div class="tl-t">13:30-14:15</div><div class="tl-what">恢复餐：主食、蛋白质和电解质；热门店排队超过 20 分钟就换 </div></div><div class="tl-row k-free"><div class="tl-t">14:15-15:30</div><div class="tl-what">返回酒店、清洁车辆、补齐 D3 消耗品 </div></div><div class="tl-row k-free"><div class="tl-t">20:30</div><div class="tl-what">完成拉伸、补水并早睡 </div></div><details class="hoplinks no-export"><summary><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" />
   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg> 逐跳导航 · 4 条 <svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="map-embed" data-src="https://maps.google.com/maps?saddr=34.364540,109.202720&amp;daddr=34.334720,109.267240+to:34.286140,109.134110+to:34.327520,109.258960+to:34.363970,109.202630&amp;dirflg=r&amp;output=embed"><p class="map-ph">地图加载中…(需联网;离线请用下方链接)</p></div><div class="hop-btns"><a href="https://uri.amap.com/navigation?from=109.202720,34.364540,%E9%AA%8A%E5%B1%B1%E8%B7%AF%E4%B9%A6%E8%B5%B7%E7%82%B9&amp;to=109.267240,34.334720,%E9%AA%8A%E5%B1%B1%E4%B8%9C%E6%AE%B5%E5%85%B3%E9%94%AE%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">1</a> <a href="https://uri.amap.com/navigation?from=109.267240,34.334720,%E9%AA%8A%E5%B1%B1%E4%B8%9C%E6%AE%B5%E5%85%B3%E9%94%AE%E7%82%B9&amp;to=109.134110,34.286140,%E5%BC%93%E9%95%BF%E5%BC%A0%E6%96%B9%E5%90%91%E5%85%B3%E9%94%AE%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">2</a> <a href="https://uri.amap.com/navigation?from=109.134110,34.286140,%E5%BC%93%E9%95%BF%E5%BC%A0%E6%96%B9%E5%90%91%E5%85%B3%E9%94%AE%E7%82%B9&amp;to=109.258960,34.327520,%E9%AA%8A%E5%B1%B1%E8%BF%94%E7%88%AC%E5%85%B3%E9%94%AE%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">3</a> <a href="https://uri.amap.com/navigation?from=109.258960,34.327520,%E9%AA%8A%E5%B1%B1%E8%BF%94%E7%88%AC%E5%85%B3%E9%94%AE%E7%82%B9&amp;to=109.202630,34.363970,%E9%AA%8A%E5%B1%B1%E8%B7%AF%E4%B9%A6%E7%BB%88%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">4</a></div></details></div>
     <div class="margin-rail"><aside class="note-card"><b><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
@@ -679,7 +696,7 @@
     </div>
   </header>
   <div class="day-body">
-    <div class="tl"><div class="tl-row k-meal"><div class="tl-t">04:40</div><div class="tl-what">起床进食，检查官方路况、雷达、风和能见度 </div></div><div class="tl-row k-free"><div class="tl-t">05:15-05:35</div><div class="tl-what">车辆、灯具、保暖防雨层、补给和撤退点最终检查 <span class="chip">硬门禁</span></div></div><div class="tl-row k-anchor"><div class="tl-t">05:45</div><div class="tl-what">从 Strava 路书起点放轮；141.95 km / +2,637 m <span class="chip">准时放轮</span> <a class="rownav" href="https://www.strava.com/routes/3326911564669495680" target="_blank" rel="noopener" aria-label="导航到 从 Strava 路书起点放轮；14"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+    <div class="tl"><div class="tl-row k-meal"><div class="tl-t">04:40</div><div class="tl-what">起床进食，检查官方路况、雷达、风和能见度 </div></div><div class="tl-row k-free"><div class="tl-t">05:15-05:35</div><div class="tl-what">车辆、灯具、保暖防雨层、补给和撤退点最终检查 <span class="chip">硬门禁</span></div></div><div class="tl-row k-anchor"><div class="tl-t">05:45</div><div class="tl-what">从 Strava 路书起点放轮；141.95 km / +2,637 m <span class="chip">准时放轮</span> <a class="rownav" href="https://www.strava.com/routes/3506985699200590472" target="_blank" rel="noopener" aria-label="导航到 从 Strava 路书起点放轮；14"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
   <circle cx="12" cy="10" r="3" /></svg></a></div></div><div class="tl-row k-anchor"><div class="tl-t">05:45-10:30</div><div class="tl-what">前半程与 31.98 km / +1,434 m 主爬坡；每小时 50-70 g 碳水、500-750 ml 液体，热时提高 </div></div><div class="tl-row k-free"><div class="tl-t">10:30-11:00</div><div class="tl-what">高点/关键节点复核：体温、制动、补给、天气与进度；不满足就按预设撤退点退出 <span class="chip">动态门禁</span></div></div><div class="tl-row k-anchor"><div class="tl-t">11:00-16:00</div><div class="tl-what">后半环线；含 8.56 km / +632 m 晚段爬坡，保留夜间和故障余量 </div></div><div class="tl-row k-free"><div class="tl-t">16:00-17:30</div><div class="tl-what">目标返回窗口；超过 17:30 立即通知接应/调整返程，不继续追加行程 <span class="chip">返程保护</span></div></div><div class="tl-row k-meal"><div class="tl-t">18:00-19:00</div><div class="tl-what">恢复餐、清洁换衣；当天返程建议不早于 20:30，优先加住一晚 </div></div><details class="hoplinks no-export"><summary><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" />
   <path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg> 逐跳导航 · 3 条 <svg class="ic chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></summary><div class="map-embed" data-src="https://maps.google.com/maps?saddr=34.054480,108.817560&amp;daddr=33.826050,108.515420+to:34.031840,108.556710+to:34.055340,108.817670&amp;dirflg=r&amp;output=embed"><p class="map-ph">地图加载中…(需联网;离线请用下方链接)</p></div><div class="hop-btns"><a href="https://uri.amap.com/navigation?from=108.817560,34.054480,%E6%9C%B1%E9%9B%80%E7%8E%AF%E7%BA%BF%E8%B7%AF%E4%B9%A6%E8%B5%B7%E7%82%B9&amp;to=108.515420,33.826050,%E7%A7%A6%E5%B2%AD%E5%8D%97%E6%AE%B5%E5%85%B3%E9%94%AE%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">1</a> <a href="https://uri.amap.com/navigation?from=108.515420,33.826050,%E7%A7%A6%E5%B2%AD%E5%8D%97%E6%AE%B5%E5%85%B3%E9%94%AE%E7%82%B9&amp;to=108.556710,34.031840,%E6%9C%B1%E9%9B%80%E6%96%B9%E5%90%91%E5%85%B3%E9%94%AE%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">2</a> <a href="https://uri.amap.com/navigation?from=108.556710,34.031840,%E6%9C%B1%E9%9B%80%E6%96%B9%E5%90%91%E5%85%B3%E9%94%AE%E7%82%B9&amp;to=108.817670,34.055340,%E6%9C%B1%E9%9B%80%E7%8E%AF%E7%BA%BF%E8%B7%AF%E4%B9%A6%E7%BB%88%E7%82%B9&amp;mode=car&amp;src=trip-planner" target="_blank" rel="noopener">3</a></div></details></div>
     <div class="margin-rail"><aside class="note-card"><b><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
@@ -724,7 +741,7 @@
   <path d="M13 19h8" />
   <path d="m3 17 2 2 4-4" />
   <path d="m3 7 2 2 4-4" /></svg> 行前清单</h2>
-    <ol><li><b>确认往返交通、酒店与室内/安全自行车存放</b> — 2026-09-10 · <p class="mini">同时确认拆装车、携车规则、9/24 抵达时刻和 9/27 返程时刻。</p></li><li><b>确认 D1 西安市区→临潼路书起点的携车接驳</b> — 2026-09-22 ·  <a href="https://www.strava.com/routes/3327275777194039836" target="_blank" rel="noopener">链接</a><p class="mini">若无法在 07:30 前从临潼起点放轮，缩短路线或取消，不把市区接驳公里混入路书。</p></li><li><b>在 Strava App 离线保存两条路书并标出 D3 两处撤退点</b> — 2026-09-24 ·  <a href="https://www.strava.com/routes/3326911564669495680" target="_blank" rel="noopener">链接</a><p class="mini">撤退点必须结合实际道路、补给和接应条件确定；本计划不虚构安全撤退路线。</p></li><li><b>核对中秋期间城墙入园通知与南门开放时间</b> — 2026-09-24 ·  <a href="http://www.chinaxiancitywall.com/index.php?m=pc" target="_blank" rel="noopener">链接</a><p class="mini">当前官网显示南门 08:00-22:00；假期如拥挤或无法入园，改城墙外平路。</p></li><li><b>D3 最终天气、路况、封山控峪与返程门禁</b> — 2026-09-26 20:00 ·  <a href="https://jtyst.shaanxi.gov.cn/cx/sslk/" target="_blank" rel="noopener">链接</a><p class="mini">官方封山控峪、G210 封闭、持续降雨、强阵风或低能见度任一成立即取消/调换 D3。</p></li><li><b>携带秦岭高海拔保温防雨装备</b> — 2026-09-24 · <p class="mini">全指手套、袖套/腿套、防风防雨外层、干燥贴身层、前后灯、充电宝和急救用品。</p></li></ol>
+    <ol><li><b>确认往返交通、酒店与室内/安全自行车存放</b> — 2026-09-10 · <p class="mini">同时确认拆装车、携车规则、9/24 抵达时刻和 9/27 返程时刻。</p></li><li><b>确认 D1 西安市区→临潼路书起点的携车接驳</b> — 2026-09-22 ·  <a href="https://www.strava.com/routes/3506981027780454660" target="_blank" rel="noopener">链接</a><p class="mini">若无法在 07:30 前从临潼起点放轮，缩短路线或取消，不把市区接驳公里混入路书。</p></li><li><b>在 Strava App 离线保存两条路书并标出 D3 两处撤退点</b> — 2026-09-24 ·  <a href="https://www.strava.com/routes/3506985699200590472" target="_blank" rel="noopener">链接</a><p class="mini">撤退点必须结合实际道路、补给和接应条件确定；本计划不虚构安全撤退路线。</p></li><li><b>核对中秋期间城墙入园通知与南门开放时间</b> — 2026-09-24 ·  <a href="http://www.chinaxiancitywall.com/index.php?m=pc" target="_blank" rel="noopener">链接</a><p class="mini">当前官网显示南门 08:00-22:00；假期如拥挤或无法入园，改城墙外平路。</p></li><li><b>D3 最终天气、路况、封山控峪与返程门禁</b> — 2026-09-26 20:00 ·  <a href="https://jtyst.shaanxi.gov.cn/cx/sslk/" target="_blank" rel="noopener">链接</a><p class="mini">官方封山控峪、G210 封闭、持续降雨、强阵风或低能见度任一成立即取消/调换 D3。</p></li><li><b>携带秦岭高海拔保温防雨装备</b> — 2026-09-24 · <p class="mini">全指手套、袖套/腿套、防风防雨外层、干燥贴身层、前后灯、充电宝和急救用品。</p></li></ol>
   </div>
   <div class="appendix wide">
     <h2 class="sec reveal"><svg class="ic draw" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v16" />
@@ -1032,6 +1049,9 @@
 })();
 
 </script>
+<!-- STRAVA ROUTE PREVIEW START -->
+<script async src="https://strava-embeds.com/embed.js"></script>
+<!-- STRAVA ROUTE PREVIEW END -->
 <!-- RIDE-WEATHER SCRIPT START -->
 <script>
 (function () {

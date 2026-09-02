@@ -11,10 +11,7 @@
 <Placemark><name>5. 骊山路书终点</name><Point><coordinates>109.202630,34.363970,0</coordinates></Point></Placemark>
 <Placemark><name>Day 2 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>109.202720,34.364540,0 109.267240,34.334720,0 109.134110,34.286140,0 109.258960,34.327520,0 109.202630,34.363970,0</coordinates></LineString></Placemark>
 </Folder>
-<Folder><name>Day 3 2026-09-26 — 秦陵主动恢复</name>
-<Placemark><name>1. 秦始皇帝陵博物院·兵马俑</name><Point><coordinates>109.278500,34.384900,0</coordinates></Point></Placemark>
-<Placemark><name>2. 丽山园（秦始皇帝陵）</name><Point><coordinates>109.249700,34.381100,0</coordinates></Point></Placemark>
-<Placemark><name>Day 3 route</name><Style><LineStyle><color>ff00aa00</color><width>3</width></LineStyle></Style><LineString><coordinates>109.278500,34.384900,0 109.249700,34.381100,0</coordinates></LineString></Placemark>
+<Folder><name>Day 3 2026-09-26 — 景点候选</name>
 </Folder>
 <Folder><name>Day 4 2026-09-27 — 秦岭长日</name>
 <Placemark><name>1. 朱雀环线路书起点</name><Point><coordinates>108.817560,34.054480,0</coordinates></Point></Placemark>

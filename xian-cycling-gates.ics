@@ -24,21 +24,21 @@ DESCRIPTION:30 分钟后复核西安骑行天气窗口
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:xian-cycling-qin-ticket-monitor-20260918@codex.local
+UID:xian-cycling-d2-choice-gate-20260915@codex.local
 DTSTAMP:20260902T040000Z
-DTSTART;TZID=Asia/Shanghai:20260918T090000
-DTEND;TZID=Asia/Shanghai:20260918T093000
-SUMMARY:西安骑行｜开始核对并预订 9/26 秦陵 08:30 首时段
-DESCRIPTION:查看秦始皇帝陵博物院 2026 中秋假期门票日历；尽早预订 9/26 08:30 首时段，实名预约并准备原件身份证。2026 假期开放通知截至 2026-09-02 未发布，以官网为准。https://www.bmy.com.cn/jingtai/bmyweb/ticketing.html
+DTSTART;TZID=Asia/Shanghai:20260915T200000
+DTEND;TZID=Asia/Shanghai:20260915T203000
+SUMMARY:西安骑行｜确认 D2 候选或纯恢复
+DESCRIPTION:兵马俑、秦始皇陵（丽山园）、陕西历史博物馆、华山均为候选且未确认；只确定一个去向或纯恢复，选定后再按官方放票窗口预约。华山若入选必须替换 D3 朱雀或增加一天。https://www.bmy.com.cn/guide/ https://www.sxhm.com/index.html https://www.chinahuashan.com/front/travelStrategy1.htm
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
-DESCRIPTION:明天核对秦陵门票日历并预订 9/26 首时段
+DESCRIPTION:明天确认 D2 候选或纯恢复
 END:VALARM
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-PT30M
-DESCRIPTION:30 分钟后核对秦陵门票日历并预订 9/26 首时段
+DESCRIPTION:30 分钟后确认 D2 候选或纯恢复
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -46,8 +46,8 @@ UID:xian-cycling-pre-go-20260922@codex.local
 DTSTAMP:20260901T133500Z
 DTSTART;TZID=Asia/Shanghai:20260922T200000
 DTEND;TZID=Asia/Shanghai:20260922T203000
-SUMMARY:西安骑行｜72 小时初审与秦陵假期开放复核
-DESCRIPTION:核对降雨、阵风、能见度、路况；复核 9/26 秦始皇帝陵博物院假期开放时间与入场通知；确认酒店、携车与 9/27 返程。https://www.bmy.com.cn/guide/ https://jtyst.shaanxi.gov.cn/cx/sslk/
+SUMMARY:西安骑行｜72 小时初审与已选 D2 候选复核
+DESCRIPTION:核对降雨、阵风、能见度、路况；按已选 D2 候选核对官方票档、开放时间、预约与交通；若未选定，保留 D2 酒店恢复并确认 9/27 返程。https://jtyst.shaanxi.gov.cn/cx/sslk/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
@@ -65,7 +65,7 @@ DTSTAMP:20260901T133500Z
 DTSTART;TZID=Asia/Shanghai:20260924T200000
 DTEND;TZID=Asia/Shanghai:20260924T203000
 SUMMARY:西安骑行｜D1 骊山最终门禁
-DESCRIPTION:完成装车检查，确认临潼接驳、天气与 Strava 离线路书。https://www.strava.com/routes/3327275777194039836
+DESCRIPTION:完成装车检查，确认临潼接驳、天气与 Strava 离线路书。https://www.strava.com/routes/3506981027780454660
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D

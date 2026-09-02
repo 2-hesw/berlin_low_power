@@ -24,12 +24,30 @@ DESCRIPTION:30 分钟后复核西安骑行天气窗口
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:xian-cycling-qin-ticket-monitor-20260918@codex.local
+DTSTAMP:20260902T040000Z
+DTSTART;TZID=Asia/Shanghai:20260918T090000
+DTEND;TZID=Asia/Shanghai:20260918T093000
+SUMMARY:西安骑行｜开始核对并预订 9/26 秦陵 08:30 首时段
+DESCRIPTION:查看秦始皇帝陵博物院 2026 中秋假期门票日历；尽早预订 9/26 08:30 首时段，实名预约并准备原件身份证。2026 假期开放通知截至 2026-09-02 未发布，以官网为准。https://www.bmy.com.cn/jingtai/bmyweb/ticketing.html
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:明天核对秦陵门票日历并预订 9/26 首时段
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT30M
+DESCRIPTION:30 分钟后核对秦陵门票日历并预订 9/26 首时段
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:xian-cycling-pre-go-20260922@codex.local
 DTSTAMP:20260901T133500Z
 DTSTART;TZID=Asia/Shanghai:20260922T200000
 DTEND;TZID=Asia/Shanghai:20260922T203000
-SUMMARY:西安骑行｜72 小时天气与路况初审
-DESCRIPTION:核对降雨、阵风、能见度、路况；确认酒店、携车与 9/27 返程。https://jtyst.shaanxi.gov.cn/cx/sslk/
+SUMMARY:西安骑行｜72 小时初审与秦陵假期开放复核
+DESCRIPTION:核对降雨、阵风、能见度、路况；复核 9/26 秦始皇帝陵博物院假期开放时间与入场通知；确认酒店、携车与 9/27 返程。https://www.bmy.com.cn/guide/ https://jtyst.shaanxi.gov.cn/cx/sslk/
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D

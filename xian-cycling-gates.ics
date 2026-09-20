@@ -6,93 +6,84 @@ METHOD:PUBLISH
 X-WR-CALNAME:西安骑行计划门禁
 X-WR-TIMEZONE:Asia/Shanghai
 BEGIN:VEVENT
-UID:xian-cycling-forecast-window-20260910@codex.local
-DTSTAMP:20260901T133500Z
-DTSTART;TZID=Asia/Shanghai:20260910T090000
-DTEND;TZID=Asia/Shanghai:20260910T093000
-SUMMARY:西安骑行｜进入预报窗口后首次复核
-DESCRIPTION:查看西安、临潼和秦岭高海拔天气；此前只有历史同期参考，不是 2026 预报。https://open-meteo.com/
+UID:xian-cycling-bike-ship-20260923@codex.local
+DTSTAMP:20260920T030657Z
+DTSTART;TZID=Asia/Shanghai:20260923T200000
+DTEND;TZID=Asia/Shanghai:20260923T203000
+SUMMARY:西安骑行｜自行车快递到店与抵达确认
+DESCRIPTION:确认自行车已寄出且预计 9/24 前送达康铂酒店（
+ 西安临潼兵马俑西花园地铁站店）、前台可代收并保留
+ 打包材料；确认 9/24 抵达时刻与骊山/朱雀 Strava 离线路
+ 书已下载。https://www.strava.com/routes/3506981027780454660
 BEGIN:VALARM
 ACTION:DISPLAY
-TRIGGER:-P1D
-DESCRIPTION:明天复核西安骑行天气窗口
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-PT30M
-DESCRIPTION:30 分钟后复核西安骑行天气窗口
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:xian-cycling-d2-choice-gate-20260915@codex.local
-DTSTAMP:20260902T040000Z
-DTSTART;TZID=Asia/Shanghai:20260915T200000
-DTEND;TZID=Asia/Shanghai:20260915T203000
-SUMMARY:西安骑行｜确认 D2 候选或纯恢复
-DESCRIPTION:兵马俑、秦始皇陵（丽山园）、陕西历史博物馆、华山均为候选且未确认；只确定一个去向或纯恢复，选定后再按官方放票窗口预约。华山若入选必须替换 D3 朱雀或增加一天。https://www.bmy.com.cn/guide/ https://www.sxhm.com/index.html https://www.chinahuashan.com/front/travelStrategy1.htm
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-P1D
-DESCRIPTION:明天确认 D2 候选或纯恢复
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-PT30M
-DESCRIPTION:30 分钟后确认 D2 候选或纯恢复
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:xian-cycling-pre-go-20260922@codex.local
-DTSTAMP:20260901T133500Z
-DTSTART;TZID=Asia/Shanghai:20260922T200000
-DTEND;TZID=Asia/Shanghai:20260922T203000
-SUMMARY:西安骑行｜72 小时初审与已选 D2 候选复核
-DESCRIPTION:核对降雨、阵风、能见度、路况；按已选 D2 候选核对官方票档、开放时间、预约与交通；若未选定，保留 D2 酒店恢复并确认 9/27 返程。https://jtyst.shaanxi.gov.cn/cx/sslk/
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-P1D
-DESCRIPTION:明天进行西安骑行 72 小时初审
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-PT30M
-DESCRIPTION:30 分钟后进行西安骑行 72 小时初审
+TRIGGER:-PT3H
+DESCRIPTION:今晚确认自行车到店与 9/24 抵达安排
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:xian-cycling-lishan-final-20260924@codex.local
-DTSTAMP:20260901T133500Z
+DTSTAMP:20260920T030657Z
 DTSTART;TZID=Asia/Shanghai:20260924T200000
 DTEND;TZID=Asia/Shanghai:20260924T203000
-SUMMARY:西安骑行｜D1 骊山最终门禁
-DESCRIPTION:完成装车检查，确认临潼接驳、天气与 Strava 离线路书。https://www.strava.com/routes/3506981027780454660
+SUMMARY:西安骑行｜骊山日前夜：装车验车与转场预约
+DESCRIPTION:完成组装与刹车/变速/胎压检查；与康铂前台确
+ 认 9/25 退房时间、骑前退房寄存与骑后冲淋安排；预约 9
+ /25 骊山结束后临潼→栾镇货拉拉（可载自行车+行李），
+ 确认吉宸民宿入住；时间允许才考虑华清池表演。https://
+ www.strava.com/routes/3506981027780454660
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
-DESCRIPTION:明天进行 D1 骊山最终门禁
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-PT30M
-DESCRIPTION:30 分钟后进行 D1 骊山最终门禁
+DESCRIPTION:明天进行骊山日前夜最终确认
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:xian-cycling-zhuque-final-20260926@codex.local
-DTSTAMP:20260901T133500Z
+UID:xian-cycling-zhuque-final-20260925@codex.local
+DTSTAMP:20260920T030657Z
+DTSTART;TZID=Asia/Shanghai:20260925T200000
+DTEND;TZID=Asia/Shanghai:20260925T203000
+SUMMARY:西安骑行｜朱雀最终 go/no-go
+DESCRIPTION:在栾镇吉宸民宿核对官方路况、封山控峪、G210
+ 、降雨/阵风/能见度与两处撤退点；任一硬门禁不通过即
+ 取消或调换。备好 9/26 自备早餐与恢复补给（民宿无早
+ 餐）、雨具、手套、干燥贴身层、前后灯、充电宝。https
+ ://jtyst.shaanxi.gov.cn/cx/sslk/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT2H
+DESCRIPTION:2 小时后做朱雀最终 go/no-go
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:xian-cycling-zhuque-morning-20260926@codex.local
+DTSTAMP:20260920T030657Z
+DTSTART;TZID=Asia/Shanghai:20260926T050000
+DTEND;TZID=Asia/Shanghai:20260926T051500
+SUMMARY:西安骑行｜朱雀出发前早晨复核
+DESCRIPTION:起床后进自备早餐，再复核一次天气、雷达、风
+ 和官方路况；05:45 保守放轮，总耗时按 8-11 小时管理，
+ 目标 16:00-17:30 返回同一民宿。https://www.strava.com/routes/3506
+ 985699200590472
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT15M
+DESCRIPTION:15 分钟后进行朱雀出发前早晨复核
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:xian-cycling-shop-confirm-20260926@codex.local
+DTSTAMP:20260920T030657Z
 DTSTART;TZID=Asia/Shanghai:20260926T200000
 DTEND;TZID=Asia/Shanghai:20260926T203000
-SUMMARY:西安骑行｜D3 朱雀最终 go/no-go
-DESCRIPTION:核对官方路况、封山控峪、G210、天气、返程和两处撤退点；任一硬门禁未通过即取消。https://jtyst.shaanxi.gov.cn/cx/sslk/
+SUMMARY:西安骑行｜确认 9/27 寄车安排
+DESCRIPTION:确认 Specialized 或其他车店名称、地址、打包寄
+ 车服务与营业时间；预约 9/27 栾镇→车店货拉拉（或确
+ 认轻松骑行路线与距离）；寄车完成后安排市区游览。
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-P1D
-DESCRIPTION:明天进行 D3 朱雀最终门禁
-END:VALARM
-BEGIN:VALARM
-ACTION:DISPLAY
-TRIGGER:-PT30M
-DESCRIPTION:30 分钟后进行 D3 朱雀最终门禁
+DESCRIPTION:明天需要确认 9/27 车店打包寄车安排
 END:VALARM
 END:VEVENT
 END:VCALENDAR

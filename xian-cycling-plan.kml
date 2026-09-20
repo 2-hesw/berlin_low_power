@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document>
-<name>2026 中秋西安两骑一游</name>
-<Folder><name>Day 1 2026-09-24 — 抵达验车</name>
+<name>2026 中秋西安两骑一收车</name>
+<Folder><name>Day 1 2026-09-24 周四 — 抵达临潼·组装验车（康铂酒店，无坐标）</name>
 </Folder>
-<Folder><name>Day 2 2026-09-25 — 骊山双爬</name>
+<Folder><name>Day 2 2026-09-25 周五 — 骊山正反爬 + 货拉拉转场栾镇</name>
 <Placemark><name>1. 骊山路书起点</name><Point><coordinates>109.202720,34.364540,0</coordinates></Point></Placemark>
 <Placemark><name>2. 骊山东段关键点</name><Point><coordinates>109.267240,34.334720,0</coordinates></Point></Placemark>
 <Placemark><name>3. 弓长张方向关键点</name><Point><coordinates>109.134110,34.286140,0</coordinates></Point></Placemark>
@@ -11,13 +11,16 @@
 <Placemark><name>5. 骊山路书终点</name><Point><coordinates>109.202630,34.363970,0</coordinates></Point></Placemark>
 <Placemark><name>Day 2 route</name><Style><LineStyle><color>ffff0000</color><width>3</width></LineStyle></Style><LineString><coordinates>109.202720,34.364540,0 109.267240,34.334720,0 109.134110,34.286140,0 109.258960,34.327520,0 109.202630,34.363970,0</coordinates></LineString></Placemark>
 </Folder>
-<Folder><name>Day 3 2026-09-26 — 景点候选</name>
-</Folder>
-<Folder><name>Day 4 2026-09-27 — 秦岭长日</name>
+<Folder><name>Day 3 2026-09-26 周六 — 朱雀环线（返回栾镇同一民宿）</name>
 <Placemark><name>1. 朱雀环线路书起点</name><Point><coordinates>108.817560,34.054480,0</coordinates></Point></Placemark>
 <Placemark><name>2. 秦岭南段关键点</name><Point><coordinates>108.515420,33.826050,0</coordinates></Point></Placemark>
 <Placemark><name>3. 朱雀方向关键点</name><Point><coordinates>108.556710,34.031840,0</coordinates></Point></Placemark>
 <Placemark><name>4. 朱雀环线路书终点</name><Point><coordinates>108.817670,34.055340,0</coordinates></Point></Placemark>
-<Placemark><name>Day 4 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>108.817560,34.054480,0 108.515420,33.826050,0 108.556710,34.031840,0 108.817670,34.055340,0</coordinates></LineString></Placemark>
+<Placemark><name>Day 3 route</name><Style><LineStyle><color>ff00aaff</color><width>3</width></LineStyle></Style><LineString><coordinates>108.817560,34.054480,0 108.515420,33.826050,0 108.556710,34.031840,0 108.817670,34.055340,0</coordinates></LineString></Placemark>
+</Folder>
+<Folder><name>Day 4 2026-09-27 周日 — 车店打包寄车 + 市区弹性游览（车店待确认，无坐标）</name>
+</Folder>
+<Folder><name>候选路线（公开，不固定排日）— 九间房-黑龙峪-水陆庵 95.25km/+1745m</name>
+<Placemark><name>九间房-黑龙峪-水陆庵（Strava 公开路书）</name><description>&lt;a href="https://www.strava.com/routes/3535256955826594052"&gt;https://www.strava.com/routes/3535256955826594052&lt;/a&gt;&lt;br/&gt;大爬升候选路线，非恢复骑；仅在主动决策、天气与准入复核通过后替换某一主骑日，不自动加为第四骑。</description></Placemark>
 </Folder>
 </Document></kml>

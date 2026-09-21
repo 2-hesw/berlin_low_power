@@ -506,6 +506,32 @@
       </div>
 
       <p class="weather-note"><b>最新查询：2026-09-21 10:49 北京时间。</b>三天统一比较临潼、骊山人祖庙高点、分水岭、水陆庵、黑龙口及凤凰山垭口。温度按最低–最高显示；雨量是全天累计，不能当作每小时强度。临潼为山脚，骊山按人祖庙附近约1250米，分水岭按2100米，凤凰山垭口按1493米查询。黑龙口指商洛牧护关镇黑龙口片区的路书参考点，非黑龙峪地名替代；水陆庵附近天气不能代表整条候选路线。各点为附近网格预报，非道路实测。出发前复核分时雨量、低温与路况。</p>
+<!-- WEATHER MAP START -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+.wx-map-panel{margin:24px 0;padding:20px;background:#f8f4e9;border:1px solid var(--line);border-radius:8px}
+.wx-map-panel h3{margin:0 0 8px;font-size:22px}.wx-map-tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.wx-map-tabs button{min-height:44px;padding:9px 18px;border:1px solid #9b9a82;background:transparent;color:#344337;border-radius:24px;cursor:pointer;font:inherit}
+.wx-map-tabs button[aria-pressed="true"]{background:#344c43;color:white;border-color:#344c43}
+#route-weather-map{height:470px;width:100%;border-radius:6px;background:#e6e9df;isolation:isolate;z-index:0}
+.wx-map-legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0;font-size:12px}.wx-map-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.wx-map-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.wx-location{background:#fffdf6;border:1px solid #d5d0bf;border-left:5px solid var(--rain-color);padding:12px;text-align:left;font:inherit;color:#263c35;cursor:pointer;border-radius:4px;min-width:0}
+.wx-location b{display:block;font-size:13px;line-height:1.5}.wx-location strong{display:block;font-size:22px;margin:6px 0}.wx-location small{display:block;line-height:1.7;font-size:12px}
+.wx-marker{border:2px solid white;box-shadow:0 1px 6px #0007;border-radius:50%;color:white;text-align:center;line-height:26px;font:bold 13px/26px sans-serif}
+.wx-map-label{font:12px/1.5 sans-serif;background:#fffef3ee;border:1px solid #c6c0ab;box-shadow:none;padding:4px 7px;color:#273d34}.wx-popup{font:13px/1.8 sans-serif;min-width:180px}.wx-popup b{font-size:15px}.wx-popup a{color:#305951}
+#wx-map-summary{font-size:15px;line-height:1.8;margin:12px 0}#wx-map-stamp{font-size:12px;color:#666}
+@media(max-width:600px){.wx-label-temp{display:none}.wx-map-label{font-size:10px;padding:3px 4px}.wx-map-panel{padding:12px}#route-weather-map{height:360px}.wx-map-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.wx-location strong{font-size:19px}.wx-map-tabs button{padding:8px 13px}}
+</style>
+<div class="wx-map-panel" id="weather-map-panel">
+<h3>沿线天气地图</h3><p class="mini">北向上 · 按实际经纬度定位。地图标注温度与日雨量，数字对应下方地点卡；颜色仅表示全天累计雨量，不代表骑行安全等级。</p>
+<div class="wx-map-tabs" aria-label="选择预报日期"><button type="button" data-wx-day="2026-09-25" aria-pressed="true">9/25 周五</button><button type="button" data-wx-day="2026-09-26" aria-pressed="false">9/26 周六</button><button type="button" data-wx-day="2026-09-27" aria-pressed="false">9/27 周日</button></div>
+<div id="route-weather-map" role="region" aria-label="西安骑行沿线天气地图"><p style="padding:20px">正在加载地图；下方地点卡可直接查看预报。</p></div>
+<div class="wx-map-legend"><span><i style="background:#48786a"></i>不足 1 mm</span><span><i style="background:#bc892e"></i>1–不足 10 mm</span><span><i style="background:#be5e37"></i>10–不足 25 mm</span><span><i style="background:#8e3b55"></i>≥25 mm</span></div>
+<p id="wx-map-summary" aria-live="polite"></p><div class="wx-map-cards" id="wx-map-cards"></div><p id="wx-map-stamp"></p>
+<p class="mini">骊山取人祖庙高点，水陆庵另列凤凰山垭口；黑龙口取商洛牧护关镇片区路书参考点。标记位置为查询点，预报来自附近网格，不是道路实测，也不代表两点之间所有路段。</p>
+</div>
+<!-- WEATHER MAP END -->
       <div class="weather-grid">
         <div class="weather-card" data-day="2026-09-25">
           <h3>9/25 周五 <span class="src-tag" data-v="tag">09-21 10:49 查询</span></h3>
@@ -1096,5 +1122,37 @@ btn.addEventListener('click',async()=>{
  }catch(e){status.textContent='刷新失败，保留上次预报。请查看来源或稍后重试。';}finally{btn.disabled=false;}
 });
 })();</script><!-- RIDE-WEATHER SCRIPT END -->
+<!-- WEATHER MAP SCRIPT START --><script>
+(()=>{
+const points=[{"key": "lt", "name": "临潼·骊山起点", "point": {"latitude": 34.36454, "longitude": 109.20272}}, {"key": "ql", "name": "分水岭·2100m", "point": {"latitude": 33.836467, "longitude": 108.807586, "elevation": 2100}}, {"key": "ls", "name": "骊山·人祖庙高点约1250m", "point": {"latitude": 34.335115, "longitude": 109.276015, "elevation": 1250}}, {"key": "sla", "name": "水陆庵附近", "point": {"latitude": 34.13333, "longitude": 109.41167}}, {"key": "hlk", "name": "黑龙口·路书附近约920m", "point": {"latitude": 34.000483, "longitude": 109.73965, "elevation": 920}}, {"key": "fh", "name": "凤凰山垭口·1493m", "point": {"latitude": 34.087743, "longitude": 109.630258, "elevation": 1493}}],short=['临潼起点','分水岭','骊山高点','水陆庵','黑龙口','凤凰山垭口'];
+let selected='2026-09-25',map,markers=[];
+const panel=document.getElementById('weather-map-panel');
+const color=v=>v<1?'#48786a':v<10?'#bc892e':v<25?'#be5e37':'#8e3b55';
+function render(){
+ const card=document.querySelector('.weather-card[data-day="'+selected+'"]');if(!card)return;
+ const readings=points.map((p,i)=>{const row=card.querySelector('[data-loc="'+p.key+'"]');const get=k=>row.querySelector('[data-v="'+k+'"]').textContent;return {...p,i,t:get('t'),p:get('p'),pp:get('pp'),g:get('g'),rain:Number(get('p').match(/[\d.]+/)[0])};});
+ document.getElementById('wx-map-cards').replaceChildren();
+ markers.forEach(m=>m.remove());markers=[];
+ readings.forEach(v=>{
+  const b=document.createElement('button');b.type='button';b.className='wx-location';b.style.setProperty('--rain-color',color(v.rain));
+  b.innerHTML='<b>'+(v.i+1)+' · '+short[v.i]+'</b><strong>'+v.rain.toFixed(1)+' <small style="display:inline">mm / 日</small></strong><small>'+v.t+'</small><small>'+v.pp+' · '+v.g+'</small>';
+  document.getElementById('wx-map-cards').append(b);
+  if(map){
+   const marker=L.marker([v.point.latitude,v.point.longitude],{icon:L.divIcon({className:'',html:'<div class="wx-marker" style="background:'+color(v.rain)+'">'+(v.i+1)+'</div>',iconSize:[30,30],iconAnchor:[15,15]}),title:v.name});
+   marker.addTo(map).bindPopup('<div class="wx-popup"><b>'+v.name+'</b><br>'+selected+'<br>'+v.t+'<br>'+v.p+'<br>'+v.pp+'<br>'+v.g+'<br><a target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat='+v.point.latitude+'&mlon='+v.point.longitude+'#map=13/'+v.point.latitude+'/'+v.point.longitude+'">查看地图位置 ↗</a></div>');marker.bindTooltip(short[v.i]+' · '+v.rain.toFixed(1)+' mm<span class="wx-label-temp"><br>'+v.t+'</span>',{permanent:true,direction:['top','right','right','left','bottom','top'][v.i],offset:[0,0],className:'wx-map-label'});markers.push(marker);
+   b.onclick=()=>{map.panTo(marker.getLatLng());marker.openPopup();};
+  }else{b.onclick=()=>window.open('https://www.openstreetmap.org/?mlat='+v.point.latitude+'&mlon='+v.point.longitude+'#map=12/'+v.point.latitude+'/'+v.point.longitude,'_blank','noopener');}
+ });
+ const sorted=[...readings].sort((a,b)=>a.rain-b.rain),wet=readings.filter(v=>v.rain>0).length;
+ document.getElementById('wx-map-summary').textContent=selected.slice(5).replace('-','/')+'：'+wet+'/'+points.length+' 个参考点有降水信号。日雨量 '+sorted[0].rain.toFixed(1)+'–'+sorted.at(-1).rain.toFixed(1)+' mm；'+short[sorted[0].i]+'相对最少，'+short[sorted.at(-1).i]+'最多。山路还需看分时雨量、温度和阵风。';
+ document.getElementById('wx-map-stamp').textContent='数据：Open-Meteo · '+card.querySelector('[data-v="tag"]').textContent+' · 与下方天气卡同步';
+ panel.querySelectorAll('[data-wx-day]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.wxDay===selected)));
+}
+panel.querySelectorAll('[data-wx-day]').forEach(b=>b.onclick=()=>{selected=b.dataset.wxDay;render();});
+new MutationObserver(render).observe(document.querySelector('.weather-grid'),{subtree:true,childList:true,characterData:true});render();
+const loader=document.createElement('script');loader.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+loader.onload=()=>{const host=document.getElementById('route-weather-map');host.replaceChildren();map=L.map(host,{scrollWheelZoom:false});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);map.fitBounds(points.map(p=>[p.point.latitude,p.point.longitude]),{padding:[65,65]});render();};
+loader.onerror=()=>{document.getElementById('route-weather-map').textContent='地图底图暂时无法加载，下方地点卡仍可查看天气，点击可打开对应地图位置。';};document.head.append(loader);
+})();</script><!-- WEATHER MAP SCRIPT END -->
 </body>
 </html>

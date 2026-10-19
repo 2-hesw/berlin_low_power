@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>周末骑哪儿</title>
+  <style>
+    :root {
+      --ink: #18201c;
+      --muted: #65736d;
+      --paper: #f6f2e8;
+      --panel: #ffffff;
+      --panel-soft: #f3f7f4;
+      --line: #dce2dc;
+      --green: #23604a;
+      --teal: #247e86;
+      --gold: #c58b2f;
+      --red: #b95a4f;
+      --shadow: 0 14px 36px rgba(30, 45, 38, 0.12);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background:
+        linear-gradient(180deg, rgba(246, 242, 232, 0.98), rgba(235, 241, 237, 0.98)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .app {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 24px 0 36px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: 0;
+      line-height: 1.05;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(30, 45, 38, 0.08);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr) 280px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid rgba(220, 226, 220, 0.92);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .panel-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .control-group {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .control-group:last-child {
+      border-bottom: 0;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 9px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .label-row output {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .segmented.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chip {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      border-color: var(--green);
+      background: #e7f2ec;
+      color: var(--green);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--green);
+    }
+
+    .status-inputs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 16px;
+    }
+
+    .status-field {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 9px;
+    }
+
+    .status-field label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .status-field input {
+      width: 100%;
+      height: 34px;
+      margin-top: 6px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0 8px;
+      background: var(--panel-soft);
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .deck-panel {
+      min-height: 720px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .deck-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .deck-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .deck-title strong {
+      font-size: 17px;
+    }
+
+    .deck-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress {
+      min-width: 86px;
+      color: var(--muted);
+      text-align: right;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .deck {
+      position: relative;
+      min-height: 560px;
+      padding: 18px;
+      overflow: hidden;
+      background: #f5f8f5;
+    }
+
+    .route-card {
+      position: absolute;
+      inset: 18px;
+      display: grid;
+      grid-template-rows: 245px minmax(0, 1fr);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: 0 16px 34px rgba(30, 45, 38, 0.16);
+      transform-origin: center 85%;
+      transition: transform 0.26s ease, opacity 0.26s ease;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .route-card:nth-child(2) {
+      transform: translateY(6px) scale(0.985);
+      opacity: 0;
+    }
+
+    .route-card:nth-child(n+3) {
+      transform: translateY(20px) scale(0.94);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .route-map {
+      position: relative;
+      background: #d9e5dc;
+      overflow: hidden;
+    }
+
+    .route-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05) contrast(1.04);
+    }
+
+    .route-map::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.34));
+    }
+
+    .score-badge {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 1;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      min-height: 44px;
+      padding: 0 12px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: rgba(24, 32, 28, 0.72);
+      backdrop-filter: blur(8px);
+      font-weight: 900;
+    }
+
+    .score-badge strong {
+      font-size: 24px;
+    }
+
+    .route-body {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      align-content: start;
+    }
+
+    .route-name {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .route-name h3 {
+      margin: 0;
+      font-size: clamp(22px, 4vw, 32px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .route-kind {
+      flex: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 8px;
+      color: var(--green);
+      background: #edf5f0;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .route-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #fbfcfa;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .reason {
+      margin: 0;
+      color: #38463f;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 6px 8px;
+      color: var(--muted);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tag.warn {
+      border-color: rgba(185, 90, 79, 0.3);
+      color: var(--red);
+      background: #fff1ef;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 14px 16px 16px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .action {
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .action.skip {
+      color: var(--red);
+    }
+
+    .action.save {
+      color: var(--green);
+      background: #e9f4ee;
+      border-color: rgba(35, 96, 74, 0.32);
+    }
+
+    .action.reset {
+      color: var(--teal);
+    }
+
+    .list {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .picked-empty {
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 4px 4px 8px;
+      font-size: 13px;
+    }
+
+    .picked-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 11px;
+      background: #fff;
+    }
+
+    .picked-card strong {
+      display: block;
+      margin-bottom: 7px;
+      line-height: 1.25;
+    }
+
+    .picked-card span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .recommendation {
+      padding: 14px 16px;
+      border-top: 1px solid var(--line);
+      background: #f8fbf9;
+    }
+
+    .recommendation strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .recommendation p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .empty-state {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1020px) {
+      .layout {
+        grid-template-columns: 280px minmax(0, 1fr);
+      }
+
+      .picked-panel {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        background-attachment: scroll;
+      }
+
+      .app {
+        width: min(100% - 18px, 560px);
+        padding-top: 14px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .status-pill {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .deck-panel {
+        min-height: 680px;
+      }
+
+      .deck {
+        min-height: 540px;
+        padding: 10px;
+      }
+
+      .route-card {
+        inset: 10px;
+        grid-template-rows: 190px minmax(0, 1fr);
+      }
+
+      .route-body {
+        padding: 13px;
+      }
+
+      .route-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .actions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .action.reset {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <h1>周末骑哪儿</h1>
+        <span>根据本周训练负荷、跟团人数和风景偏好，从你的 Strava Routes 里挑路线。</span>
+      </div>
+      <div class="status-pill" aria-live="polite"><span class="dot"></span><span id="loadLabel">本周负荷偏高</span></div>
+    </header>
+
+    <section class="layout">
+      <aside class="panel">
+        <div class="panel-head">
+          <h2>本周状态</h2>
+          <p>可以按 Strava 或体感填写，推荐会跟着重新计算。</p>
+        </div>
+        <div class="status-inputs">
+          <div class="status-field">
+            <label for="weekKm">骑行距离 km</label>
+            <input id="weekKm" type="number" min="0" step="1" value="106" />
+          </div>
+          <div class="status-field">
+            <label for="weekHours">骑行时间 h</label>
+            <input id="weekHours" type="number" min="0" step="0.5" value="3.5" />
+          </div>
+          <div class="status-field">
+            <label for="weekSuffer">训练负荷</label>
+            <input id="weekSuffer" type="number" min="0" step="10" value="454" />
+          </div>
+          <div class="status-field">
+            <label for="hardDays">强刺激次数</label>
+            <input id="hardDays" type="number" min="0" max="7" step="1" value="2" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="label-row"><span>当前疲劳</span><output id="fatigueOut">偏累</output></div>
+          <input id="fatigue" type="range" min="1" max="5" value="4" />
+        </div>
+
+        <div class="control-group">
+          <div class="label-row"><span>可用时间</span><output id="hoursOut">4.5 小时</output></div>
+          <input id="hours" type="range" min="1.5" max="8" step="0.5" value="4.5" />
+        </div>
+
+        <div class="control-group">
+          <div class="label-row"><span>地域</span><output id="regionOut">杭州</output></div>
+          <div class="segmented" data-control="region">
+            <button class="chip active" data-value="hangzhou">杭州</button>
+            <button class="chip" data-value="beijing">北京</button>
+            <button class="chip" data-value="travel">远行</button>
+          </div>
+          <div class="segmented" data-control="region" style="margin-top: 6px;">
+            <button class="chip" data-value="all">全部路线</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="label-row"><span>跟团人数</span><output id="groupOut">2-4 人</output></div>
+          <div class="segmented" data-control="group">
+            <button class="chip" data-value="solo">单人</button>
+            <button class="chip active" data-value="small">2-4 人</button>
+            <button class="chip" data-value="large">大团</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="label-row"><span>周末目标</span><output id="goalOut">长耐力</output></div>
+          <div class="segmented" data-control="goal">
+            <button class="chip" data-value="recover">恢复</button>
+            <button class="chip active" data-value="endurance">长耐力</button>
+            <button class="chip" data-value="climb">爬坡</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="label-row"><span>风景偏好</span><output id="sceneryOut">山路水边</output></div>
+          <div class="segmented two" data-control="scenery">
+            <button class="chip" data-value="mountain">山路</button>
+            <button class="chip active" data-value="water">水边</button>
+            <button class="chip" data-value="city">城郊</button>
+            <button class="chip" data-value="pilgrim">远行</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel deck-panel">
+        <div class="deck-head">
+          <div class="deck-title">
+            <strong id="deckHeadline">推荐路线</strong>
+            <span id="deckSubline">右划加入候选，左划跳过；也可以用下方按钮。</span>
+          </div>
+          <div class="progress" id="progress">1 / 10</div>
+        </div>
+        <div class="deck" id="deck"></div>
+        <div class="actions">
+          <button class="action skip" id="skipBtn">左划跳过</button>
+          <button class="action save" id="saveBtn">右划候选</button>
+          <button class="action reset" id="resetBtn">重新计算</button>
+        </div>
+      </section>
+
+      <aside class="panel picked-panel">
+        <div class="panel-head">
+          <h2>候选清单</h2>
+          <p>右划后的路线会放到这里，最后选 1 条作为周末方案。</p>
+        </div>
+        <div class="list" id="pickedList"></div>
+        <div class="recommendation">
+          <strong>训练建议</strong>
+          <p id="trainingAdvice">你这周前两天已经堆了较高强度，周末路线适合做长耐力，不建议再选超长高爬升挑战。</p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const routes = [
+      { id: "3490176365124941602", name: "白云山-太仓山", region: "hangzhou", distance: 114.9, elevation: 2224, hours: 4.4, type: "ride", scenery: ["mountain", "forest"], group: ["solo", "small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/OUSQMQKITZ2R7FNB4X5MZFWZB3CUMNVUA2QGQVQ3LBBNA3O77AATNWSCWMJTEEIPU24CZUYCIQFC2ZBOSIQJQ4HLIU4KSZYZB3HHH4Q=" },
+      { id: "3489508019275099566", name: "2026千峡湖", region: "hangzhou", distance: 123.8, elevation: 2579, hours: 4.7, type: "ride", scenery: ["water", "mountain"], group: ["solo", "small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/JXTXBYIAZWTDNYPFDBMHVEONN44UM6N4V5IZUXOO3LPAXE7YVVYUBKENTBBEBT323TUVUROJID2LK766AH3ILUSDV66CKI445HBC7QA=" },
+      { id: "3489498813579848930", name: "泽雅大环线顺时针", region: "hangzhou", distance: 144.2, elevation: 2859, hours: 5.5, type: "ride", scenery: ["mountain", "forest"], group: ["solo", "small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/TNRK4P7YQPTQNDNSWDUWR5XH32EDB3FJ7THWCTYILH3EBPTK52O2N2PEBTFLTDV3J2S6WF2JZPYBMH76KKNWLOVVWSQIG2ENNFJKXCQ=" },
+      { id: "3489473928959242466", name: "复刻泽雅大环线", region: "hangzhou", distance: 145.4, elevation: 3074, hours: 5.5, type: "ride", scenery: ["mountain", "forest"], group: ["solo"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/6ECF5DY5LHC2YGVOWPRHZRAJMYHEJGRBI26JQWVJ6RLOE7RRMEI2ID3ZHHAU4WVOP5IUOOT453D34BNNFHHKYKIGVKMZTDATIQW6EDA=" },
+      { id: "3481480637648604790", name: "妙阳禅", region: "hangzhou", distance: 64.9, elevation: 1455, hours: 2.5, type: "ride", scenery: ["mountain", "forest"], group: ["solo", "small", "large"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/LPLCQ23HPZEFJUYV6WHBS25TR5QC4QDJU7PL6U7RRKUCBTLIOHS5SF45MFTLN73FW4V72NYREDB2TDNAIYZEHHKUH7BFPQSXSZPHJGA=" },
+      { id: "3478551863514262402", name: "绍兴宁波", region: "hangzhou", distance: 165.3, elevation: 2060, hours: 6.3, type: "ride", scenery: ["water", "city"], group: ["small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/SH46FNYNXTF6JUYKLGLGCVY7RCVWZWHOBHCY2SRVB2G5AWWN4XMPY52Z47BEDVLOKX3CRVAYVMYWIUAUYNOS43LF6GF2WTM3PVQMTPA=" },
+      { id: "3475645074135241940", name: "顺时针中国地图", region: "hangzhou", distance: 225.5, elevation: 3702, hours: 8.6, type: "ride", scenery: ["water", "mountain"], group: ["solo"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/IDNVWMJVU3CCYQTMWTRRLGSPGTUDJC5N3T3I24VL3OXBNXU3X6PTAZPEKP7M4FTAFTJUY4SDB62FREWGNFEHRRJATJR3WT4VSFSHPXY=" },
+      { id: "3360094969446486898", name: "大安山-金鸡台", region: "beijing", distance: 206.7, elevation: 2312, hours: 7.9, type: "ride", scenery: ["mountain"], group: ["solo", "small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/F2KGOH3TP6KXR5CJJLGHJFDOXODSCXP4WPBGTQOIRFBIFWXXZSW65DOSX6APALRAH6RLJDXNFJVJS6EJIYRW7XN5ENJ6Q5DRD3OJTYI=" },
+      { id: "3348293564173508590", name: "白杨沟-长峪城", region: "beijing", distance: 184.0, elevation: 1969, hours: 7.0, type: "ride", scenery: ["mountain", "city"], group: ["small", "large"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/HLK2CQR4GJ73LORCLEJQ7VBSPPBWSCRKJKK6RQ2CMKF26BLS5YF2LL7EEJOFBOEGUHNKO3YSP36WXYQCSKDGOWAVG63HCWFQ3ZVREPI=" },
+      { id: "3351510913852672178", name: "冈仁波齐转山", region: "travel", distance: 49.9, elevation: 1313, hours: 10.9, type: "hike", scenery: ["pilgrim", "mountain"], group: ["solo", "small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/WVFECEVN724RDGW7RLHKSM6D2XRVSV67WREWDTUOEKVOYZU7RLYI4MVUZMREUC2MNQAEXZYWKMEUVR554ESLZR6GZLRYPHAEN6YZHXY=" },
+      { id: "3495235328649224896", name: "京杭大运河v1", region: "travel", distance: 1542.5, elevation: 3428, hours: 58.6, type: "tour", scenery: ["water", "pilgrim"], group: ["solo", "small"], image: "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/HDFBLXRXIRIOIYX6NF4QEZQGDJ7K2VD6U524ZWUMHI2ONF7DXJFMNSG2E5CW26WW7XVMG4RGI23RRULQ6C4A5QAEBTZXBTJYQRNF7HQ=" }
+    ];
+
+    const state = {
+      fatigue: 4,
+      weekKm: 106,
+      weekHours: 3.5,
+      weekSuffer: 454,
+      hardDays: 2,
+      hours: 4.5,
+      region: "hangzhou",
+      group: "small",
+      goal: "endurance",
+      scenery: "water",
+      deck: [],
+      index: 0,
+      picked: []
+    };
+
+    const labels = {
+      fatigue: ["很轻松", "正常", "有点累", "偏累", "很疲劳"],
+      region: { hangzhou: "杭州", beijing: "北京", travel: "远行", all: "全部路线" },
+      group: { solo: "单人", small: "2-4 人", large: "大团" },
+      goal: { recover: "恢复", endurance: "长耐力", climb: "爬坡" },
+      scenery: { mountain: "山路", water: "水边", city: "城郊", pilgrim: "远行" }
+    };
+
+    const deck = document.getElementById("deck");
+    const progress = document.getElementById("progress");
+    const pickedList = document.getElementById("pickedList");
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function loadClass() {
+      const load = state.weekSuffer / 120 + state.weekHours * 0.8 + state.hardDays * 1.2 + state.fatigue;
+      if (load >= 14) return { text: "恢复优先", color: "#b95a4f" };
+      if (load >= 8) return { text: "本周负荷偏高", color: "#c58b2f" };
+      if (load >= 5) return { text: "本周负荷正常", color: "#247e86" };
+      return { text: "可以进攻一点", color: "#23604a" };
+    }
+
+    function routeLoad(route) {
+      const climbDensity = route.elevation / Math.max(route.distance, 1);
+      return route.distance * 0.38 + route.elevation * 0.035 + route.hours * 9 + climbDensity * 0.9;
+    }
+
+    function classifyRoute(route) {
+      const density = route.elevation / route.distance;
+      if (route.type === "tour") return "远行项目";
+      if (route.type === "hike") return "徒步路线";
+      if (route.distance > 180 || route.hours > 7) return "超长挑战";
+      if (density > 22 || route.elevation > 2500) return "高爬升";
+      if (route.distance > 110) return "长耐力";
+      if (route.distance < 75) return "短线恢复";
+      return "稳态训练";
+    }
+
+    function scoreRoute(route) {
+      let score = 72;
+      const density = route.elevation / route.distance;
+      const load = routeLoad(route);
+      const targetLoad = state.goal === "recover" ? 70 : state.goal === "climb" ? 145 : 112;
+      const weeklyLoad = state.weekSuffer / 90 + state.weekHours * 1.1 + state.hardDays * 2 + Math.max(0, state.weekKm - 80) / 20;
+      const fatiguePenalty = (state.fatigue - 1) * 6 + weeklyLoad * 0.9;
+
+      score -= Math.abs(load - targetLoad) * 0.18;
+      score -= Math.max(0, route.hours - state.hours) * 10;
+      score -= fatiguePenalty;
+
+      if (route.scenery.includes(state.scenery)) score += 16;
+      if (route.region === state.region) score += 14;
+      if (route.group.includes(state.group)) score += 12;
+      if (state.goal === "climb" && density > 18) score += 18;
+      if (state.goal === "endurance" && route.distance >= 80 && route.distance <= 135) score += 15;
+      if (state.goal === "recover" && route.distance <= 80 && density < 24) score += 16;
+      if (state.group === "large" && route.hours <= 4 && route.distance <= 100) score += 8;
+      if ((state.fatigue >= 4 || weeklyLoad > 10) && route.elevation > 2200) score -= 12;
+      if ((state.fatigue >= 4 || weeklyLoad > 10) && route.hours > 5.5) score -= 18;
+      if (route.type !== "ride" && state.goal !== "recover") score -= 18;
+      if (route.type === "tour") score -= 34;
+
+      return Math.round(clamp(score, 18, 97));
+    }
+
+    function reasonFor(route, score) {
+      const kind = classifyRoute(route);
+      const density = Math.round(route.elevation / route.distance);
+      if (score >= 82) {
+        return `很适合本周：${kind}，爬升密度约 ${density} m/km，既有训练刺激，又没有把疲劳继续推爆。`;
+      }
+      if (score >= 65) {
+        return `可以作为候选：${kind}，但需要控制均功和起床时间，别把它骑成强度课。`;
+      }
+      return `不太适合这周直接上：${kind}，路线负荷和当前疲劳不够匹配，更适合恢复后再安排。`;
+    }
+
+    function tagsFor(route, score) {
+      const tags = [classifyRoute(route), `${Math.round(route.elevation / route.distance)} m/km`, route.group.map(g => labels.group[g]).join(" / ")];
+      if (route.scenery.includes("water")) tags.push("水边");
+      if (route.scenery.includes("mountain")) tags.push("山路");
+      if (state.fatigue >= 4 && route.hours > 5) tags.push("本周慎选");
+      if (score >= 82) tags.push("优先推荐");
+      return tags;
+    }
+
+    function recompute() {
+      const pool = state.region === "all" ? routes : routes.filter(route => route.region === state.region);
+      state.deck = pool
+        .map(route => ({ ...route, score: scoreRoute(route) }))
+        .sort((a, b) => b.score - a.score);
+      state.index = 0;
+      renderAll();
+    }
+
+    function renderControls() {
+      document.getElementById("fatigueOut").textContent = labels.fatigue[state.fatigue - 1];
+      document.getElementById("hoursOut").textContent = `${state.hours.toFixed(1)} 小时`;
+      document.getElementById("regionOut").textContent = labels.region[state.region];
+      document.getElementById("groupOut").textContent = labels.group[state.group];
+      document.getElementById("goalOut").textContent = labels.goal[state.goal];
+      document.getElementById("sceneryOut").textContent = labels.scenery[state.scenery];
+      const load = loadClass();
+      document.getElementById("loadLabel").textContent = load.text;
+      document.querySelector(".dot").style.background = load.color;
+      document.getElementById("trainingAdvice").textContent = load.text === "恢复优先" || load.text === "本周负荷偏高"
+        ? "你这周前两天已经堆了较高强度，周末适合做长耐力或风景骑，不建议选择超长高爬升路线。"
+        : "当前疲劳可控，可以选择一条更完整的长耐力路线；如果睡眠不足，优先降低爬升。";
+    }
+
+    function renderDeck() {
+      const remaining = state.deck.slice(state.index, state.index + 3);
+      progress.textContent = state.index < state.deck.length ? `${state.index + 1} / ${state.deck.length}` : `完成`;
+      deck.innerHTML = "";
+
+      if (!remaining.length) {
+        deck.innerHTML = `<div class="empty-state"><div><strong>筛完了</strong><br />调整偏好后点“重新计算”，或者从候选清单里挑一条作为周末方案。</div></div>`;
+        return;
+      }
+
+      remaining.forEach((route, offset) => {
+        const card = document.createElement("article");
+        card.className = "route-card";
+        card.dataset.id = route.id;
+        if (offset === 0) wireDrag(card);
+        card.innerHTML = `
+          <div class="route-map">
+            <img src="${route.image}" alt="${route.name} 路线地图" />
+            <div class="score-badge"><strong>${route.score}</strong><span>适配分</span></div>
+          </div>
+          <div class="route-body">
+            <div class="route-name">
+              <h3>${route.name}</h3>
+              <span class="route-kind">${classifyRoute(route)}</span>
+            </div>
+            <div class="route-metrics">
+              <div class="metric"><strong>${route.distance}</strong><span>公里</span></div>
+              <div class="metric"><strong>${route.elevation}</strong><span>爬升 m</span></div>
+              <div class="metric"><strong>${route.hours}</strong><span>预计小时</span></div>
+              <div class="metric"><strong>${Math.round(route.elevation / route.distance)}</strong><span>m/km</span></div>
+            </div>
+            <p class="reason">${reasonFor(route, route.score)}</p>
+            <div class="tags">${tagsFor(route, route.score).map(tag => `<span class="tag ${tag === "本周慎选" ? "warn" : ""}">${tag}</span>`).join("")}</div>
+          </div>
+        `;
+        deck.appendChild(card);
+      });
+    }
+
+    function renderPicked() {
+      if (!state.picked.length) {
+        pickedList.innerHTML = `<div class="picked-empty">还没有候选路线。右划一张卡片，它会出现在这里。</div>`;
+        return;
+      }
+      pickedList.innerHTML = state.picked.map(route => `
+        <div class="picked-card">
+          <strong>${route.name}</strong>
+          <span>${route.distance} km / ${route.elevation} m / ${route.hours} h · 适配分 ${route.score}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderAll() {
+      renderControls();
+      renderDeck();
+      renderPicked();
+    }
+
+    function takeCurrent(action) {
+      const route = state.deck[state.index];
+      if (!route) return;
+      if (action === "save" && !state.picked.some(item => item.id === route.id)) {
+        state.picked.push(route);
+      }
+      state.index += 1;
+      renderAll();
+    }
+
+    function animateTake(action) {
+      const card = deck.querySelector(".route-card");
+      if (!card) return takeCurrent(action);
+      const dir = action === "save" ? 1 : -1;
+      card.style.transform = `translateX(${dir * 520}px) rotate(${dir * 14}deg)`;
+      card.style.opacity = "0";
+      setTimeout(() => takeCurrent(action), 230);
+    }
+
+    function wireDrag(card) {
+      let startX = 0;
+      let currentX = 0;
+      let dragging = false;
+
+      card.addEventListener("pointerdown", event => {
+        dragging = true;
+        startX = event.clientX;
+        currentX = 0;
+        card.setPointerCapture(event.pointerId);
+        card.style.transition = "none";
+      });
+
+      card.addEventListener("pointermove", event => {
+        if (!dragging) return;
+        currentX = event.clientX - startX;
+        const rotate = currentX / 26;
+        card.style.transform = `translateX(${currentX}px) rotate(${rotate}deg)`;
+      });
+
+      card.addEventListener("pointerup", () => {
+        if (!dragging) return;
+        dragging = false;
+        card.style.transition = "";
+        if (Math.abs(currentX) > 110) {
+          animateTake(currentX > 0 ? "save" : "skip");
+        } else {
+          card.style.transform = "";
+        }
+      });
+    }
+
+    document.getElementById("skipBtn").addEventListener("click", () => animateTake("skip"));
+    document.getElementById("saveBtn").addEventListener("click", () => animateTake("save"));
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      state.picked = [];
+      recompute();
+    });
+
+    document.getElementById("fatigue").addEventListener("input", event => {
+      state.fatigue = Number(event.target.value);
+      recompute();
+    });
+
+    document.getElementById("hours").addEventListener("input", event => {
+      state.hours = Number(event.target.value);
+      recompute();
+    });
+
+    ["weekKm", "weekHours", "weekSuffer", "hardDays"].forEach(id => {
+      document.getElementById(id).addEventListener("input", event => {
+        state[id] = Number(event.target.value || 0);
+        recompute();
+      });
+    });
+
+    document.querySelectorAll(".segmented").forEach(group => {
+      group.addEventListener("click", event => {
+        const button = event.target.closest(".chip");
+        if (!button) return;
+        const key = group.dataset.control;
+        state[key] = button.dataset.value;
+        document.querySelectorAll(`.segmented[data-control="${key}"] .chip`).forEach(chip => {
+          chip.classList.toggle("active", chip.dataset.value === state[key]);
+        });
+        recompute();
+      });
+    });
+
+    recompute();
+  </script>
+</body>
+</html>

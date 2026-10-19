@@ -1,469 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="format-detection" content="telephone=no" />
-  <title>Sweet Berlin Cycling</title>
-  <style>
-    :root {
-      --ink: #1f2a24;
-      --muted: #6d7b72;
-      --paper: #fffaf0;
-      --card: #ffffff;
-      --line: #e7dfcf;
-      --moss: #396b54;
-      --moss-soft: #e8f1eb;
-      --sun: #e89545;
-      --lake: #7ab6bf;
-      --shadow: 0 22px 60px rgba(42, 57, 47, 0.14);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--ink);
-      font-family: "Avenir Next", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      background:
-        radial-gradient(circle at 12% 12%, rgba(122, 182, 191, 0.28), transparent 26rem),
-        radial-gradient(circle at 86% 8%, rgba(232, 149, 69, 0.24), transparent 24rem),
-        linear-gradient(135deg, #f7efe0 0%, #f9f4e9 48%, #eaf2ee 100%);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      width: min(1080px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 44px 0 56px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-      gap: 28px;
-      align-items: stretch;
-      margin-bottom: 28px;
-    }
-
-    .hero-main,
-    .side-card,
-    .ride-card {
-      border: 1px solid rgba(231, 223, 207, 0.86);
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-
-    .hero-main {
-      border-radius: 34px;
-      padding: clamp(28px, 5vw, 56px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-main::after {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      right: -70px;
-      bottom: -90px;
-      border-radius: 999px;
-      background: repeating-conic-gradient(from 10deg, rgba(57, 107, 84, 0.16) 0 12deg, transparent 12deg 24deg);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: var(--moss-soft);
-      color: var(--moss);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 720px;
-      font-family: Georgia, "Times New Roman", "Songti SC", serif;
-      font-size: clamp(42px, 8vw, 92px);
-      line-height: 0.92;
-      letter-spacing: -0.06em;
-    }
-
-    .sub {
-      max-width: 680px;
-      margin: 24px 0 0;
-      color: var(--muted);
-      font-size: clamp(16px, 2vw, 20px);
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 999px;
-      font-weight: 800;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .button.primary {
-      background: var(--ink);
-      color: #fff;
-      box-shadow: 0 14px 32px rgba(31, 42, 36, 0.22);
-    }
-
-    .button.secondary {
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid var(--line);
-      color: var(--moss);
-    }
-
-    .button:active {
-      transform: translateY(2px) scale(0.99);
-    }
-
-    .side-card {
-      border-radius: 30px;
-      padding: 26px;
-      display: grid;
-      align-content: center;
-      gap: 16px;
-    }
-
-    .stat {
-      display: grid;
-      gap: 4px;
-      padding: 16px;
-      border-radius: 22px;
-      background: rgba(255, 250, 240, 0.82);
-      border: 1px solid rgba(231, 223, 207, 0.76);
-    }
-
-    .stat strong {
-      font-size: 20px;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 34px 0 16px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(26px, 4vw, 42px);
-      letter-spacing: -0.04em;
-    }
-
-    .section-note {
-      max-width: 420px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .ride-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .ride-card {
-      border-radius: 28px;
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .ride-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 30px 70px rgba(42, 57, 47, 0.18);
-    }
-
-    .ride-art {
-      min-height: 180px;
-      padding: 22px;
-      color: #fff;
-      background:
-        linear-gradient(135deg, rgba(31, 42, 36, 0.25), rgba(31, 42, 36, 0.05)),
-        radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.42), transparent 9rem),
-        linear-gradient(135deg, var(--moss), var(--lake));
-      display: flex;
-      align-items: end;
-    }
-
-    .ride-art .route {
-      width: 100%;
-      height: 82px;
-      border: 3px solid rgba(255, 255, 255, 0.68);
-      border-left-color: transparent;
-      border-bottom-color: rgba(255, 255, 255, 0.32);
-      border-radius: 56% 44% 62% 38%;
-      transform: rotate(-8deg);
-      position: relative;
-    }
-
-    .ride-art .route::before,
-    .ride-art .route::after {
-      content: "";
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: #fff;
-      box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.18);
-    }
-
-    .ride-art .route::before {
-      left: 18px;
-      bottom: 6px;
-    }
-
-    .ride-art .route::after {
-      right: 24px;
-      top: 4px;
-      background: var(--sun);
-    }
-
-    .ride-body {
-      padding: 24px;
-      background: rgba(255, 255, 255, 0.86);
-    }
-
-    .ride-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .pill {
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: var(--moss-soft);
-      color: var(--moss);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .ride-body h3 {
-      margin: 0 0 10px;
-      font-size: 26px;
-      letter-spacing: -0.03em;
-    }
-
-    .ride-body p {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .soon {
-      opacity: 0.72;
-    }
-
-    .soon .ride-art {
-      background:
-        radial-gradient(circle at 84% 18%, rgba(255, 255, 255, 0.48), transparent 9rem),
-        linear-gradient(135deg, #9e8f78, #c9b58c);
-    }
-
-    footer {
-      margin-top: 34px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 760px) {
-      .page {
-        width: min(100% - 22px, 1080px);
-        padding: 22px 0 40px;
-      }
-
-      .hero,
-      .ride-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-main,
-      .side-card,
-      .ride-card {
-        border-radius: 24px;
-      }
-
-      .hero-main {
-        padding: 26px;
-      }
-
-      .section-head {
-        display: block;
-      }
-
-      .section-note {
-        margin-top: 8px;
-      }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="hesw 博客：AI Infra、Agent 工程、数值模拟、生活与骑行。">
+  <title>hesw 博客</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%232563eb'/%3E%3Cpath d='M14 36c8-18 11 18 19 0s11 8 17-9' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
 </head>
-<body>
-  <main class="page">
-    <section class="hero">
-      <div class="hero-main">
-        <div class="eyebrow">Sweet Berlin Cycling</div>
-        <h1>骑行记录与生活卡片</h1>
-        <p class="sub">
-          这里放骑行比赛、长途路线、周末训练和生活小卡片。每一张卡片都指向一份可以直接分享的移动端网页。
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="/beijing-hangzhou-cycling-plan.html">打开北京到杭州计划</a>
-          <a class="button primary" href="/qianxia-lake-cycling-2026-05-17.html">打开千峡湖行程</a>
-          <a class="button primary" href="/parents-hangzhou-shanghai-2026-05.html">打开父母同行计划</a>
-          <a class="button primary" href="/sleep-cards.html">打开睡眠小卡片</a>
-          <a class="button primary" href="/xian-cycling-plan.html">打开西安骑行计划</a>
-          <a class="button secondary" href="/parents-trip">短链接 /parents-trip</a>
-          <a class="button secondary" href="/sleep">短链接 /sleep</a>
-          <a class="button secondary" href="/xian">短链接 /xian</a>
-        </div>
+<body data-page="home">
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">∿</span><span>hesw 博客</span></a>
+      <nav class="main-nav" aria-label="主导航">
+        <a class="is-current" href="/">首页</a>
+        <a href="#categories">分类</a>
+        <a href="#archives">归档</a>
+        <a href="#about">关于</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="切换深色模式" title="切换主题"><span aria-hidden="true">◐</span></button>
+    </div>
+  </header>
+
+  <main id="main" class="container blog-layout">
+    <section class="posts-column" aria-labelledby="latest-title">
+      <div class="page-heading">
+        <h1 id="latest-title">最新文章</h1>
+        <p>共 7 篇文章</p>
       </div>
 
-      <aside class="side-card">
-        <div class="stat">
-          <strong>当前主线</strong>
-          <span>北京到杭州 2026 端午骑行计划仍是主线；同时补充可分享的生活卡片，用更轻的方式承接日常照顾。</span>
-        </div>
-        <div class="stat">
-          <strong>分享方式</strong>
-          <span>直接把网页链接发到微信、飞书或移动端 Obsidian，避免传本地 HTML 附件。</span>
-        </div>
-      </aside>
+      <div class="post-grid">
+        <article class="post-card" data-topic="tech">
+          <div class="post-meta"><time datetime="2026-08-09">2026 年 8 月 9 日</time><span class="topic topic-tech">AI Infra</span><span>8 分钟</span></div>
+          <h2><a href="/posts/pd-separation">Prefill / Decode 分离，我目前理解到了哪一步</a></h2>
+          <p>记录一次从请求路径走到资源调度的学习过程，以及还没有想明白的问题。</p>
+          <a class="read-more" href="/posts/pd-separation">阅读全文 →</a>
+        </article>
+
+        <article class="post-card" data-topic="tech">
+          <div class="post-meta"><time datetime="2026-08-03">2026 年 8 月 3 日</time><span class="topic topic-agent">Agent 工程</span><span>5 分钟</span></div>
+          <h2><a href="/posts/agent-acceptance">把 Agent 当同事以后，我开始重新理解验收</a></h2>
+          <p>从盯着过程，到明确目标、边界与完成条件。</p>
+          <a class="read-more" href="/posts/agent-acceptance">阅读全文 →</a>
+        </article>
+
+        <article class="post-card" data-topic="ride">
+          <div class="post-meta"><span class="topic topic-ride">骑行记忆</span><span>两骑一跑</span></div>
+          <h2><a href="/rides/xian">西安骑行计划</a></h2>
+          <p>骊山正反爬、朱雀环线，再留一天跑西安城墙。含路线预览、补给、装备和出发前复核。</p>
+          <a class="read-more" href="/rides/xian">查看计划 →</a>
+        </article>
+
+        <article class="post-card" data-topic="ride">
+          <div class="post-meta"><span class="topic topic-ride">骑行记忆</span><span>端午长途</span></div>
+          <h2><a href="/rides/beijing-hangzhou">北京到杭州骑行计划</a></h2>
+          <p>按最近训练能力和队友配速调整的端午长途计划，覆盖分日里程、补给、装备和中途降级规则。</p>
+          <a class="read-more" href="/rides/beijing-hangzhou">查看计划 →</a>
+        </article>
+
+        <article class="post-card" data-topic="ride">
+          <div class="post-meta"><span class="topic topic-ride">骑行记忆</span><span>比赛 · 2026.05.17</span></div>
+          <h2><a href="/rides/qianxia-lake">浙江千峡湖骑行赛</a></h2>
+          <p>G7343 去丽水，速腾取车，青田欧尚酒店中转，周日比赛后 G7338 回杭州东。</p>
+          <a class="read-more" href="/rides/qianxia-lake">查看行程 →</a>
+        </article>
+
+        <article class="post-card" data-topic="ride">
+          <div class="post-meta"><span class="topic topic-ride">骑行记忆</span><span>路线推荐</span></div>
+          <h2><a href="/tools/routes">周末骑哪儿</a></h2>
+          <p>根据本周训练负荷、可用时间、跟团人数和风景偏好，从 Strava Routes 里推荐适合周末的路线。</p>
+          <a class="read-more" href="/tools/routes">开始筛选 →</a>
+        </article>
+
+        <article class="post-card" data-topic="life">
+          <div class="post-meta"><span class="topic topic-life">生活碎片</span><span>家庭旅行 · 2026.05.23</span></div>
+          <h2><a href="/trips/hangzhou-shaoxing-shanghai">杭州-绍兴-上海父母同行计划</a></h2>
+          <p>杭州 5 晚、绍兴 1 晚、嘉兴半日、上海虹桥 2 晚，按天气、体力、订票和吃饭点整理成移动端执行卡。</p>
+          <a class="read-more" href="/trips/hangzhou-shaoxing-shanghai">查看计划 →</a>
+        </article>
+      </div>
+
+      <nav class="pagination" aria-label="文章分页"><span class="is-disabled">← 上一页</span><span>第 1 页</span><span class="is-disabled">下一页 →</span></nav>
     </section>
 
-    <section>
-      <div class="section-head">
-        <h2>网页卡片</h2>
-        <p class="section-note">已经确定的页面放在这里。后续新的比赛、路书、生活卡片，也按同样方式新增一张卡片。</p>
-      </div>
+    <aside class="sidebar" aria-label="博客侧栏">
+      <section id="categories" class="widget">
+        <h2>分类</h2>
+        <div class="category-list">
+          <button class="filter-button is-active" type="button" data-filter="all"><span>全部文章</span><b>7</b></button>
+          <button class="filter-button" type="button" data-filter="tech"><span>技术</span><b>2</b></button>
+          <button class="filter-button" type="button" data-filter="ride"><span>骑行</span><b>4</b></button>
+          <button class="filter-button" type="button" data-filter="life"><span>生活</span><b>1</b></button>
+        </div>
+      </section>
 
-      <div class="ride-grid">
-        <a class="ride-card" href="/xian-cycling-plan.html">
-          <div class="ride-art">
-            <div class="route"></div>
-          </div>
-          <div class="ride-body">
-            <div class="ride-meta">
-              <span class="pill">西安</span>
-              <span class="pill">骊山 / 朱雀</span>
-              <span class="pill">两骑一跑</span>
-            </div>
-            <h3>西安骑行计划</h3>
-            <p>骊山正反爬、朱雀环线，再留一天跑西安城墙。含 Strava 路线预览、补给、装备和出发前复核。</p>
-            <span class="button secondary">查看计划</span>
-          </div>
-        </a>
+      <section class="widget">
+        <h2>专题</h2>
+        <ul class="link-list"><li><span>AI Infra</span><small>持续更新</small></li><li><span>Agent 工程</span><small>持续更新</small></li><li><span>数值模拟</span><small>暂未发布</small></li></ul>
+      </section>
 
-        <a class="ride-card" href="/beijing-hangzhou-cycling-plan.html">
-          <div class="ride-art">
-            <div class="route"></div>
-          </div>
-          <div class="ride-body">
-            <div class="ride-meta">
-              <span class="pill">长途</span>
-              <span class="pill">7 骑 + 1</span>
-              <span class="pill">北京到杭州</span>
-            </div>
-            <h3>北京到杭州骑行计划</h3>
-            <p>按最近训练能力和队友人均 5W/kg 调整的 2026 端午强队版，覆盖分日里程、补给、装备和中途降级规则。</p>
-            <span class="button secondary">查看计划</span>
-          </div>
-        </a>
+      <section id="archives" class="widget">
+        <h2>归档</h2>
+        <ul class="link-list"><li><span>2026 年 8 月</span><small>2</small></li><li><span>2026 年 5–6 月</span><small>5</small></li></ul>
+      </section>
 
-        <a class="ride-card" href="/qianxia-lake-cycling-2026-05-17.html">
-          <div class="ride-art">
-            <div class="route"></div>
-          </div>
-          <div class="ride-body">
-            <div class="ride-meta">
-              <span class="pill">比赛</span>
-              <span class="pill">2026-05-17</span>
-              <span class="pill">千峡湖</span>
-            </div>
-            <h3>浙江千峡湖骑行赛</h3>
-            <p>G7343 去丽水，速腾取车，青田欧尚酒店中转，周日比赛后 G7338 回杭州东。</p>
-            <span class="button secondary">查看行程</span>
-          </div>
-        </a>
-
-        <a class="ride-card" href="/sleep-cards.html">
-          <div class="ride-art">
-            <div class="route"></div>
-          </div>
-          <div class="ride-body">
-            <div class="ride-meta">
-              <span class="pill">生活</span>
-              <span class="pill">睡眠</span>
-              <span class="pill">温柔低压版</span>
-            </div>
-            <h3>给今晚留一点安静</h3>
-            <p>午觉没睡好后的睡眠小卡片，适合直接分享给敏感、重感受的人：少催促，少评判，把夜晚慢慢变轻。</p>
-            <span class="button secondary">查看卡片</span>
-          </div>
-        </a>
-
-        <a class="ride-card" href="/parents-hangzhou-shanghai-2026-05.html">
-          <div class="ride-art">
-            <div class="route"></div>
-          </div>
-          <div class="ride-body">
-            <div class="ride-meta">
-              <span class="pill">家庭旅行</span>
-              <span class="pill">2026-05-23</span>
-              <span class="pill">杭州 / 绍兴 / 嘉兴 / 上海</span>
-            </div>
-            <h3>杭州-绍兴-上海父母同行计划</h3>
-            <p>杭州 5 晚、绍兴 1 晚、嘉兴半日、上海虹桥 2 晚，按天气、体力、订票和吃饭点整理成移动端执行卡。</p>
-            <span class="button secondary">查看计划</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <footer>
-      sweetberlin.top index. 更新时只需要新增 HTML 页面，并在首页添加一张卡片。
-    </footer>
+      <section id="about" class="widget">
+        <h2>关于</h2>
+        <p class="widget-copy">AI Infra、Agent 工程、数值模拟、生活和骑行。</p>
+      </section>
+    </aside>
   </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><span>© 2026 hesw 博客</span><span>sweetberlin.top</span></div></footer>
 </body>
 </html>

@@ -1,24 +1,59 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/xian",
-      "destination": "/xian-cycling-plan.html"
+      "destination": "/rides/xian",
+      "permanent": true
     },
     {
       "source": "/beijing-hangzhou",
-      "destination": "/beijing-hangzhou-cycling-plan.html"
+      "destination": "/rides/beijing-hangzhou",
+      "permanent": true
     },
     {
       "source": "/qianxia",
-      "destination": "/qianxia-lake-cycling-2026-05-17.html"
+      "destination": "/rides/qianxia-lake",
+      "permanent": true
     },
     {
       "source": "/parents-trip",
+      "destination": "/trips/hangzhou-shaoxing-shanghai",
+      "permanent": true
+    },
+    {
+      "source": "/routes",
+      "destination": "/tools/routes",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/posts/pd-separation",
+      "destination": "/article.html?slug=pd-separation"
+    },
+    {
+      "source": "/posts/agent-acceptance",
+      "destination": "/article.html?slug=agent-acceptance"
+    },
+    {
+      "source": "/rides/xian",
+      "destination": "/xian-cycling-plan.html"
+    },
+    {
+      "source": "/rides/beijing-hangzhou",
+      "destination": "/beijing-hangzhou-cycling-plan.html"
+    },
+    {
+      "source": "/rides/qianxia-lake",
+      "destination": "/qianxia-lake-cycling-2026-05-17.html"
+    },
+    {
+      "source": "/trips/hangzhou-shaoxing-shanghai",
       "destination": "/parents-hangzhou-shanghai-2026-05.html"
     },
     {
-      "source": "/sleep",
-      "destination": "/sleep-cards.html"
+      "source": "/tools/routes",
+      "destination": "/route-recommender.html"
     }
   ]
 }
